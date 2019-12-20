@@ -48,7 +48,7 @@ passport.use(new LocalStrategy(
 
 // Routes
 app.get("/login", function(req, res, next) {
-  res.render("login.ejs", { message: '' });
+  res.render("login", { message: '' });
 });
 
 app.post('/login', function(req, res, next) {
@@ -63,5 +63,5 @@ app.post('/login', function(req, res, next) {
 });
 
 app.get("/", authCheck, function(req, res, next) {
-  res.render("index.ejs", { result: 'result' });
+  res.render("index", { result: 'result' });
 });
