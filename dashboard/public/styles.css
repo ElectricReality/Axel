@@ -1,0 +1,9 @@
+@font-face {
+  font-family: "PT Root UI Light";
+  src: url("/public/pt-root-ui-light.woff");
+}
+body {
+  background-color: #021136;
+  color: white;
+  font-family: PT Root UI Light;
+}
