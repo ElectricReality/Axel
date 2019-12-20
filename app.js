@@ -30,11 +30,6 @@ async function authCheck(req, res, next) {
 
 /* Mongo */
 const mongo = require('./modules/mongo.js')
-async function mongoClient() {
-  let res = await mongo.client()
-  return res
-}
-const mongoClient = mongoClient()
 const LocalStrategy = require('passport-local').Strategy;
 passport.use(new LocalStrategy(
   async function(username, password, done) {
