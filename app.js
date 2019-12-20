@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
-app.use(express.static(__dirname + '/public'));
+app.set('views', __dirname + 'public');
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log('App listening on port ' + port));
 
