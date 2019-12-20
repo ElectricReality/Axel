@@ -49,10 +49,12 @@ passport.use(new LocalStrategy(
 ));
 
 // Routes
+app.get("/", function(req, res, next) {
+  res.redirect("/dashboard");
+});
 app.get("/login", function(req, res, next) {
   res.render("login.ejs", { message: '' });
 });
-
 app.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }
@@ -63,7 +65,6 @@ app.post('/login', function(req, res, next) {
     });
   })(req, res, next);
 });
-
-app.get("/", authCheck, function(req, res, next) {
-  res.redirect("/dashboard");
+app.get("/dashboard", function(req, res, next) {
+  res.render("dashboard.ejs", { message: '' });
 });
