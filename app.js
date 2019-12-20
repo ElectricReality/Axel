@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
 app.use(express.static(__dirname + '/dashboard/public')); //setup static public directory
-app.set('views', __dirname + 'dashboard/ejs'); //optional since express defaults to CWD/views
+app.set('views', __dirname + '/dashboard/ejs'); //optional since express defaults to CWD/views
 app.set('view engine', 'ejs');
 
 const port = process.env.PORT || 3000;
@@ -51,7 +51,7 @@ passport.use(new LocalStrategy(
 
 // Routes
 app.get("/login", function(req, res, next) {
-  res.render("login", { message: '' });
+  res.render("login.ejs", { message: '' });
 });
 
 app.post('/login', function(req, res, next) {
