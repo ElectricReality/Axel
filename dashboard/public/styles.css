@@ -7,6 +7,10 @@ body {
   color: white;
   font-family: PT Root UI Light;
 }
+p {
+  margin: 0;
+  padding: 0;
+}
 .cards {
   display: flex;
   justify-content: center;
