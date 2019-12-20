@@ -7,9 +7,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
-app.use(express.static(__dirname + '/dashboard/public')); //setup static public directory
-app.set('views', __dirname + '/dashboard/ejs'); //optional since express defaults to CWD/views
-app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/dashboard/public'));
+app.set('views', __dirname + '/dashboard/ejs');
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log('Axel is listening on ' + port));
