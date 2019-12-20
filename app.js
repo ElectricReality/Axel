@@ -48,7 +48,7 @@ passport.use(new LocalStrategy(
 
 // Routes
 app.get("/login", function(req, res, next) {
-  res.render("index.ejs", { message: '' });
+  res.render("login.ejs", { message: '' });
 });
 
 app.post('/login', function(req, res, next) {
