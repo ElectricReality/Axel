@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
-app.set('views', './public');
+app.set('views', __dirname + '/public');
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log('Axel is listening on ' + port));
 
@@ -54,7 +54,7 @@ app.get("/login", function(req, res, next) {
 app.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }
-    if (!user) { return res.render('/login',{ message: 'Password/Username is Incorrect' }); }
+    if (!user) { return res.render('login',{ message: 'Password/Username is Incorrect' }); }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
       return res.redirect('/dashboard');
