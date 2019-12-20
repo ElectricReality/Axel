@@ -50,13 +50,13 @@ passport.use(new LocalStrategy(
 
 // Routes
 app.get("/login", function(req, res, next) {
-  res.render("login", { message: '' });
+  res.render("login.ejs", { message: '' });
 });
 
 app.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }
-    if (!user) { return res.render('login',{ message: 'Password/Username is Incorrect' }); }
+    if (!user) { return res.render('login.ejs',{ message: 'Password/Username is Incorrect' }); }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
       return res.redirect('/dashboard');
@@ -65,5 +65,5 @@ app.post('/login', function(req, res, next) {
 });
 
 app.get("/", authCheck, function(req, res, next) {
-  res.render("index", { result: 'result' });
+  res.redirect("/dashboard");
 });
