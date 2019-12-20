@@ -1,0 +1,21 @@
+{
+  "name": "Axel",
+  "description": "Simplifying developer's life. A PaaS that eases pain and trouble.",
+  "version": "1",
+  "scripts": {
+    "start": "node app.js"
+  },
+
+  "dependencies": {
+    "dotenv-flow": "^3.0.0-rc.1",
+    "moment": "^2.24.0",
+    "express": "^4.17.1",
+    "passport": "^0.4.1",
+    "express-session": "^1.16.2",
+    "passport-local": "^1.0.0",
+    "ejs": "^2.6.2",
+    "ejs-lint": "^0.3.0",
+    "node-fetch": "^2.6.0",
+    "mongodb": "^3.3.4"
+  }
+}
