@@ -17,14 +17,23 @@
         margin: 0;
         padding: 0;
       }
-      .center {
-        text-align: center;
-        margin-top: 28%; /* half of the height */
+      img {
+        margin: 0;
+        padding: 0;
       }
+      .center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+
     </style>
   </head>
   <body>
     <div class="center">
+      <img src="/public/Axel.svg" height="300px" alt="Axel">
       <p style="font-size: 20px;">This website is powered by</p>
       <p style="font-size: 30px;">Axel</p>
     </div>
