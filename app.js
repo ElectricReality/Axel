@@ -50,7 +50,7 @@ passport.use(new LocalStrategy(
 
 // Routes
 app.get("/", function(req, res, next) {
-  res.redirect("/dashboard");
+  res.render("index.ejs");
 });
 app.get("/login", function(req, res, next) {
   res.render("login.ejs", { message: '' });
