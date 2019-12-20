@@ -59,12 +59,12 @@ input {
 
 button {
   background-color: #24BC8A;
-  line-height: 40px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  line-height: 30px;
   padding-left: 20px;
   padding-right: 20px;
   border-radius: 20px;
   text-decoration: none;
   color: white;
+  font-size: 15px;
+  border: solid 2px;
 }
