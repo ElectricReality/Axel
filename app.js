@@ -7,8 +7,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
-app.use(express.static(__dirname + '/dashboard/public'));
 app.set('views', __dirname + '/dashboard/ejs');
+app.use("/public", __dirname + '/dashboard/public');
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log('Axel is listening on ' + port));
