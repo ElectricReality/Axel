@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
-app.set('/public', "/public");
+app.set('views', './public');
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log('Axel is listening on ' + port));
 
