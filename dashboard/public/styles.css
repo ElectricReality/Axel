@@ -119,6 +119,7 @@ nav .user {
   text-decoration: none;
   color: white;
   padding-right: 15px;
+
 }
 
 .subnav ul {
@@ -129,6 +130,7 @@ nav .user {
   padding-top: 10px;
   padding-bottom: 10px;
   text-align: center;
+  font-size: 20px;
 }
 
 .sub-enabled {
