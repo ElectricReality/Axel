@@ -108,7 +108,7 @@ nav .user {
 
 .subnav {
   width: 100%;
-  background-color: linear-gradient(#031950, #021136);
+  background-color: linear-gradient(to right, #031950, #021136);
 }
 
 .subnav li {
