@@ -44,10 +44,10 @@ p {
 }
 
 input {
-  background-color: white;
+  background-color: #03143E;
   border-style: solid;
-  border-color: #24BC8A;
-  color: black;
+  border-color: transparent;
+  color: white;
   border-radius: 5px;
   padding-left: 10px;
   padding-right: 10px;
@@ -58,7 +58,7 @@ input {
 }
 
 button {
-  background-color: #24BC8A;
+  background-color: #03143E;
   line-height: 30px;
   padding-left: 20px;
   padding-right: 20px;
@@ -66,5 +66,5 @@ button {
   text-decoration: none;
   color: white;
   font-size: 15px;
-  border: solid 2px;
+  border: transparent;
 }
