@@ -6,6 +6,8 @@ body {
   background-color: #021136;
   color: white;
   font-family: PT Root UI Light;
+  margin: 0;
+  padding: 0;
 }
 p {
   margin: 0;
