@@ -87,7 +87,12 @@ button {
   font-size: 30px;
 }
 
+nav .logo {
+  float: left;
+}
+
 nav {
+  display: block;
   width: 100%;
   background-color: #031950;
   overflow: hidden;
@@ -95,4 +100,12 @@ nav {
 
 nav .user {
   float: right;
+  margin-right: 20px;
+  margin-top: 25px;
+  font-size: 20px;
+}
+
+.subnav {
+  width: 100%;
+  background-color:
 }
