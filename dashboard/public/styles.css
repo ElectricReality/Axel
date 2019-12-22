@@ -90,4 +90,9 @@ button {
 nav {
   width: 100%;
   background-color: #031950;
+  overflow: hidden;
+}
+
+nav .user {
+  float: right;
 }
