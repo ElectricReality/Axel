@@ -68,3 +68,21 @@ button {
   font-size: 15px;
   border: transparent;
 }
+
+.logo {
+  vertical-align: middle;
+  display: inline-block;
+  width: 100%;
+  height: 50px;
+  text-decoration: none;
+}
+
+.logo img {
+  height: 50px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.logo p {
+  font-size: 20px;
+}
