@@ -22,10 +22,10 @@ p {
 }
 
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 8px 8px #03143E;
   text-align: center;
   background-color: #031950;
-  border-radius: 5px;
+  border-radius: 40px;
   max-width: 300px;
   min-width: 300px;
   width: 300px;
