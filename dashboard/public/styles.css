@@ -130,3 +130,7 @@ nav .user {
   padding-bottom: 10px;
   text-align: center;
 }
+
+.sub-enabled {
+  text-decoration: underline !important;
+}
