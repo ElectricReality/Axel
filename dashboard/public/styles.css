@@ -136,3 +136,9 @@ nav .user {
 .sub-enabled {
   text-decoration: underline !important;
 }
+
+.progress-semi {
+  margin: 20px;
+  width: 200px;
+  height: 100px;
+}
