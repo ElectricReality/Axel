@@ -24,7 +24,7 @@ p {
 }
 
 .card {
-  padding-top: 10px;
+  margin-top: 10px;
   box-shadow: 8px 8px #03143E;
   text-align: center;
   background-color: #031950;
