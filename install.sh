@@ -34,7 +34,6 @@ echo "Starting Axel Service"
 docker service create \
   --name axel-system \
   --network axel-net \
-  --env mongo_user=axel \
   --env mongo_password=${dbpassword} \
   --publish 8080:8080 \
   --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
