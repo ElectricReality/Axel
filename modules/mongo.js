@@ -1,10 +1,8 @@
 const MongoClient = require('mongodb').MongoClient;
 const dbName = "axel";
-const dbUser = "root";
 const dbPassword = encodeURIComponent(process.env.mongo_password);
-const dbUrl = "axel-system-database";
 
-const url = `mongodb://${dbUser}:${dbPassword}@${dbUrl}/${dbName}`;
+const url = `mongodb://root:${dbPassword}@axel-system-database/axel?authSource=admin`;
 
 module.exports = {
   post: async (coll, query) => {
