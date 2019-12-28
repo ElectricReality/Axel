@@ -26,7 +26,7 @@ docker service create \
   --env MONGO_INITDB_ROOT_PASSWORD=${dbpassword} \
   --mount type=volume,source=axel-system-database-data,target=/data/db \
   --mount type=volume,source=axel-system-database-config,target=/data/configdb \
-  mongo:latest
+  mongo:latest > /dev/null 2>&1
 echo "Building Axel Image"
 docker build -t axel . > /dev/null 2>&1
 echo "Starting Axel Service"
