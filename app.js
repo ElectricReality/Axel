@@ -47,8 +47,7 @@ passport.use(new LocalStrategy(
   }
 ));
 async function authCheck(req, res, next) {
-  if (req.isAuthenticated()) return next();
-    res.redirect("/login")
+  console.log(req.isAuthenticated())
 }
 
 // Routes
@@ -86,14 +85,17 @@ app.get("/login", function(req, res, next) {
 });
 
 app.post('/login', function(req, res, next) {
-  passport.authenticate('local', async function(err, user, info) {
+  passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }
-    if (!user) {
+    if (user === undefined) {
       return res.render('login.ejs',{ message: 'Password/Username is Incorrect' });
     }
     req.logIn(user, function(err) {
       console.log("Authentication Starting")
-      if (err) { return next(err); }
+      if (err) {
+        console.log(err)
+        return next(err);
+      }
       return res.redirect('/dashboard');
     });
   })(req, res, next);
