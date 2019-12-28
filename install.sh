@@ -31,7 +31,7 @@ echo "Cloning From Repository"
 git clone https://github.com/ElectricReality/Axel.git > /dev/null 2>&1
 cd Axel > /dev/null 2>&1
 echo "Building Docker Image"
-docker build -t axel > /dev/null 2>&1
+docker build -t axel
 echo "Starting Axel Service"
 docker service create \
   --name axel-system \
