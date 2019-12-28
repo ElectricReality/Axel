@@ -16,7 +16,7 @@ Axel - Father of Peace. Axel was made in the middle of hell since the past PaaS 
   - docker
 
 ## Installation
-Run the following commands:
+Run this command:
 ```
 git clone https://github.com/ElectricReality/Axel.git && cd Axel && sh install.sh
 ```
