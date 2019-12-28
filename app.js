@@ -30,6 +30,7 @@ passport.use(new LocalStrategy(
     let user = mongo.get('users', {
       username: req.body.Username
     })
+    console.log(user)
     if (!user) {
       return done(null, false);
     }
