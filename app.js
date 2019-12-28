@@ -1,3 +1,5 @@
+const mongo = require('./modules/mongo.js')
+const install = require('./modules/install.js')
 /*  Express  */
 const express = require('express');
 const app = express();
@@ -31,7 +33,6 @@ async function authCheck(req, res, next) {
 }
 
 /* Mongo */
-const mongo = require('./modules/mongo.js')
 const LocalStrategy = require('passport-local').Strategy;
 passport.use(new LocalStrategy(
   async function(username, password, done) {
