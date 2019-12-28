@@ -52,8 +52,7 @@ app.get("/", function(req, res, next) {
 
 app.get("/register", async(req,res,next) => {
   let user = await mongo.getall('user')
-  console.log(user)
-  if(!user) {
+  if(user == []) {
     return res.render("register.ejs", { message: 'Please register your new credentials!' });
   }
   res.redirect("/login")
@@ -61,7 +60,6 @@ app.get("/register", async(req,res,next) => {
 
 app.post("/register", async(req,res,next) => {
   let user = await mongo.getall('user')
-  console.log(user)
   if(user == []) {
     bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
       if(err) {
