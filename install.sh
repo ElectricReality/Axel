@@ -22,7 +22,7 @@ echo "Starting Axel Database"
 docker service create \
   --name axel-system-database \
   --network axel-net \
-  --env MONGO_INITDB_ROOT_USERNAME=axel \
+  --env MONGO_INITDB_ROOT_USERNAME=root \
   --env MONGO_INITDB_ROOT_PASSWORD=${dbpassword} \
   --mount type=volume,source=axel-system-database-data,target=/data/db \
   --mount type=volume,source=axel-system-database-config,target=/data/configdb \
