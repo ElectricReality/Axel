@@ -11,9 +11,9 @@ Simplifying developer's life. A PaaS that eases pain and trouble.
 Axel - Father of Peace. Axel was made in the middle of hell since the past PaaS i was using was very buggy. I decided to make my own.
 
 ## Installation
-Run this command:
+Run the following commands:
 ```
-wget https://raw.githubusercontent.com/ElectricReality/Axel/master/install.sh && sh install.sh
+git clone https://github.com/ElectricReality/Axel.git && cd Axel && sh install.sh
 ```
 Ez....
 
