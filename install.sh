@@ -11,6 +11,8 @@ echo "||                                            ||"
 echo "================================================"
 echo ""
 ipv4="$(dig +short myip.opendns.com @resolver1.opendns.com)" > /dev/null 2>&1
+dbpassword="$(date +%s | sha256sum | base64 | head -c 32 )"
+userpassword="$(date +%s | sha256sum | base64 | head -c 32 )"
 echo "Starting Swarm"
 docker swarm init --advertise-addr ${ipv4} > /dev/null 2>&1
 echo "Starting Network"
@@ -30,4 +32,4 @@ docker service create \
   --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
   nginx:alpine > /dev/null 2>&1
 echo " "
-echo "You can now start using Axel at http://${ipv4}:8080"
+echo "You can now start using Axel at http://${ipv4}:8080. Your password is ${userpassword}. The username is Axel."
