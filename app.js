@@ -66,7 +66,7 @@ app.post("/register", async(req,res,next) => {
       if(err) {
         console.log(err)
       }
-      mongo.post('users', {username: req.body.password, password: hash})
+      mongo.post('users', {username: req.body.Username, password: hash})
     });
   }
   res.redirect("/login")
