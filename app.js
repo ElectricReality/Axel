@@ -36,16 +36,11 @@ passport.use(new LocalStrategy(
       return done(null, false);
     }
 
-    bcrypt.hash(password, 15, function(err, hash) {
-      if(err) {
-        console.log(err)
-      }
-      console.log(hash)
-      console.log(user.password)
-      if (hash !== user.password) {
-        console.log("Wrong Password")
-        return done(null, false);
-      }
+    bcrypt.compare(password, user.hash, function(err, res) {
+    if(res == false) {
+      console.log("Password Not Found")
+      return done(null, false);
+    }
     });
 
     console.log("Process Thing")
