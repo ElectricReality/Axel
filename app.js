@@ -70,7 +70,11 @@ app.post("/register", async(req,res,next) => {
       if(err) {
         console.log(err)
       }
-      mongo.post('users', {username: req.body.Username, password: hash})
+      let query = {
+        username: req.body.Username,
+        password: hash
+      }
+      mongo.post('users', query)
     });
   }
   res.redirect("/login")
