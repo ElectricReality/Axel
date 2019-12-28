@@ -19,6 +19,7 @@ echo "Starting Axel Service"
 docker service create \
   --name axel-system \
   --network axel-net \
+  --publish 8080:8080 \
   --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
   nginx:alpine > /dev/null 2>&1
 echo "You can now start using axel at http://${ipv4}:8080"
