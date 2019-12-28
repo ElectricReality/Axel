@@ -85,6 +85,6 @@ app.post('/login', function(req, res, next) {
     });
   })(req, res, next);
 });
-app.get("/dashboard", function(req, res, next) {
+app.get("/dashboard", authCheck, function(req, res, next) {
   res.render("dashboard.ejs", { message: '' });
 });
