@@ -15,6 +15,13 @@ echo "Starting Swarm"
 docker swarm init --advertise-addr ${ipv4} > /dev/null 2>&1
 echo "Starting Network"
 docker network create --driver overlay axel-net > /dev/null 2>&1
+echo "Starting Axel Database"
+docker service create \
+  --name axel-system-database \
+  --network axel-net \
+  --mount type=volume,source=axel-system-database-data,target=/data/db \
+  --mount type=volume,source=axel-system-database-config,target=/data/configdb \
+  mongo:latest > /dev/null 2>&1
 echo "Starting Axel Service"
 docker service create \
   --name axel-system \

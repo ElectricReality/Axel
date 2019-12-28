@@ -1,9 +1,12 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const passport = require('passport');
 const mongo = require('./modules/mongo.js')
 const install = require('./modules/install.js')
-/*  Express  */
-const express = require('express');
+const LocalStrategy = require('passport-local').Strategy;
+const port = 8080;
 const app = express();
-const bodyParser = require('body-parser');
+
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -11,12 +14,7 @@ app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
 app.set('views', __dirname + '/dashboard/ejs');
 app.use("/public", express.static(__dirname + '/dashboard/public'));
-
-const port = process.env.PORT || 3000;
 app.listen(port, () => console.log('Axel is listening on ' + port));
-
-/*  Passport  */
-const passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session());
 passport.serializeUser(function(user, cb) {
@@ -27,13 +25,6 @@ passport.deserializeUser(function(id, cb) {
     cb(err, user);
   });
 });
-async function authCheck(req, res, next) {
-  if (req.isAuthenticated()) return next();
-    res.redirect("/login")
-}
-
-/* Mongo */
-const LocalStrategy = require('passport-local').Strategy;
 passport.use(new LocalStrategy(
   async function(username, password, done) {
     let user = mongo.get('users', {
@@ -48,6 +39,10 @@ passport.use(new LocalStrategy(
     return done(null, user);
   }
 ));
+async function authCheck(req, res, next) {
+  if (req.isAuthenticated()) return next();
+    res.redirect("/login")
+}
 
 // Routes
 app.get("/", function(req, res, next) {
