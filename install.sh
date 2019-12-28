@@ -22,4 +22,5 @@ docker service create \
   --publish 8080:8080 \
   --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
   nginx:alpine > /dev/null 2>&1
-echo "You can now start using axel at http://${ipv4}:8080"
+echo " "
+echo "You can now start using Axel at http://${ipv4}:8080"
