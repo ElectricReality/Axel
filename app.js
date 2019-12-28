@@ -62,7 +62,7 @@ app.get("/register", async(req,res,next) => {
 app.post("/register", async(req,res,next) => {
   let user = await mongo.getall('user')
   console.log(user)
-  if(!user) {
+  if(user == []) {
     bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
       if(err) {
         console.log(err)
