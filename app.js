@@ -40,11 +40,14 @@ passport.use(new LocalStrategy(
       if(err) {
         console.log(err)
       }
+      console.log(hash)
+      console.log(user.password)
       if (hash !== user.password) {
         console.log("Wrong Password")
         return done(null, false);
       }
     });
+
     console.log("Process Thing")
     return done(null, user);
   }
