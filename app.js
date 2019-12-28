@@ -30,8 +30,9 @@ passport.use(new LocalStrategy(
     let user = await mongo.get('users', {
       username: username
     })
-    console.log(user)
-    if (!user) {
+
+    if (user.length == 0) {
+      console.log("User Not Found")
       return done(null, false);
     }
 
@@ -40,9 +41,11 @@ passport.use(new LocalStrategy(
         console.log(err)
       }
       if (hash !== user.password) {
+        console.log("Wrong Password")
         return done(null, false);
       }
     });
+    console.log("Process Thing")
     return done(null, user);
   }
 ));
@@ -58,7 +61,6 @@ app.get("/", function(req, res, next) {
 
 app.get("/register", async(req,res,next) => {
   let user = await mongo.getall('users')
-  console.log(user)
   if(user.length == 0) {
     return res.render("register.ejs", { message: 'Please register your new credentials!' });
   }
@@ -89,7 +91,6 @@ app.get("/login", function(req, res, next) {
 app.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }
-    console.log(user)
     if (!user) { return res.render('login.ejs',{ message: 'Password/Username is Incorrect' }); }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
