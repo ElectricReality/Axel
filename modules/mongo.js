@@ -21,6 +21,7 @@ module.exports = {
     }
     try {
       const db = client.db("axel");
+      console.log(db)
       let collection = db.collection(coll);
       let res = await collection.insertOne(query);
       return res
