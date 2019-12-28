@@ -22,6 +22,11 @@
             <span>Axel</span>
           </div>
           <br>
+          <%
+            if(message) {
+          %>
+          <p><%= message %><</p>
+          <% } %>
           <p style="font-size: 18px;">Username</p>
           <input type="text" name="Username" value="" placeholder="Username">
           <p style="font-size: 18px;">Password</p>
