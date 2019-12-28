@@ -46,6 +46,7 @@ passport.use(new LocalStrategy(
         return done(null, false);
       }
     });
+    console.log("proceed")
     return done(null, user);
   }
 ));
@@ -92,6 +93,7 @@ app.get("/login", function(req, res, next) {
 app.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }
+    console.log(user)
     if (!user) { return res.render('login.ejs',{ message: 'Password/Username is Incorrect' }); }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
