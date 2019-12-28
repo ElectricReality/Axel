@@ -10,11 +10,11 @@ echo "||         Starting Axel Installation         ||"
 echo "||                                            ||"
 echo "================================================"
 echo ""
-ipv4="$(curl ifconfig.co)" > /dev/null 2>&1
+ipv4="$(curl ifconfig.co)" >
 echo "Starting Swarm"
-docker swarm init --advertise-addr ${ipv4} > /dev/null 2>&1
+docker swarm init --advertise-addr ${ipv4} >
 echo "Starting Network"
-docker network create --driver overlay axel-net > /dev/null 2>&1
+docker network create --driver overlay axel-net >
 echo "Starting Axel Database"
 docker service create \
   --name axel-system-database \
@@ -22,7 +22,7 @@ docker service create \
   --restart always \
   --mount type=volume,source=axel-system-database-data,target=/data/db \
   --mount type=volume,source=axel-system-database-config,target=/data/configdb \
-  mongo:latest > /dev/null 2>&1
+  mongo:latest >
 echo "Starting Axel Service"
 docker service create \
   --name axel-system \
@@ -30,6 +30,6 @@ docker service create \
   --restart always \
   --publish 8080:8080 \
   --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
-  nginx:alpine > /dev/null 2>&1
+  nginx:alpine >
 echo " "
 echo "You can now start using Axel at http://${ipv4}:8080"
