@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const mongo = require('./modules/mongo.js')
-const install = require('./modules/install.js')
 const LocalStrategy = require('passport-local').Strategy;
 const port = 8080;
 const app = express();
