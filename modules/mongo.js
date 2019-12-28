@@ -1,5 +1,4 @@
 const MongoClient = require('mongodb').MongoClient;
-const dbName = "axel";
 
 const url = `mongodb://axel-system-database`;
 
@@ -21,7 +20,7 @@ module.exports = {
       return;
     }
     try {
-      const db = client.db(dbName);
+      const db = client.db("axel");
       let collection = db.collection(coll);
       let res = await collection.insertOne(query);
       return res
@@ -49,7 +48,7 @@ module.exports = {
       return;
     }
     try {
-      const db = client.db(dbName);
+      const db = client.db("axel");
       let collection = db.collection(coll);
       let res = await collection.findOne(query);
       return res
@@ -74,7 +73,7 @@ module.exports = {
       return;
     }
     try {
-      const db = client.db(dbName);
+      const db = client.db("axel");
       let collection = db.collection(coll);
       let data = await collection.find({}).toArray()
       return data
@@ -105,7 +104,7 @@ module.exports = {
       return;
     }
     try {
-      const db = client.db(dbName);
+      const db = client.db("axel");
       let collection = db.collection(coll);
       let res = await collection.updateOne(query, newquery);
       return res
@@ -133,7 +132,7 @@ module.exports = {
       return;
     }
     try {
-      const db = client.db(dbName);
+      const db = client.db("axel");
       let collection = db.collection(coll);
       let res = await collection.deleteOne(query);
       return res
