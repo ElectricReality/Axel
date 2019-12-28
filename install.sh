@@ -19,7 +19,6 @@ echo "Starting Axel Database"
 docker service create \
   --name axel-system-database \
   --network axel-net \
-  --restart always \
   --mount type=volume,source=axel-system-database-data,target=/data/db \
   --mount type=volume,source=axel-system-database-config,target=/data/configdb \
   mongo:latest
@@ -27,7 +26,6 @@ echo "Starting Axel Service"
 docker service create \
   --name axel-system \
   --network axel-net \
-  --restart always \
   --publish 8080:8080 \
   --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
   nginx:alpine
