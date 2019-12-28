@@ -6,19 +6,9 @@ echo "||   /  /_\  \     >   <   |   __|  |  |      ||"
 echo "||  /  _____  \   /  .  \  |  |____ |  '----. ||"
 echo "|| /__/     \__\ /__/ \__\ |_______||_______| ||"
 echo "||                                            ||"
-echo "||         Starting Axel Installation         ||"
+echo "||        Starting Axel Uninstallation        ||"
 echo "||                                            ||"
 echo "================================================"
-echo ""
-ipv4="$(curl ifconfig.co)" > /dev/null 2>&1
-echo "Starting Swarm"
-docker swarm init --advertise-addr ${ipv4} > /dev/null 2>&1
-echo "Starting Network"
-docker network create --driver overlay axel-net > /dev/null 2>&1
-echo "Starting Axel Service"
-docker service create \
-  --name axel-system \
-  --network axel-net \
-  --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
-  nginx:alpine > /dev/null 2>&1
-echo "You can now start using axel at http://${ipv4}:8080"
+docker service rm $(docker service ls -q)
+docker swarm leave --force
+docker system prune --all --force
