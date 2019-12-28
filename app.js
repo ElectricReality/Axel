@@ -89,9 +89,11 @@ app.get("/login", function(req, res, next) {
 app.post('/login', function(req, res, next) {
   passport.authenticate('local', async function(err, user, info) {
     if (err) { return next(err); }
-    console.log(await user)
-    if (!user.username) { return res.render('login.ejs',{ message: 'Password/Username is Incorrect' }); }
+    if (!user) { 
+      return res.render('login.ejs',{ message: 'Password/Username is Incorrect' });
+    }
     req.logIn(user, function(err) {
+      console.log("Authentication Starting")
       if (err) { return next(err); }
       return res.redirect('/dashboard');
     });
