@@ -28,14 +28,14 @@ passport.deserializeUser(function(id, cb) {
 passport.use(new LocalStrategy(
   async function(username, password, done) {
     let user = mongo.get('users', {
-      username: req.body.Username
+      username: username
     })
     console.log(user)
     if (!user) {
       return done(null, false);
     }
 
-    bcrypt.hash(req.body.Password, 15, function(err, hash) {
+    bcrypt.hash(password, 15, function(err, hash) {
       if(err) {
         console.log(err)
       }
