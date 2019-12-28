@@ -27,9 +27,6 @@ docker service create \
   --mount type=volume,source=axel-system-database-data,target=/data/db \
   --mount type=volume,source=axel-system-database-config,target=/data/configdb \
   mongo:latest > /dev/null 2>&1
-echo "Cloning From Repository"
-git clone https://github.com/ElectricReality/Axel.git > /dev/null 2>&1
-cd Axel > /dev/null 2>&1
 echo "Building Docker Image"
 docker build -t axel .
 echo "Starting Axel Service"
