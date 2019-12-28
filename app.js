@@ -28,10 +28,9 @@ passport.deserializeUser(function(id, cb) {
 passport.use(new LocalStrategy(
   async function(username, password, done) {
     let user = mongo.get('users', {
-      username: username
+      username: req.body.Username
     })
     if (!user) {
-      console.log("User not found")
       return done(null, false);
     }
 
@@ -39,14 +38,10 @@ passport.use(new LocalStrategy(
       if(err) {
         console.log(err)
       }
-      console.log(hash)
-      console.log(user.password)
       if (hash !== user.password) {
-        console.log("not equal")
         return done(null, false);
       }
     });
-    console.log("proceed")
     return done(null, user);
   }
 ));
