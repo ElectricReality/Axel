@@ -34,9 +34,12 @@ passport.use(new LocalStrategy(
       console.log("User not found")
       return done(null, false);
     }
-    bcrypt.compare(password, user.password, function(err, res) {
-      if(res == false) {
-        console.log("Wrong Pw")
+
+    bcrypt.hash(req.body.Password, 15, function(err, hash) {
+      if(err) {
+        console.log(err)
+      }
+      if (hash !== user.password) {
         return done(null, false);
       }
     });
