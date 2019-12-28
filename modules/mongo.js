@@ -24,7 +24,7 @@ module.exports = {
       return;
     }
     try {
-      const db = client.db("hypebot");
+      const db = client.db(dbName);
       let collection = db.collection(coll);
       let res = await collection.insertOne(query);
       return res
@@ -52,7 +52,7 @@ module.exports = {
       return;
     }
     try {
-      const db = client.db("hypebot");
+      const db = client.db(dbName);
       let collection = db.collection(coll);
       let res = await collection.findOne(query);
       return res
@@ -63,7 +63,10 @@ module.exports = {
     }
   },
 
-  getall: async () => {
+  getall: async (coll) => {
+    if (!coll) {
+      return console.log("Collection is not defined!")
+    }
     const client = await MongoClient.connect(url, {
       useNewUrlParser: true,
       useUnifiedTopology: true
@@ -74,8 +77,8 @@ module.exports = {
       return;
     }
     try {
-      const db = client.db("hypebot");
-      let collection = db.collection('GuildData');
+      const db = client.db(dbName);
+      let collection = db.collection(coll);
       let data = await collection.find({}).toArray()
       return data
     } catch (err) {
@@ -105,7 +108,7 @@ module.exports = {
       return;
     }
     try {
-      const db = client.db("hypebot");
+      const db = client.db(dbName);
       let collection = db.collection(coll);
       let res = await collection.updateOne(query, newquery);
       return res
@@ -133,7 +136,7 @@ module.exports = {
       return;
     }
     try {
-      const db = client.db("hypebot");
+      const db = client.db(dbName);
       let collection = db.collection(coll);
       let res = await collection.deleteOne(query);
       return res

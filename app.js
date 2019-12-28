@@ -32,9 +32,11 @@ passport.use(new LocalStrategy(
     if (!user) {
       return done(null, false);
     }
-    if (user.password != password) {
-      return done(null, false);
-    }
+    bcrypt.compare(password, user.password, function(err, res) {
+      if(res == false) {
+        return done(null, false);
+      }
+    });
     return done(null, user);
   }
 ));
@@ -47,9 +49,32 @@ async function authCheck(req, res, next) {
 app.get("/", function(req, res, next) {
   res.render("index.ejs");
 });
+
+app.get("/register", async(req,res,next) => {
+  let user = await mongo.getall('user')
+  if(!user) {
+    return res.render("register.ejs", { message: 'Please register your new credentials!' });
+  }
+  res.redirect("/login")
+})
+
+app.post("/register", async(req,res,next) => {
+  let user = await mongo.getall('user')
+  if(!user) {
+    bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+      if(err) {
+        console.log(err)
+      }
+      mongo.post('users', {username: req.body.password, password: hash})
+    });
+  }
+  res.redirect("/login")
+})
+
 app.get("/login", function(req, res, next) {
   res.render("login.ejs", { message: '' });
 });
+
 app.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }
