@@ -19,6 +19,7 @@ echo "Starting Axel Database"
 docker service create \
   --name axel-system-database \
   --network axel-net \
+  --hostname axel-system-database \
   --mount type=volume,source=axel-system-database-data,target=/data/db \
   --mount type=volume,source=axel-system-database-config,target=/data/configdb \
   mongo:latest > /dev/null 2>&1
@@ -26,6 +27,7 @@ echo "Starting Axel Service"
 docker service create \
   --name axel-system \
   --network axel-net \
+  --hostname axel-system \
   --publish 8080:8080 \
   --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
   nginx:alpine > /dev/null 2>&1
