@@ -10,7 +10,7 @@ echo "||         Starting Axel Installation         ||"
 echo "||                                            ||"
 echo "================================================"
 echo ""
-ipv4="$(curl ifconfig.co)" > /dev/null 2>&1
+ipv4="$(dig +short myip.opendns.com @resolver1.opendns.com)" > /dev/null 2>&1
 echo "Starting Swarm"
 docker swarm init --advertise-addr ${ipv4} > /dev/null 2>&1
 echo "Starting Network"
