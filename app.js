@@ -39,7 +39,10 @@ passport.use(new LocalStrategy(
       if(err) {
         console.log(err)
       }
+      console.log(hash)
+      console.log(user.password)
       if (hash !== user.password) {
+        console.log("not equal")
         return done(null, false);
       }
     });
@@ -67,7 +70,6 @@ app.get("/register", async(req,res,next) => {
 
 app.post("/register", async(req,res,next) => {
   let user = await mongo.getall('users')
-  console.log(user)
   if(user.length == 0) {
     bcrypt.hash(req.body.Password, 15, function(err, hash) {
       if(err) {
