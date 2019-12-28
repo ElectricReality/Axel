@@ -1,6 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
 const dbName = "axel";
-const dbPassword = encodeURIComponent(process.env.mongo_password);
 
 const url = `mongodb://axel-system-database`;
 

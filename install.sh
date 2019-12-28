@@ -12,8 +12,6 @@ echo "||                                            ||"
 echo "================================================"
 echo ""
 ipv4="$(dig +short myip.opendns.com @resolver1.opendns.com)" > /dev/null 2>&1
-dbpassword="$(date +%s | sha256sum | base64 | head -c 32 )"
-userpassword="$(date +%s | sha256sum | base64 | head -c 32 )"
 echo "Starting Swarm"
 docker swarm init --advertise-addr ${ipv4} > /dev/null 2>&1
 echo "Starting Network"
@@ -31,7 +29,6 @@ echo "Starting Axel Service"
 docker service create \
   --name axel-system \
   --network axel-net \
-  --env mongo_password=${dbpassword} \
   --publish 8080:8080 \
   --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
   axel > /dev/null 2>&1
