@@ -11,10 +11,10 @@ echo "||                                            ||"
 echo "================================================"
 echo " "
 echo "Removing Services"
-docker service rm $(docker service ls -q)
+docker service rm $(docker service ls -q) > /dev/null 2>&1
 echo "Removing Swarm"
-docker swarm leave --force
+docker swarm leave --force > /dev/null 2>&1
 echo "Starting System Prune"
-docker system prune --all --force
+docker system prune --all --force > /dev/null 2>&1
 echo " "
 echo "Uninstallation Complete! Thank you for using Axel."
