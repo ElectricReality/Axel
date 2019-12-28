@@ -4,7 +4,7 @@ const dbUser = "axel";
 const dbPassword = encodeURIComponent(process.env.mongo_password);
 const dbUrl = "axel-system-database";
 
-const url = `mongodb://${dbUser}:${dbPassword}@${dbUrl}/${dbName}?authSource=admin`;
+const url = `mongodb://${dbUser}:${dbPassword}@${dbUrl}/${dbName}?authSource=axel`;
 
 module.exports = {
   post: async (coll, query) => {
