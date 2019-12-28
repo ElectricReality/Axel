@@ -62,7 +62,7 @@ app.get("/register", async(req,res,next) => {
 app.post("/register", async(req,res,next) => {
   let user = await mongo.getall('user')
   if(user.length == 0) {
-    bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+    bcrypt.hash(req.body.password, 15, function(err, hash) {
       if(err) {
         console.log(err)
       }
