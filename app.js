@@ -31,10 +31,12 @@ passport.use(new LocalStrategy(
       username: username
     })
     if (!user) {
+      console.log("User not found")
       return done(null, false);
     }
     bcrypt.compare(password, user.password, function(err, res) {
       if(res == false) {
+        console.log("Wrong Pw")
         return done(null, false);
       }
     });
@@ -53,6 +55,7 @@ app.get("/", function(req, res, next) {
 
 app.get("/register", async(req,res,next) => {
   let user = await mongo.getall('user')
+  console.log(user)
   if(user.length == 0) {
     return res.render("register.ejs", { message: 'Please register your new credentials!' });
   }
@@ -61,6 +64,7 @@ app.get("/register", async(req,res,next) => {
 
 app.post("/register", async(req,res,next) => {
   let user = await mongo.getall('user')
+  console.log(user)
   if(user.length == 0) {
     bcrypt.hash(req.body.Password, 15, function(err, hash) {
       if(err) {
