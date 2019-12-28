@@ -27,7 +27,7 @@ passport.deserializeUser(function(id, cb) {
 });
 passport.use(new LocalStrategy(
   async function(username, password, done) {
-    let user = mongo.get('users', {
+    let user = await mongo.get('users', {
       username: username
     })
     console.log(user)
