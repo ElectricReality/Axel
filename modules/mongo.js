@@ -1,8 +1,8 @@
 const MongoClient = require('mongodb').MongoClient;
-const dbName = process.env.MONGO_NAME;
-const dbUser = process.env.MONGO_USER;
-const dbPassword = encodeURIComponent(process.env.MONGO_PASSWORD);
-const dbUrl = process.env.MONGO_URL;
+const dbName = "axel";
+const dbUser = process.env.mongo_user;
+const dbPassword = encodeURIComponent(process.env.mongo_password);
+const dbUrl = "axel-system-database";
 
 const url = `mongodb://${dbUser}:${dbPassword}@${dbUrl}/${dbName}?authSource=admin`;
 

@@ -21,6 +21,9 @@ echo "Starting Axel Database"
 docker service create \
   --name axel-system-database \
   --network axel-net \
+  --env MONGO_INITDB_ROOT_USERNAME=axel \
+  --env MONGO_INITDB_DATABASE=axel \
+  --env MONGO_INITDB_ROOT_PASSWORD=${dbpassword} \
   --mount type=volume,source=axel-system-database-data,target=/data/db \
   --mount type=volume,source=axel-system-database-config,target=/data/configdb \
   mongo:latest > /dev/null 2>&1
@@ -28,8 +31,10 @@ echo "Starting Axel Service"
 docker service create \
   --name axel-system \
   --network axel-net \
+  --env mongo_user=axel \
+  --env mongo_password=${dbpassword} \
   --publish 8080:8080 \
   --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
   nginx:alpine > /dev/null 2>&1
 echo " "
-echo "You can now start using Axel at http://${ipv4}:8080. Your password is ${userpassword}. The username is Axel."
+echo "You can now start using Axel at http://${ipv4}:8080/login. Please set new username and password immediately at the admin dashboard!"
