@@ -31,10 +31,8 @@ app.use(passport.session());
 passport.serializeUser(function(user, cb) {
   cb(null, user);
 });
-passport.deserializeUser(function(id, cb) {
-  User.findById(id, function(err, user) {
-    cb(err, user);
-  });
+passport.deserializeUser(function(user, cb) {
+  cb(null, user);
 });
 passport.use(new LocalStrategy(
   async function(username, password, done) {
