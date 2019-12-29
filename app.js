@@ -43,16 +43,14 @@ passport.use(new LocalStrategy(
       console.log("User Not Found")
       return done(null, false);
     }
-    await bcrypt.compare(password, user.password, function(err, allow) {
-      if(err){
-        console.log(err)
-      }
+
+    bcrypt.compare(password, user.password, function(err, allow) {
       if(allow == false) {
         console.log("Password Not Found")
         return done(null, false);
       }
     });
-
+    console.log("Continue Auth")
     return done(null, user);
   }
 ));
