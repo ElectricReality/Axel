@@ -17,6 +17,7 @@
     "ejs-lint": "^0.3.0",
     "node-fetch": "^2.6.0",
     "mongodb": "^3.3.4",
-    "bcrypt": "^3.0.7"
+    "bcrypt": "^3.0.7",
+    "memorystore": "^1.6.1"
   }
 }
