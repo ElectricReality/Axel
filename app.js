@@ -17,14 +17,8 @@ app.use("/public", express.static(__dirname + '/dashboard/public'));
 app.listen(port, () => console.log('Axel is listening on ' + port));
 app.use(passport.initialize());
 app.use(passport.session());
-passport.serializeUser(function(user, cb) {
-  cb(null, user);
-});
-passport.deserializeUser(function(id, cb) {
-  User.findById(id, function(err, user) {
-    cb(err, user);
-  });
-});
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 passport.use(new LocalStrategy(
   async function(username, password, done) {
     let user = await mongo.get('users', {
