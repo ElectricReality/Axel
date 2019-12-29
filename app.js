@@ -99,6 +99,7 @@ app.post('/login', function(req, res, next) {
     if (user == null) {
       return res.render('login.ejs',{ message: 'Password/Username is Incorrect' });
     }
+    console.log(user)
     req.logIn(user, function(err) {
       if (err) {
         console.log(err)
