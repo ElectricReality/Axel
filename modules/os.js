@@ -6,7 +6,7 @@ module.exports = {
   },
 
   cpuUsage: async () => {
-    os.cpuUsage(function(v){
+    os.cpuUsage(async (v) => {
 	     return await v
     });
   },
