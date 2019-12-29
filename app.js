@@ -31,18 +31,14 @@ app.use(passport.session());
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
-passport.deserializeUser(function(id, done) {
-  console.log(id)
-  done(null, id);
+passport.deserializeUser(function(user, done) {
+  done(null, user);
 });
 passport.use(new LocalStrategy(
   async function(username, password, done) {
     let user = await mongo.get('users', {
       username: username
     })
-
-    console.log(user)
-
     if (user == null) {
       console.log("User Not Found")
       return done(null, false);
@@ -100,11 +96,10 @@ app.get("/login", function(req, res, next) {
 app.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }
-    if (user === undefined) {
+    if (user == null) {
       return res.render('login.ejs',{ message: 'Password/Username is Incorrect' });
     }
     req.logIn(user, function(err) {
-      console.log("Authentication Starting")
       if (err) {
         console.log(err)
         return next(err);
