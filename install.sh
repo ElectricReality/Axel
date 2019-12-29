@@ -12,6 +12,7 @@ echo "||                                            ||"
 echo "================================================"
 echo ""
 ipv4="$(dig +short myip.opendns.com @resolver1.opendns.com)" > /dev/null 2>&1
+session="$(date +%s | sha256sum | base64 | head -c 32 )"
 echo "Starting Swarm"
 docker swarm init --advertise-addr ${ipv4} > /dev/null 2>&1
 echo "Starting Network"
@@ -30,6 +31,7 @@ docker service create \
   --name axel-system \
   --network axel-net \
   --publish 8080:8080 \
+  --env session=${session} \
   --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
   axel > /dev/null 2>&1
 echo " "

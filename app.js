@@ -4,6 +4,8 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 const mongo = require('./modules/mongo.js')
 const LocalStrategy = require('passport-local').Strategy;
+const session = require("express-session");
+const MemoryStore = require("memorystore")(session);
 const port = 8080;
 const app = express();
 
@@ -14,11 +16,26 @@ app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
 app.set('views', __dirname + '/dashboard/ejs');
 app.use("/public", express.static(__dirname + '/dashboard/public'));
+app.use(session({
+      store: new MemoryStore({
+        checkPeriod: 109900000
+      }),
+      secret: process.env.session,
+      resave: false,
+      saveUninitialized: false
+}));
+
 app.listen(port, () => console.log('Axel is listening on ' + port));
 app.use(passport.initialize());
 app.use(passport.session());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+passport.deserializeUser(function(id, cb) {
+  User.findById(id, function(err, user) {
+    cb(err, user);
+  });
+});
 passport.use(new LocalStrategy(
   async function(username, password, done) {
     let user = await mongo.get('users', {
