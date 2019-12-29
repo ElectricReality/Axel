@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const os = require('./modules/os.js')
 const bcrypt = require('bcrypt');
 const mongo = require('./modules/mongo.js')
 const LocalStrategy = require('passport-local').Strategy;
@@ -113,5 +114,5 @@ app.get('/logout', function(req, res){
 });
 
 app.get("/dashboard", authCheck, function(req, res, next) {
-  res.render("dashboard.ejs", { message: '' });
+  res.render("dashboard.ejs", { message: '', os: os });
 });

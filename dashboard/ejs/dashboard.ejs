@@ -3,26 +3,26 @@
 <div class="cards">
   <div class="card">
     <div class="content">
+      <p style="font-size: 20px;" >Operating System</p>
+      <p><%= os.platform(); %></p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="content">
       <p style="font-size: 20px;" >Cpu Usage</p>
-      <p>10%</p>
+      <p><%= os.cpuUsage(); %></p>
     </div>
   </div>
   <div class="card">
     <div class="content">
       <p style="font-size: 20px;" >Ram Usage</p>
-      <p>1000MB of 4000MB</p>
-    </div>
-  </div>
-  <div class="card">
-    <div class="content">
-      <p style="font-size: 20px;" >Disc Usage</p>
-      <p>10GB of 20GB</p>
+      <p><%= os.usedMem %> of <%= os.totalMem %></p>
     </div>
   </div>
   <div class="card">
     <div class="content">
       <p style="font-size: 20px;" >System Uptime</p>
-      <p>10:00:10</p>
+      <p><%= os.sysUp %></p>
     </div>
   </div>
   <div class="card">
