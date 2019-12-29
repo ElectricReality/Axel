@@ -45,6 +45,7 @@ passport.use(new LocalStrategy(
     }
 
     bcrypt.compare(password, user.hash, function(err, res) {
+    console.log(res)
     if(res == false) {
       console.log("Password Not Found")
       return done(null, false);
