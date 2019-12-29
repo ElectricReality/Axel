@@ -12,8 +12,8 @@ module.exports = {
   },
 
   usedMem: async () => {
-    let used = os.totalmem() - os.freemem()
-    return await used
+    let used = await os.totalmem() - os.freemem()
+    return used
   },
 
   sysUp: async () => {
