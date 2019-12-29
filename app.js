@@ -44,12 +44,14 @@ passport.use(new LocalStrategy(
       return done(null, false);
     }
 
-    bcrypt.compare(password, user.password, function(err, res) {
-    console.log(res)
-    if(res !== true) {
-      console.log("Password Not Found")
-      return done(null, false);
-    }
+    bcrypt.compare(password, user.password, function(err, allow) {
+      if(err){
+        console.log(err)
+      }
+      if(allow == false) {
+        console.log("Password Not Found")
+        return done(null, false);
+      }
     });
 
     return done(null, user);
