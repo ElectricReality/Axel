@@ -56,7 +56,8 @@ passport.use(new LocalStrategy(
   }
 ));
 async function authCheck(req, res, next) {
-  console.log(req.isAuthenticated())
+  if (req.isAuthenticated()) return next();
+    res.redirect("/login")
 }
 
 // Routes
