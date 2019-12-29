@@ -28,11 +28,11 @@ app.use(session({
 app.listen(port, () => console.log('Axel is listening on ' + port));
 app.use(passport.initialize());
 app.use(passport.session());
-passport.serializeUser(function(user, cb) {
-  cb(null, user);
+passport.serializeUser(function(user, done) {
+  done(null, user);
 });
-passport.deserializeUser(function(user, cb) {
-  cb(null, user);
+passport.deserializeUser(function(user, done) {
+  done(null, user);
 });
 passport.use(new LocalStrategy(
   async function(username, password, done) {
