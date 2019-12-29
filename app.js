@@ -43,8 +43,7 @@ passport.use(new LocalStrategy(
       console.log("User Not Found")
       return done(null, false);
     }
-
-    bcrypt.compare(password, user.password, function(err, allow) {
+    await bcrypt.compare(password, user.password, function(err, allow) {
       if(err){
         console.log(err)
       }
