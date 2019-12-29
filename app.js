@@ -96,10 +96,9 @@ app.get("/login", function(req, res, next) {
 app.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }
-    if (user == null) {
+    if (user == false) {
       return res.render('login.ejs',{ message: 'Password/Username is Incorrect' });
     }
-    console.log(user)
     req.logIn(user, function(err) {
       if (err) {
         console.log(err)
