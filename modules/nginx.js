@@ -57,7 +57,7 @@ module.exports = {
       let result = await services.find(s => s.Spec.Name === "axel-system-nginx")
       console.log(services)
       console.log(result)
-      if (result.Spec == undefined) {
+      if (result == "d") {
         docker.createService(options, function(err, csdata) {
           if (err) {
             return console.log(err)
