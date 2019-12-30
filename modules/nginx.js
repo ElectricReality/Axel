@@ -12,7 +12,7 @@ module.exports = {
     //}
     await docker.buildImage({
       context: './nginx',
-      src: ['Dockerfile']
+      src: ['Dockerfile', 'nginx.conf']
     }, {
       t: 'axel-nginx'
     }, function(error, output) {
