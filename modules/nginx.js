@@ -47,9 +47,10 @@ module.exports = {
         "Parallelism": 1
       },
       "EndpointSpec": {
-        "ExposedPorts": [{
+        "Ports": [{
           "Protocol": "tcp",
-          "Port": 80
+          "TargetPort": 80,
+          "PublishedPort": 80,
         }]
       }
     };
@@ -91,9 +92,10 @@ module.exports = {
             "Parallelism": 1
           },
           "EndpointSpec": {
-            "ExposedPorts": [{
+            "Ports": [{
               "Protocol": "tcp",
-              "Port": 80
+              "TargetPort": 80,
+              "PublishedPort": 80,
             }]
           }
         };
