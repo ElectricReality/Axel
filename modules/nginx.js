@@ -17,13 +17,8 @@ module.exports = {
       if (error) {
         return console.error(error);
       }
-      console.log(output);
+      output.pipe(process.stdout);
     });
     docker.createService({Name: 'axel-system-nginx', Networks: 'axel-net', TaskTemplate: {ContainerSpec: {Image: 'axel-nginx'}} })
-    docker.createContainer({Image: 'axel-nginx:latest', name: 'axel-system-nginx'}, function (err, container) {
-      container.start(function (err, data) {
-        console.log(response)
-      });
-    });
   }
 }
