@@ -67,7 +67,7 @@ module.exports = {
       } else {
         let upoptions = {
           "Name": "axel-system-nginx",
-          "version": parseInt(result.Version.Index),
+          "version": `${parseInt(result.Version.Index)}`,
           "TaskTemplate": {
             "ContainerSpec": {
               "Image": "axel-nginx"
@@ -109,7 +109,5 @@ module.exports = {
     }).catch(function(err) {
       console.log(err)
     });
-
-
   }
 }
