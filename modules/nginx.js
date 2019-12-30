@@ -56,11 +56,12 @@ module.exports = {
     docker.listServices({}).then(async function(services) {
       let result = await services.find(s => s.Spec.Name == "axel-system-nginx")
       if(!result){
+        console.log("Creating Service")
         docker.createService(options, function(err, csdata) {
           if (err) {
             return console.log(err)
           }
-          return console.log("Nginx System Created")
+          return csdata;
         })
       }
       let container = await docker.getService(result.id)
