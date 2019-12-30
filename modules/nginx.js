@@ -4,10 +4,10 @@ const mongo = require('../modules/mongo.js')
 
 module.exports = {
   update: async () => {
-    let settings = await mongo.getall('nginx')
-    if(settings.length == 0){
-      return;
-    }
+    //let settings = await mongo.getall('nginx')
+    //if(settings.length == 0){
+    //  return;
+    //}
     docker.buildImage('/axel/nginx', {t: 'axel-nginx'}, function (err, response){
       console.log(response)
     });
