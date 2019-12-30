@@ -11,8 +11,8 @@ module.exports = {
     //  return;
     //}
     docker.buildImage({
-      context: '../nginx',
-      src: ['nginx.Dockerfile', 'nginx.conf']
+      context: './nginx',
+      src: ['Dockerfile.nginx', 'nginx.conf']
     }, {
       t: 'axel-nginx'
     }, function(error, output) {
@@ -55,7 +55,7 @@ module.exports = {
 
     docker.listServices({}).then(async function(services) {
       let result = await services.find(s => s.Spec.Name == "axel-system")
-      console.log(result)
+      //console.log(result)
       /* docker.createService(options, function(err, csdata) {
         if (err) {
           return console.log(err)
