@@ -97,8 +97,8 @@ module.exports = {
             }]
           }
         };
-        const service = docker.getService(result)
-        service.update(encodeURIComponent(opts), function(err, sudata) {
+        const service = docker.getService(result.ID)
+        service.update(opts, function(err, sudata) {
           if (err) {
             return console.log(err)
           }
