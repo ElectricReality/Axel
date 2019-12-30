@@ -20,41 +20,56 @@ module.exports = {
       output.pipe(process.stdout);
     });
     let options = {
-        "Name": "axel-system-nginx",
-        "TaskTemplate": {
-          "ContainerSpec": {
-            "Image": "axel-nginx"
-          },
-          "Resources": {
-            "Limits": {},
-            "Reservations": {}
-          },
-          "RestartPolicy": {},
-          "Placement": {}
+      "Name": "axel-system-nginx",
+      "TaskTemplate": {
+        "ContainerSpec": {
+          "Image": "axel-nginx"
         },
-        "Mode": {
-          "Replicated": {
-            "Replicas": 1
-          }
+        "Resources": {
+          "Limits": {},
+          "Reservations": {}
         },
-        "Networks": [{
-          'Target': "axel-net",
-        }],
-        "UpdateConfig": {
-          "Parallelism": 1
-        },
-        "EndpointSpec": {
-          "ExposedPorts": [{
-            "Protocol": "tcp",
-            "Port": 80
-          }]
+        "RestartPolicy": {},
+        "Placement": {}
+      },
+      "Mode": {
+        "Replicated": {
+          "Replicas": 1
         }
-      };
-    docker.createService(options, function(err, data) {
+      },
+      "Networks": [{
+        'Target': "axel-net",
+      }],
+      "UpdateConfig": {
+        "Parallelism": 1
+      },
+      "EndpointSpec": {
+        "ExposedPorts": [{
+          "Protocol": "tcp",
+          "Port": 80
+        }]
+      }
+    };
+
+    docker.listServices(async function(err, data) {
       if(err){
         return console.log(err)
       }
-      console.log(data)
-    })
+      let data = await data.find(s => s.Spec.Name == "axel-system-nginx")
+      if(data.length == 0) {
+        docker.createService(options, function(err, data) {
+          if(err){
+            return console.log(err)
+          }
+          console.log(data)
+        })
+      }
+      docker.service.update(options, function(err, data) {
+        if(err){
+          return console.log(err)
+        }
+        console.log(data)
+      })
+    });
   }
 }
