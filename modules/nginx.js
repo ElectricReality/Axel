@@ -65,41 +65,40 @@ module.exports = {
           return console.log("Nginx Service Created");
         })
       } else {
-        let upoptions = {
-          "Name": "axel-system-nginx",
-          "version": `${parseInt(result.Version.Index)}`,
-          "TaskTemplate": {
-            "ContainerSpec": {
-              "Image": "axel-nginx"
-            },
-            "Resources": {
-              "Limits": {},
-              "Reservations": {}
-            },
-            "RestartPolicy": {},
-            "Placement": {}
+        let opts = {
+        "Name": "axel-system-nginx",
+        "version": parseInt(result.Version.Index),
+        "TaskTemplate": {
+          "ContainerSpec": {
+            "Image": "axel-nginx"
           },
-          "Mode": {
-            "Replicated": {
-              "Replicas": 1
-            }
+          "Resources": {
+            "Limits": {},
+            "Reservations": {}
           },
-          "Networks": [{
-            'Target': "axel-net",
-          }],
-          "UpdateConfig": {
-            "Parallelism": 1
-          },
-          "EndpointSpec": {
-            "ExposedPorts": [{
-              "Protocol": "tcp",
-              "Port": 80
-            }]
+          "RestartPolicy": {},
+          "Placement": {}
+        },
+        "Mode": {
+          "Replicated": {
+            "Replicas": 1
           }
-        };
+        },
+        "Networks": [{
+          'Target': "axel-net",
+        }],
+        "UpdateConfig": {
+          "Parallelism": 1
+        },
+        "EndpointSpec": {
+          "ExposedPorts": [{
+            "Protocol": "tcp",
+            "Port": 80
+          }]
+        }
+      };
         const service = docker.getService(result)
-
-        service.update(upoptions, function(err, sudata) {
+        service.update(opts, function(err, sudata) {
           if (err) {
             return console.log(err)
           }
