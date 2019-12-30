@@ -10,7 +10,7 @@ module.exports = {
     //if(settings.length == 0){
     //  return;
     //}
-    docker.buildImage({
+    await docker.buildImage({
       context: './nginx',
       src: ['Dockerfile']
     }, {
@@ -21,6 +21,7 @@ module.exports = {
       }
       console.log("Building Nginx")
     });
+
     let options = {
       "Name": "axel-system-nginx",
       "TaskTemplate": {
