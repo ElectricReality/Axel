@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const os = require('os-utils')
+const status = require('os')
 const bcrypt = require('bcrypt');
 const mongo = require('./modules/mongo.js')
 const LocalStrategy = require('passport-local').Strategy;
@@ -9,7 +9,10 @@ const session = require("express-session");
 const MemoryStore = require("memorystore")(session);
 const port = 8080;
 const app = express();
+const nginx = require('./modules/nginx.js')
 
+// Update Nginx settings
+//nginx.update()
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -115,4 +118,23 @@ app.get('/logout', function(req, res){
 
 app.get("/dashboard", authCheck, function(req, res, next) {
   res.render("dashboard.ejs", { message: '', os: os });
+});
+
+app.get("/settings", authCheck, function(req, res, next) {
+  res.render("settings.ejs", { message: '', os: os });
+});
+
+app.post("/settings", authCheck, function(req, res, next) {
+  let domain = req.body.domain
+  let query = {
+    username: req.body.Username,
+    cert: "Not set",
+    certkey: "Not set"
+  }
+  mongo.post('users', query)
+  res.render("settings.ejs", { message: '', os: os });
+});
+
+app.get("/applications", authCheck, function(req, res, next) {
+  res.render("applications.ejs", { message: '', os: os });
 });

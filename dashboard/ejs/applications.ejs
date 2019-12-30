@@ -1,0 +1,41 @@
+<% include ./blocks/header %>
+<p style="text-align: center; font-size: 30px;">Overview</p>
+<div class="cards">
+  <div class="card">
+    <div class="content">
+      <p style="font-size: 20px;" >Operating System</p>
+      <p><%= os.platform(); %></p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="content">
+      <p style="font-size: 20px;" >Cpu Usage</p>
+      <p><%= os.cpuUsage(function(v){ return v; }); %></p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="content">
+      <p style="font-size: 20px;" >Ram Usage</p>
+      <p><%= os.totalmem() - os.freemem() %> of <%= os.totalmem() %></p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="content">
+      <p style="font-size: 20px;" >System Uptime</p>
+      <p><%= os.sysUptime() %></p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="content">
+      <p style="font-size: 20px;" >Applications</p>
+      <p>4</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="content">
+      <p style="font-size: 20px;" >Users</p>
+      <p>2</p>
+    </div>
+  </div>
+</div>
+<% include ./blocks/footer %>
