@@ -12,7 +12,7 @@ module.exports = {
     //}
     docker.buildImage({
       context: './nginx',
-      src: ['Dockerfile']
+      src: ['Dockerfile.nginx']
     }, {
       t: 'axel-nginx'
     }, function(error, output) {
