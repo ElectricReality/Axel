@@ -19,7 +19,7 @@ module.exports = {
       if (error) {
         return console.error(error);
       }
-      output.pipe(process.stdout);
+      console.log(output)
     });
     let options = {
       "Name": "axel-system-nginx",
