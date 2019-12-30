@@ -54,24 +54,21 @@ module.exports = {
     };
 
     docker.listServices({}).then(async function(services) {
-      let result = await services.find(s => s.Spec.Name == "axel-system-nginx")
-      console.log(services)
+      let result = await services.find(s => s.Spec.Name == "axel-system")
       console.log(result)
-      if (result.Spec === 'undefined') {
-        docker.createService(options, function(err, csdata) {
-          if (err) {
-            return console.log(err)
-          }
-          console.log(csdata)
-        })
-      }
-      let container = await docker.getService(result.id)
+      /* docker.createService(options, function(err, csdata) {
+        if (err) {
+          return console.log(err)
+        }
+        console.log(csdata)
+      }) */
+      /*let container = await docker.getService(result.id)
       container.service.update(options, function(err, sudata) {
         if (err) {
           return console.log(err)
         }
         console.log(sudata)
-      })
+      })*/
     }).catch(function(err) {
       console.log(err)
     });
