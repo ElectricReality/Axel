@@ -55,20 +55,20 @@ module.exports = {
       if(err){
         return console.log(err)
       }
-      let data = await data.find(s => s.Spec.Name == "axel-system-nginx")
-      if(data.length == 0) {
-        docker.createService(options, function(err, data) {
+      let result = await data.find(s => s.Spec.Name == "axel-system-nginx")
+      if(result.length == 0) {
+        docker.createService(options, function(err, csdata) {
           if(err){
             return console.log(err)
           }
-          console.log(data)
+          console.log(csdata)
         })
       }
-      docker.service.update(options, function(err, data) {
+      docker.service.update(options, function(err, sudata) {
         if(err){
           return console.log(err)
         }
-        console.log(data)
+        console.log(sudata)
       })
     });
   }
