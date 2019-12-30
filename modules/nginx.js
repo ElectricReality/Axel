@@ -19,6 +19,14 @@ module.exports = {
       }
       output.pipe(process.stdout);
     });
-    docker.createService({Name: 'axel-system-nginx', Networks: 'axel-net', TaskTemplate: {ContainerSpec: {Image: 'axel-nginx'}} })
+    docker.createService({
+      Name: 'axel-system-nginx',
+      Networks: 'axel-net',
+      TaskTemplate: {
+        ContainerSpec: {
+          Image: 'axel-nginx'
+        }
+      }
+    })
   }
 }
