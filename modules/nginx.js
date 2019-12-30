@@ -98,7 +98,7 @@ module.exports = {
           }
         };
         const service = docker.getService(result)
-        service.update(opts.stringify(), function(err, sudata) {
+        service.update(SON.stringify(opts), function(err, sudata) {
           if (err) {
             return console.log(err)
           }
