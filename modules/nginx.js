@@ -19,14 +19,40 @@ module.exports = {
       }
       output.pipe(process.stdout);
     });
-    docker.createService({
-      Name: 'axel-system-nginx',
-      Networks: 'axel-net',
-      TaskTemplate: {
-        ContainerSpec: {
-          Image: 'axel-nginx'
+    let options = {
+        "Name": "axel-system-nginx",
+        "TaskTemplate": {
+          "ContainerSpec": {
+            "Image": "axel-nginx"
+          },
+          "Resources": {
+            "Limits": {},
+            "Reservations": {}
+          },
+          "RestartPolicy": {},
+          "Placement": {}
+        },
+        "Mode": {
+          "Replicated": {
+            "Replicas": 1
+          }
+        },
+        "Networks": "axel-net",
+        "UpdateConfig": {
+          "Parallelism": 1
+        },
+        "EndpointSpec": {
+          "ExposedPorts": [{
+            "Protocol": "tcp",
+            "Port": 80
+          }]
         }
+      };
+    docker.createService(options, function(err, data) {
+      if(err){
+        return console.log(err)
       }
+      console.log(data)
     })
   }
 }
