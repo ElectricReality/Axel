@@ -1,5 +1,7 @@
 const Docker = require('dockerode');
-const docker = new Docker({socketPath: '/var/run/docker.sock'});
+const docker = new Docker({
+  socketPath: '/var/run/docker.sock'
+});
 const mongo = require('../modules/mongo.js')
 
 module.exports = {
@@ -51,25 +53,26 @@ module.exports = {
       }
     };
 
-    docker.listServices(async function(err, data) {
-      if(err){
-        return console.log(err)
-      }
-      let result = await data.find(s => s.Spec.Name == "axel-system-nginx")
-      if(result.length == 0) {
+    docker.listServices({}).then(function(services) {
+      let result = await services.find(s => s.Spec.Name == "axel-system-nginx")
+      if (result.length == 0) {
         docker.createService(options, function(err, csdata) {
-          if(err){
+          if (err) {
             return console.log(err)
           }
           console.log(csdata)
         })
       }
-      docker.service.update(options, function(err, sudata) {
-        if(err){
+      result.service.update(options, function(err, sudata) {
+        if (err) {
           return console.log(err)
         }
         console.log(sudata)
       })
+    }).catch(function(err) {
+      console.log(err)
     });
+
+
   }
 }
