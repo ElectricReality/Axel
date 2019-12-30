@@ -61,16 +61,17 @@ module.exports = {
           if (err) {
             return console.log(err)
           }
-          return csdata;
+          return console.log("Nginx Service Created");
+        })
+      } else {
+        let container = await docker.getService(result.id)
+        container.service.update(options, function(err, sudata) {
+          if (err) {
+            return console.log(err)
+          }
+          return console.log("Nginx Service Updated");
         })
       }
-      let container = await docker.getService(result.id)
-      container.service.update(options, function(err, sudata) {
-        if (err) {
-          return console.log(err)
-        }
-        console.log(sudata)
-      })
     }).catch(function(err) {
       console.log(err)
     });
