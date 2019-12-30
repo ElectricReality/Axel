@@ -37,7 +37,9 @@ module.exports = {
             "Replicas": 1
           }
         },
-        "Networks": "axel-net",
+        "Networks": [{
+          'Target': "axel-net",
+        }],
         "UpdateConfig": {
           "Parallelism": 1
         },
