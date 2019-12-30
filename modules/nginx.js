@@ -63,7 +63,8 @@ module.exports = {
           console.log(csdata)
         })
       }
-      result.service.update(options, function(err, sudata) {
+      let container = await docker.getService(result.id)
+      container.service.update(options, function(err, sudata) {
         if (err) {
           return console.log(err)
         }
