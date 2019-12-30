@@ -65,7 +65,8 @@ module.exports = {
           return console.log("Nginx Service Created");
         })
       } else {
-        docker.getService(result.id).service.update(options, function(err, sudata) {
+        console.log(result.ID)
+        docker.getService(result.ID).service.update(options, function(err, sudata) {
           if (err) {
             return console.log(err)
           }
