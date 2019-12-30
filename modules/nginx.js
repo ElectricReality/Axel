@@ -97,7 +97,7 @@ module.exports = {
             }]
           }
         };
-        result.service.update(upoptions, function(err, sudata) {
+        result.update(upoptions, function(err, sudata) {
           if (err) {
             return console.log(err)
           }
