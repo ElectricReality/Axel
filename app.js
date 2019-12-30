@@ -10,9 +10,6 @@ const MemoryStore = require("memorystore")(session);
 const port = 8080;
 const app = express();
 const nginx = require('./modules/nginx.js')
-
-// Update Nginx settings
-nginx.update()
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -138,3 +135,6 @@ app.post("/settings", authCheck, function(req, res, next) {
 app.get("/applications", authCheck, function(req, res, next) {
   res.render("applications.ejs", { message: '', os: os });
 });
+
+// Update Nginx settings
+nginx.update()
