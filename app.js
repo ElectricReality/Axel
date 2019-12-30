@@ -12,7 +12,7 @@ const app = express();
 const nginx = require('./modules/nginx.js')
 
 // Update Nginx settings
-//nginx.update()
+nginx.update()
 app.use(bodyParser.urlencoded({
   extended: true
 }));
