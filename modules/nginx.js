@@ -8,7 +8,7 @@ module.exports = {
     //if(settings.length == 0){
     //  return;
     //}
-    docker.buildImage('/axel/nginx', {t: 'axel-nginx'}, function (err, response){
+    docker.buildImage('../nginx.js', {t: 'axel-nginx'}, function (err, response){
       console.log(response)
     });
     docker.createService({Name: 'axel-system-nginx', Networks: 'axel-net', TaskTemplate: {ContainerSpec: {Image: 'axel-nginx'}} })
