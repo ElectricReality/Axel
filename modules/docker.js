@@ -3,6 +3,7 @@ var docker = new Docker({
   socketPath: '/var/run/docker.sock'
 });
 const tarfs = require('tar-fs');
+const path = require('path');
 
 module.exports = {
   axel: async () => {

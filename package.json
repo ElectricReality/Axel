@@ -20,6 +20,8 @@
     "bcrypt": "^3.0.7",
     "memorystore": "^1.6.1",
     "os": "^0.1.1",
-    "dockerode": "^3.0.2"
+    "dockerode": "^3.0.2",
+    "tarfs": "^2.0.0",
+    "path": "^0.12.7"
   }
 }
