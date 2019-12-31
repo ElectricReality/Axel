@@ -1,35 +1,60 @@
 var Docker = require('dockerode');
-var docker = new Docker({socketPath: '/var/run/docker.sock'});
-
+var docker = new Docker({
+  socketPath: '/var/run/docker.sock'
+});
+const tarfs = require('tar-fs');
 
 module.exports = {
-  getAllService: async (coll, query) => {
-    let service = new Array();
-    docker.listServices.forEach(s => {
-      service.push({
-        service_id: s.ID,
-        service_name: s.Spec.Name,
-        service_replicas: s.Spec.Mode.Replicated.Replicas,
-        service_volumes: s.Spec.TaskTemplate.ContainerSpec.Mounts.length,
-        service_
-      })
-    })
+  axel: async () => {
+    update: async () => {
+      const pack = tarfs.pack(path.join(__dirname, '..'));
 
-  },
-
-  get: async (coll, query) => {
-
-  },
-
-  getall: async (coll) => {
-
-  },
-
-  update: async (coll, query, newquery) => {
-
-  },
-
-  remove: async (coll, query) => {
-
+      docker.buildImage(pack, {
+        t: 'axel-system'
+      }).then(out => console.log("Building Axel..."));
+      docker.listServices({}).then(async function(ser) {
+        let result = await ser.find(s => s.Spec.Name == "axel-system")
+        const service = docker.getService(result.ID)
+        let opts = {
+          "Name": "axel-system",
+          "version": parseInt(result.Version.Index),
+          "TaskTemplate": {
+            "ContainerSpec": {
+              "Image": "axel-system"
+            },
+            "Resources": {
+              "Limits": {},
+              "Reservations": {}
+            },
+            "RestartPolicy": {},
+            "Placement": {}
+          },
+          "Mode": {
+            "Replicated": {
+              "Replicas": 1
+            }
+          },
+          "Networks": [{
+            'Target': "axel-net",
+          }],
+          "UpdateConfig": {
+            "Parallelism": 1
+          },
+          "EndpointSpec": {
+            "Ports": [{
+              "Protocol": "tcp",
+              "TargetPort": 3000,
+              "PublishedPort": 3000,
+            }]
+          }
+        };
+        service.update(opts, function(err, sudata) {
+          if (err) {
+            return console.log(err)
+          }
+          return console.log("Axel Service Updated");
+        })
+      });
+    }
   }
 }

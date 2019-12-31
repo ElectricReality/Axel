@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const status = require('os')
 const bcrypt = require('bcrypt');
+const docker = require('./modules/docker.js')
 const mongo = require('./modules/mongo.js')
 const LocalStrategy = require('passport-local').Strategy;
 const session = require("express-session");
@@ -134,6 +135,11 @@ app.post("/settings", authCheck, function(req, res, next) {
 
 app.get("/applications", authCheck, function(req, res, next) {
   res.render("applications.ejs", { message: '', os: os });
+});
+
+app.get("/settings/update", authCheck, function(req, res, next) {
+  docker.axel.update()
+  res.render("update.ejs", { message: '', os: os });
 });
 
 // Update Nginx settings
