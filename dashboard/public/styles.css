@@ -73,6 +73,18 @@ button {
   border: transparent;
 }
 
+.button {
+  background-color: #03143E;
+  line-height: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: white;
+  font-size: 15px;
+  border: transparent;
+}
+
 .logo {
   overflow: auto;
 }
