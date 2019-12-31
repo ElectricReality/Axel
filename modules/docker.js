@@ -7,7 +7,7 @@ const path = require('path');
 
 module.exports = {
   axel: async () => {
-      const pack = tarfs.pack(path.join(__dirname, '..'));
+      const pack = await tarfs.pack(path.join(__dirname, '..'));
       docker.buildImage(pack, {
         t: 'axel-system'
       }).then(out => console.log("Building Axel..."));
