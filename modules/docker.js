@@ -8,11 +8,12 @@ const path = require('path');
 module.exports = {
   axel: async () => {
       const pack = await tarfs.pack('../');
-      docker.buildImage(pack, {t: 'axel-system'}, function (err, response){
+      console.log(pack)
+      docker.buildImage(pack, {t: 'axel'}, function (err, response){
         if(err) {
           console.log(err)
         }
-        console.log("Axel Image Generated")
+        console.log(response)
       });
       docker.listServices({}).then(async function(ser) {
         let result = await ser.find(s => s.Spec.Name == "axel-system")
@@ -22,7 +23,7 @@ module.exports = {
           "version": parseInt(result.Version.Index),
           "TaskTemplate": {
             "ContainerSpec": {
-              "Image": "axel-system"
+              "Image": "axel"
             },
             "Resources": {
               "Limits": {},
