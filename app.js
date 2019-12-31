@@ -18,11 +18,21 @@ app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
 app.set('views', __dirname + '/dashboard/ejs');
 app.use("/public", express.static(__dirname + '/dashboard/public'));
+function randomString(length, chars) {
+    var mask = '';
+    if (chars.indexOf('a') > -1) mask += 'abcdefghijklmnopqrstuvwxyz';
+    if (chars.indexOf('A') > -1) mask += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    if (chars.indexOf('#') > -1) mask += '0123456789';
+    if (chars.indexOf('!') > -1) mask += '~`!@#$%^&*()_+-={}[]:";\'<>?,./|\\';
+    var result = '';
+    for (var i = length; i > 0; --i) result += mask[Math.floor(Math.random() * mask.length)];
+    return result;
+}
 app.use(session({
       store: new MemoryStore({
         checkPeriod: 109900000
       }),
-      secret: process.env.session,
+      secret: randomString(32, '#aA'),
       resave: false,
       saveUninitialized: false
 }));
