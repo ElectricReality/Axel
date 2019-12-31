@@ -13,9 +13,8 @@ module.exports = {
         if(err) {
           console.log(err)
         }
-        console.log(response)
+        console.log("Axel Image Generated")
       });
-      let sersecret = process.env.session
       docker.listServices({}).then(async function(ser) {
         let result = await ser.find(s => s.Spec.Name == "axel-system")
         const service = docker.getService(result.ID)
