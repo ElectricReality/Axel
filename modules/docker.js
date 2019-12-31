@@ -8,9 +8,12 @@ const path = require('path');
 module.exports = {
   axel: async () => {
       const pack = await tarfs.pack('../');
-      docker.buildImage(pack, {
-        t: 'axel-system'
-      }).then(out => console.log("Building Axel..."));
+      docker.buildImage(pack, {t: 'axel-system'}, function (err, response){
+        if(err) {
+          console.log(err)
+        }
+        console.log("Axel Image Generated")
+      });
       docker.listServices({}).then(async function(ser) {
         let result = await ser.find(s => s.Spec.Name == "axel-system")
         const service = docker.getService(result.ID)
