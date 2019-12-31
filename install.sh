@@ -25,7 +25,7 @@ docker service create \
   --mount type=volume,source=axel-system-database-config,target=/data/configdb \
   mongo:latest > /dev/null 2>&1
 echo "Building Axel Image"
-docker build -t axel . > /dev/null 2>&1
+docker build -t axel .
 echo "Starting Axel Service"
 docker service create \
   --name axel-system \
@@ -33,6 +33,6 @@ docker service create \
   --publish 8080:8080 \
   --env session=${session} \
   --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
-  axel > /dev/null 2>&1
+  axel
 echo " "
 echo "You can now start using Axel at http://${ipv4}:8080/login. Please set new username and password immediately at the admin dashboard!"
