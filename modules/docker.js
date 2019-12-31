@@ -6,9 +6,7 @@ const tarfs = require('tar-fs');
 
 module.exports = {
   axel: async () => {
-    update: async () => {
       const pack = tarfs.pack(path.join(__dirname, '..'));
-
       docker.buildImage(pack, {
         t: 'axel-system'
       }).then(out => console.log("Building Axel..."));
@@ -56,5 +54,4 @@ module.exports = {
         })
       });
     }
-  }
 }
