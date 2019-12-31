@@ -44,7 +44,6 @@ module.exports = {
           "UpdateConfig": {
             "Parallelism": 1
           },
-          "Env":[`session=${sersecret}`],
           "EndpointSpec": {
             "Ports": [{
               "Protocol": "tcp",
