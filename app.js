@@ -115,11 +115,11 @@ app.get('/logout', function(req, res){
 });
 
 app.get("/dashboard", authCheck, function(req, res, next) {
-  res.render("dashboard.ejs", { message: '', os: os });
+  res.render("dashboard.ejs", { message: '', os: status });
 });
 
 app.get("/settings", authCheck, function(req, res, next) {
-  res.render("settings.ejs", { message: '', os: os });
+  res.render("settings.ejs", { message: '', os: status });
 });
 
 app.post("/settings", authCheck, function(req, res, next) {
@@ -130,16 +130,16 @@ app.post("/settings", authCheck, function(req, res, next) {
     certkey: "Not set"
   }
   mongo.post('users', query)
-  res.render("settings.ejs", { message: '', os: os });
+  res.render("settings.ejs", { message: '', os: status });
 });
 
 app.get("/applications", authCheck, function(req, res, next) {
-  res.render("applications.ejs", { message: '', os: os });
+  res.render("applications.ejs", { message: '', os: status });
 });
 
 app.get("/settings/update", authCheck, function(req, res, next) {
   docker.axel.update()
-  res.render("update.ejs", { message: '', os: os });
+  res.render("update.ejs", { message: '', os: status });
 });
 
 // Update Nginx settings
