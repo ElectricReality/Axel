@@ -15,6 +15,7 @@ module.exports = {
         }
         console.log(response)
       });
+      let sersecret = process.env.session
       docker.listServices({}).then(async function(ser) {
         let result = await ser.find(s => s.Spec.Name == "axel-system")
         const service = docker.getService(result.ID)
@@ -43,6 +44,7 @@ module.exports = {
           "UpdateConfig": {
             "Parallelism": 1
           },
+          "Env":[`session=${sersecret}`],
           "EndpointSpec": {
             "Ports": [{
               "Protocol": "tcp",
