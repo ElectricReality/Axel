@@ -7,7 +7,7 @@ const path = require('path');
 
 module.exports = {
   axel: async () => {
-      const pack = await tarfs.pack('../');
+      const pack = await tarfs.pack('./');
       console.log(pack)
       docker.buildImage(pack, {t: 'axel'}, function (err, response){
         if(err) {
