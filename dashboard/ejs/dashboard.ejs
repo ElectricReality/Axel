@@ -9,12 +9,6 @@
   </div>
   <div class="card">
     <div class="content">
-      <p style="font-size: 20px;" >Cpu Usage</p>
-      <p><%= os.cpuUsage(function(v){ return v; }); %></p>
-    </div>
-  </div>
-  <div class="card">
-    <div class="content">
       <p style="font-size: 20px;" >Ram Usage</p>
       <p><%= os.totalmem() - os.freemem() %> of <%= os.totalmem() %></p>
     </div>
