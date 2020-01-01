@@ -48,7 +48,7 @@ module.exports = {
         "Name": "axel-system",
         "version": parseInt(result.Version.Index),
         "TaskTemplate": {
-          "ForceUpdate": parseInt(1),
+          "ForceUpdate": parseInt(0),
           "ContainerSpec": {
             "Image": "axel",
             "Mounts": [{
