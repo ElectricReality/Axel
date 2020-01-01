@@ -39,7 +39,7 @@ module.exports = {
       .catch((err) => console.error('failed: ', err));
     const pack = await tarfs.pack(filePath);
     await docker.pruneImages()
-    await docker.buildImage(pack, {t: 'axel:latest'});
+    await docker.buildImage(pack, {tag: 'axel:latest'});
     await docker.pull('axel:latest');
     docker.listServices({}).then(async function(ser) {
       let result = await ser.find(s => s.Spec.Name == "axel-system")
