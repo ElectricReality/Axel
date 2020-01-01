@@ -43,7 +43,6 @@
       <p id="paragraph" style="font-size: 30px;">Please wait for <span id="countdown">20</span> seconds.</p>
     </div>
     <script type="text/javascript">
-        $(document).ready(function () {
           setInterval(function () {
             let paragraph = document.getElementByID("paragraph").innerHTML
             let remaining = document.getElementByID("countdown").innerHTML;
@@ -52,10 +51,9 @@
             }
             document.getElementById("countdown").innerHTML = remaining;
           }, 20000);
-            setTimeout(function () {
-                window.location = "/login";
-            }, 20000);
-        });
+          setTimeout(function () {
+            window.location = "/login";
+          }, 20000);
     </script>
   </body>
 </html>
