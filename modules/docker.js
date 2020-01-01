@@ -15,7 +15,7 @@ module.exports = {
         .catch((err) => console.error('failed: ', err));
       const filePath = path.join(process.cwd(), '/Axel');
       const pack = await tarfs.pack(filePath);
-      docker.buildImage(pack, {t: 'axel'}, function (err, response){
+      docker.buildImage(pack, {t: 'axel:latest'}, function (err, response){
         if(err) {
           console.log(err)
         }
@@ -29,7 +29,7 @@ module.exports = {
           "version": parseInt(result.Version.Index),
           "TaskTemplate": {
             "ContainerSpec": {
-              "Image": "axel",
+              "Image": "axel:latest",
               "Mounts": [{
                 "Type": "bind",
                 "Source": "/var/run/docker.sock",
