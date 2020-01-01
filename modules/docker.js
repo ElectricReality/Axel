@@ -40,7 +40,7 @@ module.exports = {
     const pack = await tarfs.pack(filePath);
     await docker.pruneImages()
     let stream1 = await docker.buildImage(pack, {
-      t: 'axel'
+      t: 'axel:latest'
     });
     let stream2 = docker.pull('axel:latest');
     await new Promise((resolve, reject) => {
