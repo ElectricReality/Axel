@@ -39,7 +39,7 @@ module.exports = {
       .catch((err) => console.error('failed: ', err));
     const pack = await tarfs.pack(filePath);
     let stream = await docker.buildImage(pack, {
-      t: 'axel:latest'
+      t: 'axel'
     });
     await new Promise((resolve, reject) => {
       docker.modem.followProgress(stream, (err, res) => err ? reject(err) : resolve(res));
