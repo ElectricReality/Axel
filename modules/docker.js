@@ -8,7 +8,6 @@ const path = require('path');
 module.exports = {
   axel: async () => {
       const pack = await tarfs.pack('./');
-      console.log(pack)
       docker.buildImage(pack, {t: 'axel'}, function (err, response){
         if(err) {
           console.log(err)
@@ -60,6 +59,7 @@ module.exports = {
           if (err) {
             return console.log(err)
           }
+          console.log(sudata)
           return console.log("Axel Service Updated");
         })
       });
