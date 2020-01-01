@@ -15,7 +15,7 @@ module.exports = {
         .catch((err) => console.error('failed: ', err));
       const filePath = path.join(process.cwd(), '/Axel');
       const pack = await tarfs.pack(filePath);
-      docker.buildImage(pack, {t: 'axel:latest'}, function (err, response){
+      await docker.buildImage(pack, {t: 'axel:latest'}, function (err, response){
         if(err) {
           console.log(err)
         }
