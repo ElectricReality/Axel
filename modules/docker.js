@@ -9,7 +9,7 @@ const git = require('simple-git/promise')
 module.exports = {
   axel: async () => {
       let repo = 'https://github.com/ElectricReality/Axel.git';
-      git().silent(true)
+      await git().silent(true)
         .clone(repo)
         .then(() => console.log('Clone finish'))
         .catch((err) => console.error('failed: ', err));
