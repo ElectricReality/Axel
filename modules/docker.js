@@ -4,9 +4,11 @@ const docker = new Docker({
 });
 const tarfs = require('tar-fs');
 const path = require('path');
+const git = require('simple-git')("../");
 
 module.exports = {
   axel: async () => {
+      git().pull('origin', 'master', {'--no-rebase': null})
       const pack = await tarfs.pack(process.cwd());
       docker.buildImage(pack, {t: 'axel'}, function (err, response){
         if(err) {

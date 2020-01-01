@@ -25,7 +25,7 @@ docker service create \
   --mount type=volume,source=axel-system-database-config,target=/data/configdb \
   mongo:latest > /dev/null 2>&1
 echo "Building Axel Image"
-docker build -t axel .
+docker build -t axel:latest .
 echo "Starting Axel Service"
 docker service create \
   --name axel-system \
