@@ -4,7 +4,7 @@ const docker = new Docker({
 });
 const tarfs = require('tar-fs');
 const path = require('path');
-const git = require('simple-git/promise')
+const git = require('simple-git/promise')(__dirname)
 
 module.exports = {
   axel: async () => {
@@ -13,7 +13,7 @@ module.exports = {
         .clone(repo)
         .then(() => console.log('Clone finish'))
         .catch((err) => console.error('failed: ', err));
-      const filePath = path.join(__dirname, '/Axel');
+      const filePath = '/Axel'
       const pack = await tarfs.pack(filePath);
       docker.buildImage(pack, {t: 'axel'}, function (err, response){
         if(err) {
