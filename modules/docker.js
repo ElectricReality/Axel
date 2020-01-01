@@ -1,5 +1,4 @@
 const Docker = require('dockerode');
-let dockerode = new Dockerode();
 const docker = new Docker({
   socketPath: '/var/run/docker.sock'
 });
