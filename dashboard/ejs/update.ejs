@@ -49,7 +49,7 @@
             if(remaining < 0){
               return document.getElementById("paragraph").innerHTML = "Redirecting to login page.";
             }
-            document.getElementById("countdown").innerHTML = remaining;
+            document.getElementById("countdown").innerHTML = remaining - 1;
           }, 20000);
           setTimeout(function () {
             window.location = "/login";
