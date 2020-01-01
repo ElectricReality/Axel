@@ -39,11 +39,17 @@ module.exports = {
       .catch((err) => console.error('failed: ', err));
     const pack = await tarfs.pack(filePath);
     await docker.pruneImages()
-    let stream = await docker.buildImage(pack, {
-      t: 'axel'
+    await docker.buildImage(pack, {t: 'axel'}, function(err, response){
+      if(err){
+        console.log(err)
+      }
+      console.log("Image Generated")
     });
-    await new Promise((resolve, reject) => {
-      docker.modem.followProgress(stream, (err, res) => err ? reject(err) : resolve(res));
+    docker.pull('axel:latest', function (err, stream) {
+      if(err){
+        console.log(err)
+      }
+      console.log("Image Generated")
     });
     docker.listServices({}).then(async function(ser) {
       let result = await ser.find(s => s.Spec.Name == "axel-system")
