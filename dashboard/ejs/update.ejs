@@ -40,7 +40,22 @@
     <div class="center">
       <img src="/public/Axel.svg" height="200px" alt="Axel">
       <p style="font-size: 20px;">Axel is being updated.</p>
-      <p style="font-size: 30px;">Please wait.</p>
+      <p id="paragraph" style="font-size: 30px;">Please wait for <span id="countdown">20</span> seconds.</p>
     </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+          setInterval(function () {
+            let paragraph = document.getElementByID("paragraph").innerHTML
+            let remaining = document.getElementByID("countdown").innerHTML;
+            if(remaining < 0){
+              return document.getElementById("paragraph").innerHTML = "Redirecting to login page.";
+            }
+            document.getElementById("countdown").innerHTML = remaining;
+          }, 20000);
+            setTimeout(function () {
+                window.location = "/login";
+            }, 20000);
+        });
+    </script>
   </body>
 </html>
