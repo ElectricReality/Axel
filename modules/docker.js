@@ -53,7 +53,7 @@ module.exports = {
         "version": parseInt(result.Version.Index),
         "TaskTemplate": {
           "ContainerSpec": {
-            "Image": "axel:latest",
+            "Image": "axel",
             "Mounts": [{
               "Type": "bind",
               "Source": "/var/run/docker.sock",
