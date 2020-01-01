@@ -4,12 +4,17 @@ const docker = new Docker({
 });
 const tarfs = require('tar-fs');
 const path = require('path');
-const git = require('simple-git')("../");
+const git = require('simple-git/promise')
 
 module.exports = {
   axel: async () => {
-      git().pull('origin', 'master', {'--no-rebase': null})
-      const pack = await tarfs.pack(process.cwd());
+      let repo = 'https://github.com/ElectricReality/Axel.git';
+      git().silent(true)
+        .clone(repo)
+        .then(() => console.log('Clone finish'))
+        .catch((err) => console.error('failed: ', err));
+      const filePath = path.join(__dirname, '/Axel');
+      const pack = await tarfs.pack(filePath);
       docker.buildImage(pack, {t: 'axel'}, function (err, response){
         if(err) {
           console.log(err)
