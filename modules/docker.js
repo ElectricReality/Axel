@@ -15,11 +15,9 @@ module.exports = {
         .catch((err) => console.error('failed: ', err));
       const filePath = path.join(process.cwd(), '/Axel');
       const pack = await tarfs.pack(filePath);
-      await docker.buildImage(pack, {t: 'axel:latest'}, function (err, response){
-        if(err) {
-          console.log(err)
-        }
-        console.log("Axel Image Created")
+      let stream = await dockerode.buildImage(pack, {t: 'axel:latest'});
+      await new Promise((resolve, reject) => {
+        dockerode.modem.followProgress(stream, (err, res) => err ? reject(err) : resolve(res));
       });
       docker.listServices({}).then(async function(ser) {
         let result = await ser.find(s => s.Spec.Name == "axel-system")
