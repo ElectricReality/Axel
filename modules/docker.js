@@ -38,6 +38,7 @@ module.exports = {
       .then(() => console.log('Clone finish'))
       .catch((err) => console.error('failed: ', err));
     const pack = await tarfs.pack(filePath);
+    await docker.pruneImages(options)
     let stream = await docker.buildImage(pack, {
       t: 'axel'
     });
