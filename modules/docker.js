@@ -4,7 +4,7 @@ const docker = new Docker({
 });
 const tarfs = require('tar-fs');
 const path = require('path');
-const git = require('simple-git/promise')(__dirname)
+const git = require('simple-git/promise')
 
 module.exports = {
   axel: async () => {
