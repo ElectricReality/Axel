@@ -44,8 +44,8 @@
     </div>
     <script type="text/javascript">
           setInterval(function () {
-            let paragraph = document.getElementByID("paragraph").value
-            let remaining = document.getElementByID("countdown").value;
+            let paragraph = document.getElementById("paragraph").value
+            let remaining = document.getElementById("countdown").value;
             if(remaining < 0){
               return document.getElementById("paragraph").innerHTML = "Redirecting to login page.";
             }
