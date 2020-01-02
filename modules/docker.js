@@ -11,7 +11,7 @@ const fs = require("fs"); // Or `import fs from "fs";` with ESM
 module.exports = {
   axel: async () => {
     // Build Image
-    await docker.buildImage({remote: 'https://github.com/ElectricReality/Axel.git#master'}, {t: 'axel:latest'}, function (err, response){
+    await docker.buildImage({remote: 'https://github.com/ElectricReality/Axel.git#master', t: 'axel:latest'}, function (err, response){
       if(err){
         return console.log(err)
       }
