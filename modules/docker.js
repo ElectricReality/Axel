@@ -49,7 +49,7 @@ module.exports = {
         "TaskTemplate": {
           "ForceUpdate": parseInt(1),
           "ContainerSpec": {
-            "Image": "axel:latest",
+            "Image": "axel",
             "Mounts": [{
               "Type": "bind",
               "Source": "/var/run/docker.sock",
