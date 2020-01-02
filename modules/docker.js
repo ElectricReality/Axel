@@ -15,7 +15,7 @@ module.exports = {
       if(err){
         return console.log(err)
       }
-      console.log("Axel Image Built")
+      console.log(response)
     });
     // Service Update
     docker.listServices({}).then(async function(ser) {
