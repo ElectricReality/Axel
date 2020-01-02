@@ -10,38 +10,17 @@ const fs = require("fs"); // Or `import fs from "fs";` with ESM
 
 module.exports = {
   axel: async () => {
-    let repo = 'https://github.com/ElectricReality/Axel.git';
-    const filePath = path.join(process.cwd(), '/Axel');
-    if (fs.existsSync(filePath)) {
-      var rmdir = function(dir) {
-        var list = fs.readdirSync(dir);
-        for (var i = 0; i < list.length; i++) {
-          var filename = path.join(dir, list[i]);
-          var stat = fs.statSync(filename);
-
-          if (filename == "." || filename == "..") {
-            // pass these files
-          } else if (stat.isDirectory()) {
-            // rmdir recursively
-            rmdir(filename);
-          } else {
-            // rm fiilename
-            fs.unlinkSync(filename);
-          }
-        }
-        fs.rmdirSync(dir);
-      };
-      rmdir(filePath);
-    }
-    await git().silent(true)
-      .clone(repo)
-      .then(() => console.log('Clone finish'))
-      .catch((err) => console.error('failed: ', err));
-    const pack = await tarfs.pack(filePath);
-    await docker.buildImage(pack, {t: 'axel:latest'});
-    await docker.listServices({}).then(async function(ser) {
+    // Build Image
+    await docker.buildImage({'remote': 'https://github.com/ElectricReality/Axel.git'}, {t: 'axel:latest'}, function (err, response){
+      if(err){
+        return console.log(err)
+      }
+      console.log("Axel Image Built")
+    });
+    // Service Update
+    docker.listServices({}).then(async function(ser) {
       let result = await ser.find(s => s.Spec.Name == "axel-system")
-      const service = docker.getService(result.ID)
+      let service = await docker.getService(result.ID)
       let opts = {
         "Name": "axel-system",
         "version": parseInt(result.Version.Index),
@@ -85,7 +64,6 @@ module.exports = {
         if (err) {
           return console.log(err)
         }
-        console.log(sudata)
         return console.log("Axel Service Updated");
       })
     });
