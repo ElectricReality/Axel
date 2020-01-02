@@ -38,8 +38,8 @@ module.exports = {
       .then(() => console.log('Clone finish'))
       .catch((err) => console.error('failed: ', err));
     const pack = await tarfs.pack(filePath);
-    await docker.buildImage(pack, {t: 'axel:latest',forcerm: true});
-    docker.listServices({}).then(async function(ser) {
+    await docker.buildImage(pack, {t: 'axel:latest'});
+    await docker.listServices({}).then(async function(ser) {
       let result = await ser.find(s => s.Spec.Name == "axel-system")
       const service = docker.getService(result.ID)
       let opts = {
