@@ -38,8 +38,7 @@ module.exports = {
       .then(() => console.log('Clone finish'))
       .catch((err) => console.error('failed: ', err));
     const pack = await tarfs.pack(filePath);
-    await docker.pruneImages()
-    await docker.buildImage(pack, {t: 'axel',forcerm: true});
+    await docker.buildImage(pack, {t: 'axel:latest',forcerm: true});
     docker.listServices({}).then(async function(ser) {
       let result = await ser.find(s => s.Spec.Name == "axel-system")
       const service = docker.getService(result.ID)
@@ -49,7 +48,7 @@ module.exports = {
         "TaskTemplate": {
           "ForceUpdate": parseInt(1),
           "ContainerSpec": {
-            "Image": "axel",
+            "Image": "axel:latest",
             "Mounts": [{
               "Type": "bind",
               "Source": "/var/run/docker.sock",
@@ -82,7 +81,7 @@ module.exports = {
           }]
         }
       };
-      service.update(opts, function(err, sudata) {
+      await service.update(opts, function(err, sudata) {
         if (err) {
           return console.log(err)
         }
