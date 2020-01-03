@@ -19,7 +19,7 @@ module.exports = {
         return console.log(err)
       }
       console.log("-----Build Logs-----");
-      console.log(response);
+      await console.log(response);
     });
     // Service Update
     await docker.listServices({}).then(async function(ser) {
@@ -69,7 +69,7 @@ module.exports = {
           return console.log(err)
         }
         console.log("-----Service Logs-----");
-        console.log(sudata)
+        await console.log(sudata)
         console.log("Axel Service Updated");
       })
     });
