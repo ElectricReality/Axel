@@ -153,5 +153,5 @@ app.get("/settings/update", authCheck, function(req, res, next) {
 });
 
 // Update Nginx settings
-console.log("Version 1.0.1")
+console.log("Version 1.0.2")
 nginx.update()
