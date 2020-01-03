@@ -11,18 +11,17 @@ const fs = require("fs"); // Or `import fs from "fs";` with ESM
 module.exports = {
   axel: async () => {
     // Build Image
-
-    let stream = await docker.buildImage(null, {
+    await docker.buildImage(null, {
       t: 'axel:latest',
       remote: 'github.com/ElectricReality/Axel.git'
+    }, function(err, response) {
+      if (err) {
+        return console.log(err)
+      }
+        console.log(response);
     });
-    await new Promise((resolve, reject) => {
-      docker.modem.followProgress(stream, (err, res) =>
-      err ? console.log(err) : console.log(res));
-    });
-
     // Service Update
-    docker.listServices({}).then(async function(ser) {
+    await docker.listServices({}).then(async function(ser) {
       let result = await ser.find(s => s.Spec.Name == "axel-system")
       let service = await docker.getService(result.ID)
       let opts = {
