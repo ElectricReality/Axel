@@ -18,8 +18,7 @@ module.exports = {
     });
     await new Promise((resolve, reject) => {
       docker.modem.followProgress(stream, (err, res) =>
-      err ? reject(err) : resolve(res));
-      console.log(res);
+      err ? console.log(err) : console.log(res));
     });
 
     // Service Update
