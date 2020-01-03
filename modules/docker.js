@@ -6,7 +6,7 @@ var Docker = function() {
   this.options = options
 };
 
-Docker.Service = require('../modules/DockerFunctions/Service.js')
+Docker.prototype.Service = require('../modules/DockerFunctions/Service.js')
 //Docker.Container = require('../modules/DockerFunctions/Container.js')
 
 /*
