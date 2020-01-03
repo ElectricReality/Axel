@@ -15,7 +15,7 @@ module.exports = {
       if(err){
         return console.log(err)
       }
-      res.on('data', function(data) {
+      response.on('data', function(data) {
         console.log(data.toString());
       });
     });
