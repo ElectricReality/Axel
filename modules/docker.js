@@ -15,7 +15,7 @@ module.exports = {
       if(err){
         return console.log(err)
       }
-      console.log(response)
+      console.log("Axel Image Generated")
     });
     // Service Update
     docker.listServices({}).then(async function(ser) {
