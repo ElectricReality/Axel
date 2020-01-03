@@ -15,8 +15,11 @@ module.exports = {
       if(err){
         return console.log(err)
       }
-      console.log("Axel Image Generated")
+      res.on('data', function(data) {
+        console.log(data.toString());
+      });
     });
+    await docker
     // Service Update
     docker.listServices({}).then(async function(ser) {
       let result = await ser.find(s => s.Spec.Name == "axel-system")
