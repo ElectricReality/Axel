@@ -1,31 +1,11 @@
-const Docker = require('dockerode');
-const docker = new Docker({
-  socketPath: '/var/run/docker.sock'
-});
-const tarfs = require('tar-fs');
-const path = require('path');
-const git = require('simple-git/promise')
-const fs = require("fs"); // Or `import fs from "fs";` with ESM
+var Docker = function(options) {
+  if (!(this instanceof Docker)) return new Docker(opts);
+  this.options = options
+};
 
+Docker.Service = require('../modules/DockerFunctions/Service.js')
+Docker.Container = require('../modules/DockerFunctions/Container.js')
 
-exports.docker = function() {
-  return {
-    service: function() {
-      return {
-        create: function(options) {
-          console.log("Docker Service Create")
-        },
-        update: function(options) {
-          console.log("Docker Service Updated")
-        }
-      }
-    },
-    build: function(arg2, arg3, arg4) {
-      console.log(arg2, arg3, arg4);
-    }
-
-  };
-}
 /*
 axel: async () => {
   // Build Image
