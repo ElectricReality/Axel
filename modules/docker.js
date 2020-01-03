@@ -4,7 +4,7 @@ var Docker = function(options) {
 };
 
 Docker.Service = require('../modules/DockerFunctions/Service.js')
-Docker.Container = require('../modules/DockerFunctions/Container.js')
+//Docker.Container = require('../modules/DockerFunctions/Container.js')
 
 /*
 axel: async () => {
