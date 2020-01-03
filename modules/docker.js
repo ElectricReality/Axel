@@ -1,14 +1,15 @@
-var Docker = function() {
-  if (!(this instanceof Docker)) return new Docker(opts);
+var docker = function() {
   let options = ({
     socketPath: '/var/run/docker.sock'
   })
   this.options = options
 };
 
-Docker.prototype.Service.Create = function(){
-  console.log("Create Service")
-  console.log(this.options)
+docker.prototype.Service = {
+  Create: function() {
+    console.log("Create Service")
+    console.log(this.options)
+  }
 }
 //Docker.Container = require('../modules/DockerFunctions/Container.js')
 
