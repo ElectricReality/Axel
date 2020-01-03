@@ -1,5 +1,8 @@
-var Docker = function(options) {
+var Docker = function() {
   if (!(this instanceof Docker)) return new Docker(opts);
+  let options = ({
+    socketPath: '/var/run/docker.sock'
+  })
   this.options = options
 };
 
