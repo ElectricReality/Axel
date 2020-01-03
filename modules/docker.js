@@ -11,15 +11,11 @@ const fs = require("fs"); // Or `import fs from "fs";` with ESM
 module.exports = {
   axel: async () => {
     // Build Image
-    await docker.buildImage(null, {
-      t: 'axel:latest',
-      remote: 'github.com/ElectricReality/Axel.git'
-    }, async function(err, response) {
+    docker.buildImage(null, {t: 'axel:latest',remote: 'github.com/ElectricReality/Axel.git'}, function(err, response) {
       if (err) {
         return console.log(err)
       }
-      console.log("-----Build Logs-----");
-      await console.log(response);
+      console.log("Axel image generated");
     });
     // Service Update
     await docker.listServices({}).then(async function(ser) {
@@ -64,12 +60,10 @@ module.exports = {
           }]
         }
       };
-      await service.update(opts, async function(err, sudata) {
+      await service.update(opts, function(err, sudata) {
         if (err) {
           return console.log(err)
         }
-        console.log("-----Service Logs-----");
-        await console.log(sudata)
         console.log("Axel Service Updated");
       })
     });
