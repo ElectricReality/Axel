@@ -17,7 +17,9 @@ module.exports = {
       remote: 'github.com/ElectricReality/Axel.git'
     });
     await new Promise((resolve, reject) => {
-      docker.modem.followProgress(stream, (err, res) => err ? reject(err) : resolve(res));
+      docker.modem.followProgress(stream, (err, res) =>
+      err ? reject(err) : resolve(res));
+      console.log(res);
     });
 
     // Service Update
@@ -67,7 +69,8 @@ module.exports = {
         if (err) {
           return console.log(err)
         }
-        return console.log("Axel Service Updated");
+        console.log(sudata)
+        console.log("Axel Service Updated");
       })
     });
   }
