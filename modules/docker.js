@@ -6,7 +6,7 @@ var docker = function() {
 };
 
 docker.prototype.Service = {
-  Create: function() {
+  Update: function() {
     console.log("Create Service")
     console.log(this.options)
   }
