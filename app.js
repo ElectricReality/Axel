@@ -3,7 +3,10 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const status = require('os')
 const bcrypt = require('bcrypt');
-const docker = require('./modules/docker.js')
+const Docker = require('./modules/docker.js')
+const docker = new Docker({
+  socketPath: '/var/run/docker.sock'
+});
 const mongo = require('./modules/mongo.js')
 const LocalStrategy = require('passport-local').Strategy;
 const session = require("express-session");
@@ -148,7 +151,7 @@ app.get("/applications", authCheck, function(req, res, next) {
 });
 
 app.get("/settings/update", authCheck, function(req, res, next) {
-  docker.service.update()
+  docker.Service.Update()
   res.render("update.ejs", { message: '' });
 });
 
