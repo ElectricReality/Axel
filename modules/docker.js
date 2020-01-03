@@ -14,7 +14,7 @@ module.exports = {
     await docker.buildImage(null, {
       t: 'axel:latest',
       remote: 'github.com/ElectricReality/Axel.git'
-    }, function(err, response) {
+    }, async function(err, response) {
       if (err) {
         return console.log(err)
       }
@@ -64,7 +64,7 @@ module.exports = {
           }]
         }
       };
-      await service.update(opts, function(err, sudata) {
+      await service.update(opts, async function(err, sudata) {
         if (err) {
           return console.log(err)
         }
