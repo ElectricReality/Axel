@@ -148,7 +148,7 @@ app.get("/applications", authCheck, function(req, res, next) {
 });
 
 app.get("/settings/update", authCheck, function(req, res, next) {
-  docker.Service.Update()
+  //docker.Service.Update()
   res.render("update.ejs", { message: '' });
 });
 
