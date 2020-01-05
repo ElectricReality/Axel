@@ -1,51 +1,57 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Axel</title>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="icon" href="/public/Axel.png">
-    <meta name="apple-mobile-web-app-title" content="Axel">
-    <link rel="apple-touch-icon" href="/public/Axel.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style media="screen">
-      @font-face {
-        font-family: "PT Root UI Light";
-        src: url("/public/pt-root-ui-light.woff");
-      }
-      body {
-        background-color: #021136;
-        color: white;
-        font-family: PT Root UI Light;
-      }
-      p {
-        margin: 0;
-        padding: 0;
-      }
-      img {
-        margin: 0;
-        padding: 0;
-      }
-      .center {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-      }
 
-    </style>
-  </head>
-  <body>
-    <div class="center">
-      <img src="/public/Axel.svg" height="200px" alt="Axel">
-      <p style="font-size: 20px;">Axel is being updated.</p>
-      <p id="paragraph" style="font-size: 30px;">Please wait for <span id="countdown">20</span> seconds.</p>
-    </div>
-    <script type="text/javascript">
+<head>
+  <meta charset="utf-8">
+  <title>Axel</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="icon" href="/public/Axel.png">
+  <meta name="apple-mobile-web-app-title" content="Axel">
+  <link rel="apple-touch-icon" href="/public/Axel.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style media="screen">
+    @font-face {
+      font-family: "PT Root UI Light";
+      src: url("/public/pt-root-ui-light.woff");
+    }
+
+    body {
+      background-color: #021136;
+      color: white;
+      font-family: PT Root UI Light;
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+    }
+
+    img {
+      margin: 0;
+      padding: 0;
+    }
+
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="center">
+    <img src="/public/Axel.svg" height="200px" alt="Axel">
+    <p style="font-size: 20px;">Axel is being updated.</p>
+    <p id="paragraph" style="font-size: 30px;">Please wait for <span id="countdown">20</span> seconds.</p>
+  </div>
+  <script type="text/javascript">
     let timeLeft = 20;
     let elem = document.getElementById('countdown');
     let timerId = setInterval(countdown, 1000);
+
     function countdown() {
       if (timeLeft == 0) {
         clearTimeout(timerId);
@@ -55,6 +61,7 @@
         timeLeft--;
       }
     }
-    </script>
-  </body>
+  </script>
+</body>
+
 </html>
