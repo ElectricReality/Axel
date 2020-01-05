@@ -49,11 +49,12 @@
   <script type="text/javascript">
     let timeLeft = 20;
     let elem = document.getElementById('countdown');
+    let secondelem = document.getElementById('paragraph');
     let timerId = setInterval(countdown, 1000);
 
     function countdown() {
       if (timeLeft == 0) {
-        clearTimeout(timerId);
+        secondelem.innerHTML = "Redirecting"
         window.location = "/login";
       } else {
         elem.innerHTML = timeLeft;
