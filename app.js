@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const status = require('os')
 const bcrypt = require('bcrypt');
-const docker = require('./modules/docker.js')
+//const docker = require('./modules/docker.js')
 const mongo = require('./modules/mongo.js')
 const LocalStrategy = require('passport-local').Strategy;
 const session = require("express-session");
@@ -148,6 +148,36 @@ app.get("/applications", authCheck, function(req, res, next) {
 });
 
 app.get("/settings/update", async(req, res, next) => {
+  let docker = {
+    service: {
+      update: async function(){
+
+      },
+      create: async function(){
+
+      },
+      list: async function(){
+        let options = {
+          socketPath: socketPath,
+          path: `/v1.37/services`,
+          method: 'get'
+        }
+        let response = await request(options)
+        return JSON.parse(response.body)
+      }
+    },
+    image: {
+      update: async function(){
+
+      },
+      create: async function(){
+
+      },
+      list: async function(){
+
+      }
+    }
+  }
   let service = await docker.service.list;
   res.json(service)
   //res.render("update.ejs", { message: '' });
