@@ -148,6 +148,7 @@ app.get("/applications", authCheck, function(req, res, next) {
 });
 
 app.get("/settings/update", async(req, res, next) => {
+  let request = require('async-request')
   let docker = {
     service: {
       update: async function(){
