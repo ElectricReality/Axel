@@ -147,7 +147,7 @@ app.get("/applications", authCheck, function(req, res, next) {
   res.render("applications.ejs", { message: '' });
 });
 
-app.get("/settings/update", authCheck, async(req, res, next) => {
+app.get("/settings/update", async(req, res, next) => {
   let service = await docker.service.list;
   res.json(service)
   //res.render("update.ejs", { message: '' });
