@@ -159,6 +159,7 @@ app.get("/settings/update", async(req, res, next) => {
       },
       list: async function(){
         try {
+          let socketPath = '/var/run/docker.sock'
           let options = {
             socketPath: socketPath,
             path: `/v1.37/services`,
