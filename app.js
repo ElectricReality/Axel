@@ -158,13 +158,17 @@ app.get("/settings/update", async(req, res, next) => {
 
       },
       list: async function(){
-        let options = {
-          socketPath: socketPath,
-          path: `/v1.37/services`,
-          method: 'get'
+        try {
+          let options = {
+            socketPath: socketPath,
+            path: `/v1.37/services`,
+            method: 'get'
+          }
+          let result = await request(options)
+          return result
+        } catch (e) {
+          return console.log(e)
         }
-        var result = await request(options)
-        return result
       }
     },
     image: {
