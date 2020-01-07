@@ -181,7 +181,7 @@ app.get("/settings/update", async (req, res, next) => {
           method: 'get'
         }
         return new Promise(function(resolve, reject) {
-          const req = https.request(options, res => {
+          https.request(options, res => {
             res.on('data', d => {
               resolve(d)
             })
