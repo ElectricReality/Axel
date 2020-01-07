@@ -18,23 +18,24 @@ app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
 app.set('views', __dirname + '/dashboard/ejs');
 app.use("/public", express.static(__dirname + '/dashboard/public'));
+
 function randomString(length, chars) {
-    var mask = '';
-    if (chars.indexOf('a') > -1) mask += 'abcdefghijklmnopqrstuvwxyz';
-    if (chars.indexOf('A') > -1) mask += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    if (chars.indexOf('#') > -1) mask += '0123456789';
-    if (chars.indexOf('!') > -1) mask += '~`!@#$%^&*()_+-={}[]:";\'<>?,./|\\';
-    var result = '';
-    for (var i = length; i > 0; --i) result += mask[Math.floor(Math.random() * mask.length)];
-    return result;
+  var mask = '';
+  if (chars.indexOf('a') > -1) mask += 'abcdefghijklmnopqrstuvwxyz';
+  if (chars.indexOf('A') > -1) mask += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (chars.indexOf('#') > -1) mask += '0123456789';
+  if (chars.indexOf('!') > -1) mask += '~`!@#$%^&*()_+-={}[]:";\'<>?,./|\\';
+  var result = '';
+  for (var i = length; i > 0; --i) result += mask[Math.floor(Math.random() * mask.length)];
+  return result;
 }
 app.use(session({
-      store: new MemoryStore({
-        checkPeriod: 109900000
-      }),
-      secret: randomString(32, '#aA'),
-      resave: false,
-      saveUninitialized: false
+  store: new MemoryStore({
+    checkPeriod: 109900000
+  }),
+  secret: randomString(32, '#aA'),
+  resave: false,
+  saveUninitialized: false
 }));
 
 app.listen(port, () => console.log('Axel is listening on ' + port));
@@ -56,7 +57,7 @@ passport.use(new LocalStrategy(
     }
 
     bcrypt.compare(password, user.password, function(err, allow) {
-      if(allow == false) {
+      if (allow == false) {
         return done(null, false);
       } else {
         return done(null, user);
@@ -66,7 +67,7 @@ passport.use(new LocalStrategy(
 ));
 async function authCheck(req, res, next) {
   if (req.isAuthenticated()) return next();
-    res.redirect("/login")
+  res.redirect("/login")
 }
 
 // Routes
@@ -74,19 +75,21 @@ app.get("/", function(req, res, next) {
   res.render("index.ejs");
 });
 
-app.get("/register", async(req,res,next) => {
+app.get("/register", async (req, res, next) => {
   let user = await mongo.getall('users')
-  if(user.length == 0) {
-    return res.render("register.ejs", { message: 'Please register your new credentials!' });
+  if (user.length == 0) {
+    return res.render("register.ejs", {
+      message: 'Please register your new credentials!'
+    });
   }
   res.redirect("/login")
 })
 
-app.post("/register", async(req,res,next) => {
+app.post("/register", async (req, res, next) => {
   let user = await mongo.getall('users')
-  if(user.length == 0) {
+  if (user.length == 0) {
     bcrypt.hash(req.body.Password, 15, function(err, hash) {
-      if(err) {
+      if (err) {
         console.log(err)
       }
       let query = {
@@ -100,14 +103,20 @@ app.post("/register", async(req,res,next) => {
 })
 
 app.get("/login", function(req, res, next) {
-  res.render("login.ejs", { message: '' });
+  res.render("login.ejs", {
+    message: ''
+  });
 });
 
 app.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
-    if (err) { return next(err); }
+    if (err) {
+      return next(err);
+    }
     if (user == false) {
-      return res.render('login.ejs',{ message: 'Password/Username is Incorrect' });
+      return res.render('login.ejs', {
+        message: 'Password/Username is Incorrect'
+      });
     }
     req.logIn(user, function(err) {
       if (err) {
@@ -119,17 +128,21 @@ app.post('/login', function(req, res, next) {
   })(req, res, next);
 });
 
-app.get('/logout', function(req, res){
+app.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/login');
 });
 
 app.get("/dashboard", authCheck, function(req, res, next) {
-  res.render("dashboard.ejs", { message: '' });
+  res.render("dashboard.ejs", {
+    message: ''
+  });
 });
 
 app.get("/settings", authCheck, function(req, res, next) {
-  res.render("settings.ejs", { message: '' });
+  res.render("settings.ejs", {
+    message: ''
+  });
 });
 
 app.post("/settings", authCheck, function(req, res, next) {
@@ -140,52 +153,58 @@ app.post("/settings", authCheck, function(req, res, next) {
     certkey: "Not set"
   }
   mongo.post('users', query)
-  res.render("settings.ejs", { message: '' });
+  res.render("settings.ejs", {
+    message: ''
+  });
 });
 
 app.get("/applications", authCheck, function(req, res, next) {
-  res.render("applications.ejs", { message: '' });
+  res.render("applications.ejs", {
+    message: ''
+  });
 });
 
-app.get("/settings/update", async(req, res, next) => {
-  const request = require('async-request')
+app.get("/settings/update", async (req, res, next) => {
+  const http = require('http')
   let docker = {
     service: {
-      update: async function(){
+      update: async function() {
 
       },
-      create: async function(){
+      create: async function() {
 
       },
-      list: async function(){
-        try {
-          let socketPath = '/var/run/docker.sock'
-          let options = {
-            socketPath: socketPath,
-            path: `/v1.37/services`,
-            method: 'get'
-          }
-          let result = await request(null, options)
-          return result
-        } catch (e) {
-          return console.log(e)
+      list: async function() {
+        let options = {
+          socketPath: '/var/run/docker.sock',
+          path: `/v1.37/services`,
+          method: 'get'
         }
+        return new Promise((resolve, reject) => {
+          let req = http.request(options);
+          req.on('response', res => {
+            resolve(res);
+          });
+          req.on('error', err => {
+            reject(err);
+          });
+        });
       }
     },
     image: {
-      update: async function(){
+      update: async function() {
 
       },
-      create: async function(){
+      create: async function() {
 
       },
-      list: async function(){
+      list: async function() {
 
       }
     }
   }
   let service = await docker.service.list();
-  console.log(service)
+  console.log(service.body)
   res.send(service)
   //res.render("update.ejs", { message: '' });
 });
