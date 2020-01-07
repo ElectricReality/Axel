@@ -32,7 +32,9 @@ let docker = {
   }
 }
 
-return docker
+module.exports = {
+  docker: docker
+}
 //Docker.Container = require('../modules/DockerFunctions/Container.js')
 
 /*
