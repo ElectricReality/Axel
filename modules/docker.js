@@ -1,5 +1,3 @@
-let request = require('async-request')
-
 let socketPath = '/var/run/docker.sock'
 let docker = {
   service: {
