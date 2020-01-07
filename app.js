@@ -163,9 +163,9 @@ app.get("/settings/update", async(req, res, next) => {
           path: `/v1.37/services`,
           method: 'get'
         }
-        let response = await request(options)
-        console.log(response.body)
-        return response.body
+        var result = await request(options)
+        console.log(result.body)
+        return result.body
       }
     },
     image: {
