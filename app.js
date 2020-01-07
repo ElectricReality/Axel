@@ -164,8 +164,8 @@ app.get("/settings/update", async(req, res, next) => {
           method: 'get'
         }
         var result = await request(options)
-        console.log(result.body)
-        return result.body
+        console.log(result)
+        return result
       }
     },
     image: {
