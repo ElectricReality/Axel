@@ -180,8 +180,13 @@ app.get("/settings/update", async (req, res, next) => {
           path: `/v1.37/services`,
           method: 'get'
         }
-          let req = await http.request(options);
-          return req
+        return new Promise(function(resolve, reject) {
+          const req = https.request(options, res => {
+            res.on('data', d => {
+              resolve(d)
+            })
+          })
+        })
       }
     },
     image: {
