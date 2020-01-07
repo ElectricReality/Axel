@@ -148,8 +148,9 @@ app.get("/applications", authCheck, function(req, res, next) {
 });
 
 app.get("/settings/update", authCheck, function(req, res, next) {
-  //docker.Service.Update()
-  res.render("update.ejs", { message: '' });
+  let service = await docker.service.list();
+  res.json(service)
+  //res.render("update.ejs", { message: '' });
 });
 
 // Update Nginx settings

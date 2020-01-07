@@ -24,6 +24,7 @@
     "tar-fs": "^2.0.0",
     "path": "^0.12.7",
     "simple-git": "^1.129.0",
-    "fs": "^0.0.1-security"
+    "fs": "^0.0.1-security",
+    "async-request": "^1.2.0"
   }
 }

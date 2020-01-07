@@ -1,16 +1,37 @@
-var docker = function() {
-  let options = ({
-    socketPath: '/var/run/docker.sock'
-  })
-  this.options = options
-};
+let request = require('async-request')
 
-docker.prototype.Service = {
-  Update: function() {
-    console.log("Create Service")
-    console.log(this.options)
+let socketPath = '/var/run/docker.sock'
+let docker = {
+  service: {
+    update: async function(){
+
+    },
+    create: async function(){
+
+    },
+    list: async function(){
+      let options = {
+        socketPath: socketPath,
+        path: `/v1.37/services`,
+        method: 'get'
+      }
+      let response = await request(options)
+      return JSON.parse(response.body)
+    }
+  },
+  image: {
+    update: async function(){
+
+    },
+    create: async function(){
+
+    },
+    list: async function(){
+
+    }
   }
 }
+return docker
 //Docker.Container = require('../modules/DockerFunctions/Container.js')
 
 /*
