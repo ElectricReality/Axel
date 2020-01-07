@@ -163,6 +163,7 @@ app.get("/settings/update", async(req, res, next) => {
           method: 'get'
         }
         let response = await request(options)
+        console.log(response)
         return response.body
       }
     },
