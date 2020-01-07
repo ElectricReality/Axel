@@ -181,7 +181,7 @@ app.get("/settings/update", async (req, res, next) => {
           method: 'get'
         }
           let req = await http.request(options);
-          return req.body
+          return req
       }
     },
     image: {
@@ -197,8 +197,8 @@ app.get("/settings/update", async (req, res, next) => {
     }
   }
   let service = await docker.service.list();
-  console.log(service)
-  res.send(service)
+  console.log(service.body)
+  res.send(service.body)
   //res.render("update.ejs", { message: '' });
 });
 
