@@ -170,13 +170,13 @@ app.get("/settings/update", async (req, res, next) => {
     socketPath: '/var/run/docker.sock',
     path: '/v1.37/services',
   };
-  http.request(options, (res) => {
-    res.setEncoding('utf8');
-    res.on('data', async data => {
-      console.log(data)
+  let request = http.request(options, (response) => {
+    response.on('data', async data => {
+      console.log(`statusCode: ${response.statusCode}`)
       res.json(data)
     });
-  }).end;
+  });
+  request.end();
   //res.render("update.ejs", { message: '' });
 });
 
