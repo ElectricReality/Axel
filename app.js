@@ -172,6 +172,7 @@ app.get("/settings/update", async (req, res, next) => {
   };
   let request = http.request(options, (response) => {
     response.on('data', data => {
+      console.log(data)
       console.log(`statusCode: ${response.statusCode}`)
       res.json(data)
     });
