@@ -201,8 +201,8 @@ app.get("/settings/update", async (req, res, next) => {
     }
   }
   let service = await docker.service.list();
-  console.log(JSON.stringify(service))
-  res.body(JSON.stringify(service))
+  console.log(service)
+  res.raw(JSON.stringify(service))
   //res.render("update.ejs", { message: '' });
 });
 
