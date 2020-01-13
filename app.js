@@ -174,9 +174,10 @@ app.get("/settings/update", async (req, res, next) => {
     res.setEncoding('utf8');
     res.on('error', data => console.error(data));
     res.on('data', async data => {
+      console.log(data)
       res.json(data)
     });
-  });
+  }).end;
   //res.render("update.ejs", { message: '' });
 });
 
