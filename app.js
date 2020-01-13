@@ -180,17 +180,18 @@ app.get("/settings/update", async (req, res, next) => {
           socketPath: '/var/run/docker.sock',
           path: '/v1.37/services',
         };
+
         const callback = res => {
           console.log(`STATUS: ${res.statusCode}`);
           res.setEncoding('utf8');
           res.on('data', async data => {
-            await result.push(data)
+            return data
           });
           res.on('error', data => console.error(data));
         };
         const clientRequest = http.request(options, callback);
         clientRequest.end();
-        return result
+        return callback
       }
     },
     image: {
