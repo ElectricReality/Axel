@@ -171,8 +171,7 @@ app.get("/settings/update", async (req, res, next) => {
     path: '/v1.37/services',
   };
   let request = http.request(options, (response) => {
-    response.on('data', async data => {
-      response.setEncoding('utf8');
+    response.on('data', data => {
       console.log(`statusCode: ${response.statusCode}`)
       res.json(data)
     });
