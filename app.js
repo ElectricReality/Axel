@@ -182,7 +182,7 @@ app.get("/settings/update", async (req, res, next) => {
         const callback = res => {
           console.log(`STATUS: ${res.statusCode}`);
           res.setEncoding('utf8');
-          console.log(res.data)
+          console.log(res.body)
 
         };
         const clientRequest = http.request(options, callback);
