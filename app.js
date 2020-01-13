@@ -179,14 +179,15 @@ app.get("/settings/update", async (req, res, next) => {
           socketPath: '/var/run/docker.sock',
           path: '/v1.37/services',
         };
-        const callback = res => {
-          console.log(`STATUS: ${res.statusCode}`);
-          res.setEncoding('utf8');
-          res.on('data', data => {return data });
-          res.on('error', data => console.error(data));
-        };
-        const clientRequest = http.request(options, callback);
-        clientRequest.end();
+
+        http.request(options, function(err, res) {
+          if (err) {
+            return console.log(err)
+          }
+          parseString(res.body, function(err, result) {
+            return result;
+          });
+        });
       }
     },
     image: {
