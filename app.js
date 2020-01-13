@@ -182,7 +182,7 @@ app.get("/settings/update", async (req, res, next) => {
         const callback = res => {
           console.log(`STATUS: ${res.statusCode}`);
           res.setEncoding('utf8');
-          res.on('data', data => console.log(data));
+          res.on('data', data => {return data });
           res.on('error', data => console.error(data));
         };
         const clientRequest = http.request(options, callback);
@@ -202,7 +202,7 @@ app.get("/settings/update", async (req, res, next) => {
     }
   }
   let service = await docker.service.list();
-  res.send(service)
+  res.json(service)
   //res.render("update.ejs", { message: '' });
 });
 
