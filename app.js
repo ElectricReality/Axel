@@ -179,13 +179,13 @@ app.get("/settings/update", async (req, res, next) => {
           socketPath: '/var/run/docker.sock',
           path: '/v1.37/services',
         };
-        var str = '';
+        let arr = new Array;
         callback = function(response) {
           response.on('data', function(chunk) {
-            str += chunk;
+            arr.push(chunk)
           })
           response.on('end', function() {
-            console.log(str);
+            console.log(arr);
           });
         }
         http.request(options, callback).end;
