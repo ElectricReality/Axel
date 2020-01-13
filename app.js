@@ -172,6 +172,7 @@ app.get("/settings/update", async (req, res, next) => {
   };
   let request = http.request(options, (response) => {
     response.on('data', async data => {
+      response.setEncoding('utf8');
       console.log(`statusCode: ${response.statusCode}`)
       res.json(data)
     });
