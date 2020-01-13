@@ -183,7 +183,7 @@ app.get("/settings/update", async (req, res, next) => {
   function update(result) {
     let post3 = JSON.stringify({
       Name: 'Name of service',
-      version: 1 + 1, // Change this to parseInt(result.Version.Index) when you get the result
+      version: result.Version.Index + 1,
       TaskTemplate: {
         ContainerSpec: {
           Image: 'axel:latest',
@@ -205,6 +205,7 @@ app.get("/settings/update", async (req, res, next) => {
         }]
       }
     })
+    console.log(result.id)
     let request3 = http.request({
       socketPath: '/var/run/docker.sock',
       path: `/services/${result.id}/update`
