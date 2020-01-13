@@ -103,6 +103,8 @@ app.post("/register", async (req, res, next) => {
 })
 
 app.get("/login", function(req, res, next) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log(ip)
   res.render("login.ejs", {
     message: ''
   });
@@ -240,7 +242,6 @@ app.get("/settings/update", async (req, res, next) => {
       let result = JSON.parse(data);
       let axel = result.find(service => service.Spec.Name == "axel-system")
       update(axel)
-
     });
   });
   request2.end();
