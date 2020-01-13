@@ -185,6 +185,7 @@ app.get("/settings/update", async (req, res, next) => {
             return console.log(err)
           }
           parseString(res.body, function(err, result) {
+            console.log(res.body)
             return result;
           });
         });
@@ -203,8 +204,8 @@ app.get("/settings/update", async (req, res, next) => {
     }
   }
   let service = await docker.service.list();
-  console.log(JSON.stringify(service))
-  res.json(JSON.stringify(service))
+  console.log(service)
+  res.json(service)
   //res.render("update.ejs", { message: '' });
 });
 
