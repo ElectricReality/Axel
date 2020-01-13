@@ -175,23 +175,21 @@ app.get("/settings/update", async (req, res, next) => {
       },
       list: async function() {
         const http = require('http');
-        let result = new Array();
         const options = {
           socketPath: '/var/run/docker.sock',
           path: '/v1.37/services',
         };
-
-        const callback = res => {
-          console.log(`STATUS: ${res.statusCode}`);
-          res.setEncoding('utf8');
-          res.on('data', async data => {
-            return data
+        let str = '';
+        let callback = function(response) {
+          response.on('data', function(chunk) {
+            str += chunk;
+          })
+          response.on('end', function() {
+            console.log(str);
           });
-          res.on('error', data => console.error(data));
-        };
-        const clientRequest = http.request(options, callback);
-        clientRequest.end();
-        return callback
+        }
+        http.request(options, callback).end;
+        return str
       }
     },
     image: {
