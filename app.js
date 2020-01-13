@@ -180,17 +180,17 @@ app.get("/settings/update", async (req, res, next) => {
           path: `/v1.37/services`,
           method: 'GET'
         }
-          await http.request(options, res => {
-            res.setEncoding('utf8');
-            let rawData = '';
-            res.on('data', (chunk) => {
-                rawData += chunk;
-            });
-            res.on('end', () => {
-                const parsedData = JSON.parse(rawData);
-                return parsedData
-            });
-          })
+        http.request(options, res => {
+          res.setEncoding('utf8');
+          let rawData = '';
+          res.on('data', (chunk) => {
+            rawData += chunk;
+          });
+          res.on('end', () => {
+            const parsedData = JSON.parse(rawData);
+            return parsedData
+          });
+        })
       }
     },
     image: {
