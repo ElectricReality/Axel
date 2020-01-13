@@ -189,7 +189,7 @@ app.get("/settings/update", async (req, res, next) => {
           });
         }
         http.request(options, callback).end;
-        return str
+        return arr
       }
     },
     image: {
