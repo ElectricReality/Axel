@@ -4,7 +4,6 @@ const passport = require('passport');
 const status = require('os')
 const http = require('http');
 const bcrypt = require('bcrypt');
-//const docker = require('./modules/docker.js')
 const mongo = require('./modules/mongo.js')
 const LocalStrategy = require('passport-local').Strategy;
 const session = require("express-session");
@@ -166,22 +165,76 @@ app.get("/applications", authCheck, function(req, res, next) {
 });
 
 app.get("/settings/update", async (req, res, next) => {
-  const options = {
+  let post1 = JSON.stringify({
+    t: 'axel:latest',
+    remote: 'https://github.com/ElectricReality/Axel.git'
+  })
+  let request1 = http.request({
     socketPath: '/var/run/docker.sock',
-    path: '/v1.37/services',
-  };
-  let request = http.request(options, (response) => {
+    path: '/v1.37/build'
+  }, (response) => {
+    if (response.statusCode !== 200) {
+      return console.log('something went wrong.')
+    }
+  });
+  request1.write(post)
+  request1.end();
+
+  function update(result) {
+    let post3 = JSON.stringify({
+      Name: 'Name of service',
+      version: 1 + 1, // Change this to parseInt(result.Version.Index) when you get the result
+      TaskTemplate: {
+        ContainerSpec: {
+          Image: 'axel:latest',
+          Mounts: [{
+            Type: 'bind',
+            Source: '/var/run/docker.sock',
+            Target: '/var/run/docker.sock'
+          }]
+        },
+      },
+      Networks: [{
+        Target: 'axel-net',
+      }],
+      EndpointSpec: {
+        Ports: [{
+          Protocol: 'tcp',
+          TargetPort: 3000,
+          PublishedPort: 3000,
+        }]
+      }
+    })
+    let request3 = http.request({
+      socketPath: '/var/run/docker.sock',
+      path: `/services/${result.id}/update`
+    }, (response) => {
+      if (response.statusCode !== 200) {
+        return console.log('something went wrong.')
+      }
+    });
+    request3.write(post3)
+    request3.end();
+  }
+
+  let request2 = http.request({
+    socketPath: '/var/run/docker.sock',
+    path: '/v1.37/services'
+  }, (response) => {
     let data = '';
     response.on('data', chunk => {
       data += chunk;
     });
     response.on('end', () => {
       console.log(`statusCode: ${response.statusCode}`)
-      console.log(JSON.parse(data));
-      res.json(JSON.parse(data))
+      let result = JSON.parse(data);
+      let axel = result.find(service => service.Spec.Name == "axel-system")
+      update(axel)
+
     });
   });
-  request.end();
+  request2.end();
+
   //res.render("update.ejs", { message: '' });
 });
 
