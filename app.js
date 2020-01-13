@@ -171,10 +171,14 @@ app.get("/settings/update", async (req, res, next) => {
     path: '/v1.37/services',
   };
   let request = http.request(options, (response) => {
-    response.on('data', data => {
-      console.log(data)
+    let data = '';
+    response.on('data', chunk => {
+      data += chunk;
+    });
+    response.on('end', () => {
       console.log(`statusCode: ${response.statusCode}`)
-      res.json(data)
+      console.log(JSON.parse(data));
+      res.json(JSON.parse(data))
     });
   });
   request.end();
