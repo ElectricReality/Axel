@@ -178,7 +178,7 @@ app.get("/settings/update", async (req, res, next) => {
         let options = {
           socketPath: '/var/run/docker.sock',
           path: `/v1.37/services`,
-          method: 'get'
+          method: 'GET'
         }
           await http.request(options, res => {
             res.setEncoding('utf8');
