@@ -177,7 +177,7 @@ app.get("/settings/update", async (req, res, next) => {
       return console.log('something went wrong.')
     }
   });
-  request1.write(post)
+  request1.write(post1)
   request1.end();
 
   function update(result) {
