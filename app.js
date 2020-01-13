@@ -180,7 +180,7 @@ app.get("/settings/update", async (req, res, next) => {
           path: '/v1.37/services',
         };
         var str = '';
-        let callback = function(response) {
+        callback = function(response) {
           response.on('data', function(chunk) {
             str += chunk;
           })
