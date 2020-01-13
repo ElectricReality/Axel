@@ -183,8 +183,8 @@ app.get("/settings/update", async (req, res, next) => {
         const callback = res => {
           console.log(`STATUS: ${res.statusCode}`);
           res.setEncoding('utf8');
-          res.on('data', data => {
-            result.push(data)
+          res.on('data', async data => {
+            await result.push(data)
           });
           res.on('error', data => console.error(data));
         };
