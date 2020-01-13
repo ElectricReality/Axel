@@ -234,8 +234,7 @@ app.get("/settings/update", async (req, res, next) => {
     });
   });
   request2.end();
-
-  //res.render("update.ejs", { message: '' });
+  res.render("update.ejs", { message: '' });
 });
 
 // Update Nginx settings
