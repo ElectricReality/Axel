@@ -179,16 +179,14 @@ app.get("/settings/update", async (req, res, next) => {
           socketPath: '/var/run/docker.sock',
           path: '/v1.37/services',
         };
-
-        http.request(options, function(err, res) {
-          if (err) {
-            return console.log(err)
-          }
-          parseString(res.body, function(err, result) {
-            console.log(res.body)
-            return result;
-          });
-        });
+        const callback = res => {
+          console.log(`STATUS: ${res.statusCode}`);
+          res.setEncoding('utf8');
+          await res.on('data', data =>  {return data} );
+          res.on('error', data => console.error(data));
+        };
+        const clientRequest = http.request(options, callback);
+        clientRequest.end();
       }
     },
     image: {
@@ -204,8 +202,8 @@ app.get("/settings/update", async (req, res, next) => {
     }
   }
   let service = await docker.service.list();
-  console.log(service)
-  res.json(service)
+  console.log(JSON.stringify(service))
+  res.json(JSON.stringify(service))
   //res.render("update.ejs", { message: '' });
 });
 
