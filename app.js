@@ -165,7 +165,6 @@ app.get("/applications", authCheck, function(req, res, next) {
 });
 
 app.get("/settings/update", async (req, res, next) => {
-  const http = require('http')
   let docker = {
     service: {
       update: async function() {
@@ -175,22 +174,19 @@ app.get("/settings/update", async (req, res, next) => {
 
       },
       list: async function() {
-        let options = {
+        const http = require('http');
+        const options = {
           socketPath: '/var/run/docker.sock',
-          path: `/v1.37/services`,
-          method: 'GET'
-        }
-        http.request(options, res => {
+          path: '/v1.37/services',
+        };
+        const callback = res => {
+          console.log(`STATUS: ${res.statusCode}`);
           res.setEncoding('utf8');
-          let rawData = '';
-          res.on('data', (chunk) => {
-            rawData += chunk;
-          });
-          res.on('end', () => {
-            const parsedData = JSON.parse(rawData);
-            console.log(parsedData)
-          });
-        })
+          res.on('data', data => console.log(data));
+          res.on('error', data => console.error(data));
+        };
+        const clientRequest = http.request(options, callback);
+        clientRequest.end();
       }
     },
     image: {
