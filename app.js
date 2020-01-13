@@ -211,7 +211,7 @@ app.get("/settings/update", async (req, res, next) => {
     }, (response) => {
       if (response.statusCode !== 200) {
         response.on('data', chunk => {
-          let result = JSON.parse(data);
+          let result = JSON.parse(chunk);
           console.log(result)
         });
         return console.log('something went wrong.')
