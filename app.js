@@ -103,8 +103,6 @@ app.post("/register", async (req, res, next) => {
 })
 
 app.get("/login", function(req, res, next) {
-  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-  console.log(ip)
   res.render("login.ejs", {
     message: ''
   });
