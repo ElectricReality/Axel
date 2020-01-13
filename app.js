@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const status = require('os')
+const http = require('http');
 const bcrypt = require('bcrypt');
 //const docker = require('./modules/docker.js')
 const mongo = require('./modules/mongo.js')
@@ -165,48 +166,17 @@ app.get("/applications", authCheck, function(req, res, next) {
 });
 
 app.get("/settings/update", async (req, res, next) => {
-  let docker = {
-    service: {
-      update: async function() {
-
-      },
-      create: async function() {
-
-      },
-      list: async function() {
-        const http = require('http');
-        const options = {
-          socketPath: '/var/run/docker.sock',
-          path: '/v1.37/services',
-        };
-        let arr = new Array;
-        callback = function(response) {
-          response.on('data', function(chunk) {
-            arr.push(chunk)
-          })
-          response.on('end', function() {
-            console.log(arr);
-          });
-        }
-        http.request(options, callback).end;
-        return arr
-      }
-    },
-    image: {
-      update: async function() {
-
-      },
-      create: async function() {
-
-      },
-      list: async function() {
-
-      }
-    }
-  }
-  let service = await docker.service.list();
-  console.log(JSON.stringify(service))
-  res.json(JSON.stringify(service))
+  const options = {
+    socketPath: '/var/run/docker.sock',
+    path: '/v1.37/services',
+  };
+  http.request(options, function (res) {
+    res.setEncoding('utf8');
+    res.on('error', data => console.error(data));
+    res.on('data', async data => {
+      res.json(data)
+    });
+  });
   //res.render("update.ejs", { message: '' });
 });
 
