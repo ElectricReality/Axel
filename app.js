@@ -174,7 +174,7 @@ app.get("/settings/update", async (req, res, next) => {
     path: '/v1.37/build'
   }, (response) => {
     if (response.statusCode !== 200) {
-      return console.log('something went wrong.')
+      return console.log('something went wrong. Request 1')
     }
   });
   request1.write(post1)
@@ -215,7 +215,7 @@ app.get("/settings/update", async (req, res, next) => {
           let result = JSON.parse(chunk);
           console.log(result)
         });
-        return console.log('something went wrong.')
+        return console.log('something went wrong. Request 3')
       }
     });
     request3.write(post3)
