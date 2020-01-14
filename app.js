@@ -166,9 +166,8 @@ app.get("/applications", authCheck, function(req, res, next) {
 
 app.get("/settings/update", async (req, res, next) => {
   let post = JSON.stringify({
-    dockerfile: 'Dockerfile',
     t: 'axel:latest',
-    remote: 'github.com/ElectricReality/Axel.git'
+    remote: 'https://github.com/ElectricReality/Axel.git'
   })
   let request = http.request({
     socketPath: '/var/run/docker.sock',
