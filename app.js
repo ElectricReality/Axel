@@ -172,6 +172,7 @@ app.get("/settings/update", async (req, res, next) => {
   let request = http.request({
     socketPath: '/var/run/docker.sock',
     path: '/v1.37/build',
+    method: 'POST'
   }, (response) => {
     response.on('data', chunk => {
       console.log(response.statusCode)
