@@ -174,7 +174,8 @@ app.get("/settings/update", async (req, res, next) => {
     path: '/build'
   }, (response) => {
     response.on('data', chunk => {
-      console.log(JSON.parse(chunk)+ response.statusCode)
+      console.log(response.statusCode)
+      console.log(JSON.parse(chunk))
     });
     if (response.statusCode !== 200) {
       return console.log('something went wrong.')
