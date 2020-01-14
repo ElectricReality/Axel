@@ -172,7 +172,11 @@ app.get("/settings/update", async (req, res, next) => {
   let request = http.request({
     socketPath: '/var/run/docker.sock',
     path: '/v1.37/build',
-    method: 'POST'
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-tar',
+      'Content-Length': Buffer.byteLength(post)
+    }
   }, (response) => {
     response.on('data', chunk => {
       console.log(response.statusCode)
@@ -182,7 +186,9 @@ app.get("/settings/update", async (req, res, next) => {
       return console.log('something went wrong.')
     }
   });
-  res.render("update.ejs", { message: '' });
+  res.render("update.ejs", {
+    message: ''
+  });
   request.write(post)
   request.end();
 });
