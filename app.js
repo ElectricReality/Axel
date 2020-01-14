@@ -171,10 +171,10 @@ app.get("/settings/update", async (req, res, next) => {
   })
   let request = http.request({
     socketPath: '/var/run/docker.sock',
-    path: '/v1.37/build'
+    path: '/build'
   }, (response) => {
     response.on('data', chunk => {
-      console.log(JSON.parse(chunk))
+      console.log(JSON.parse(chunk)+ response.statusCode)
     });
     if (response.statusCode !== 200) {
       return console.log('something went wrong.')
