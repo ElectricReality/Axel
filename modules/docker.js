@@ -10,7 +10,7 @@ const http = require('http');
 // Get Services
 let request = http.request({
   socketPath: '/var/run/docker.sock',
-  path: '/v1.37/services'
+  path: '/v1.40/services'
 }, (response) => {
   let data = '';
   response.on('data', chunk => {
@@ -67,7 +67,7 @@ let post = JSON.stringify({
 })
 let request = http.request({
   socketPath: '/var/run/docker.sock',
-  path: '/v1.37/build'
+  path: '/v1.40/build'
 }, (response) => {
   if (response.statusCode !== 200) {
     return console.log('something went wrong.')

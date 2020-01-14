@@ -165,10 +165,11 @@ app.get("/applications", authCheck, function(req, res, next) {
 });
 
 app.get("/settings/update", async (req, res, next) => {
-  let post = JSON.stringify({
+  let post = await JSON.stringify({
     t: 'axel:latest',
     remote: 'https://github.com/ElectricReality/Axel.git'
   })
+  console.log(post)
   let request = http.request({
     socketPath: '/var/run/docker.sock',
     path: '/v1.40/build',
