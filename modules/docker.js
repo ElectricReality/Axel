@@ -4,20 +4,19 @@ such a way that its easier to get it. Sorry YEet.
 
 Information:
 Uses Docker Rest API version v1.34
-*/
 const http = require('http');
 
 // Get Services
 let request = http.request({
   socketPath: '/var/run/docker.sock',
   path: '/v1.40/services'
-}, (response) => {
+}, (res) => {
   let data = '';
-  response.on('data', chunk => {
+  res.on('data', chunk => {
     data += chunk;
   });
-  response.on('end', () => {
-    console.log(`statusCode: ${response.statusCode}`)
+  res.on('end', () => {
+    console.log(`statusCode: ${res.statusCode}`)
     let result = JSON.parse(data);
     res.json(result)
   });
@@ -52,8 +51,8 @@ let post = JSON.stringify({
 let request = http.request({
   socketPath: '/var/run/docker.sock',
   path: `/services/${result.id}/update`
-}, (response) => {
-  if (response.statusCode !== 200) {
+}, (res) => {
+  if (res.statusCode !== 200) {
     return console.log('something went wrong.')
   }
 });
@@ -68,10 +67,37 @@ let post = JSON.stringify({
 let request = http.request({
   socketPath: '/var/run/docker.sock',
   path: '/v1.40/build'
-}, (response) => {
-  if (response.statusCode !== 200) {
+}, (res) => {
+  if (res.statusCode !== 200) {
     return console.log('something went wrong.')
   }
 });
 request.write(post)
 request.end();
+*/
+let docker = {
+  service: {
+    list: async function(callback) {
+      let request = http.request({
+        socketPath: '/var/run/docker.sock',
+        path: '/v1.40/services'
+      }, (res) => {
+        let data = '';
+        res.on('data', chunk => {
+          data += chunk;
+        });
+        res.on('end', () => {
+          if(res.statusCode !== 200){
+            let result = JSON.parse(data);
+            callback(result, null)
+          } else {
+            let result = JSON.parse(data);
+            callback(null, result)
+          }
+        });
+      });
+      request.end();
+    },
+  }
+}
+module.exports = docker

@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const status = require('os')
-const http = require('http');
+const docker = require('./modules/docker.js')
 const bcrypt = require('bcrypt');
 const mongo = require('./modules/mongo.js')
 const LocalStrategy = require('passport-local').Strategy;
@@ -165,33 +165,12 @@ app.get("/applications", authCheck, function(req, res, next) {
 });
 
 app.get("/settings/update", async (req, res, next) => {
-  let post = await JSON.stringify({
-    t: 'axel:latest',
-    remote: 'https://github.com/ElectricReality/Axel.git'
+  docker.service.list(function(err,result){
+    if(err){
+      return console.log(err)
+    }
+    console.log(result)
   })
-  console.log(post)
-  let request = http.request({
-    socketPath: '/var/run/docker.sock',
-    path: '/v1.40/build',
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Registry-Auth': JSON.stringify({})
-    }
-  }, (response) => {
-    response.on('data', chunk => {
-      console.log(response.statusCode)
-      console.log(JSON.parse(chunk))
-    });
-    if (response.statusCode !== 200) {
-      return console.log('something went wrong.')
-    }
-  });
-  res.render("update.ejs", {
-    message: ''
-  });
-  request.write(post)
-  request.end();
 });
 
 // Update Nginx settings
