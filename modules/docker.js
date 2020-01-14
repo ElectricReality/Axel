@@ -105,8 +105,8 @@ let docker = {
       let post = JSON.stringify(options)
       let request = http.request({
         socketPath: '/var/run/docker.sock',
-        path: '/v1.40/build?',
-        method: 'POST',
+        path: '/v1.40/build?t=axel:latest&remote=http%3A%2F%2Fgithub.com%2FElectricReality%2FAxel.git',
+        method: 'GET',
         header: {
           'Content-type': 'application/x-www-form-urlencoded'
         }
@@ -125,7 +125,6 @@ let docker = {
           }
         });
       });
-      request.write(post)
       request.end();
     }
   }
