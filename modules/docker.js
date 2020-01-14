@@ -102,15 +102,11 @@ let docker = {
   },
   image: {
     build: async function(options,callback) {
-      let post = JSON.stringify(options)
       let request = http.request({
         socketPath: '/var/run/docker.sock',
         path: '/v1.40/build',
         method: 'POST',
-        qs: {
-          t: "axel",
-          remote: "http://github.com/ElectricReality/Axel.git"
-        }
+        qs: options
       }, (res) => {
         let data = '';
         res.on('data', chunk => {
