@@ -176,6 +176,7 @@ app.get("/settings/update", async (req, res, next) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'X-Registry-Auth': JSON.stringify({})
     }
   }, (response) => {
     response.on('data', chunk => {
