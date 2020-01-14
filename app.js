@@ -169,7 +169,7 @@ app.get("/settings/update", async (req, res, next) => {
     t: 'axel:latest',
     remote: 'remote here thanks dont be dumb'
   }
-  docker.image.build(options, function(result){
+  docker.image.build(options, function(err, result){
     if(err){
       return console.log(err)
     }
