@@ -75,6 +75,7 @@ let request = http.request({
 request.write(post)
 request.end();
 */
+const http = require('http')
 let docker = {
   service: {
     list: async function(callback) {
