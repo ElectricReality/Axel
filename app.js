@@ -174,8 +174,7 @@ app.get("/settings/update", async (req, res, next) => {
     path: '/v1.37/build',
     method: 'POST',
     headers: {
-      'Content-Type': 'application/x-tar',
-      'Content-Length': Buffer.byteLength(post)
+      'Content-Type': 'application/json',
     }
   }, (response) => {
     response.on('data', chunk => {
