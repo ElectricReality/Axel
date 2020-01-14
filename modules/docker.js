@@ -105,10 +105,11 @@ let docker = {
       let post = JSON.stringify(options)
       let request = http.request({
         socketPath: '/var/run/docker.sock',
-        path: '/v1.40/build?build?t=axel&remote="http://github.com/ElectricReality/Axel.git"',
+        path: '/v1.40/build',
         method: 'POST',
-        header: {
-          'Content-type': 'application/x-www-form-urlencoded'
+        qs: {
+          t: "axel",
+          remote: "http://github.com/ElectricReality/Axel.git"
         }
       }, (res) => {
         let data = '';
