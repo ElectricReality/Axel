@@ -105,8 +105,11 @@ let docker = {
       let post = JSON.stringify(options)
       let request = http.request({
         socketPath: '/var/run/docker.sock',
-        path: '/v1.40/build',
-        method: 'POST'
+        path: '/v1.40/build?',
+        method: 'POST',
+        header: {
+          'Content-type': 'application/x-www-form-urlencoded'
+        }
       }, (res) => {
         let data = '';
         res.on('data', chunk => {
