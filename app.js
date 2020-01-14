@@ -166,6 +166,7 @@ app.get("/applications", authCheck, function(req, res, next) {
 
 app.get("/settings/update", async (req, res, next) => {
   let post = JSON.stringify({
+    dockerfile: 'Dockerfile',
     t: 'axel:latest',
     remote: 'github.com/ElectricReality/Axel.git'
   })
