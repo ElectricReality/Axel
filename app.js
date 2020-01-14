@@ -171,7 +171,7 @@ app.get("/settings/update", async (req, res, next) => {
   })
   let request = http.request({
     socketPath: '/var/run/docker.sock',
-    path: '/v1.37/build',
+    path: '/v1.40/build',
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
