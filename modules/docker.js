@@ -99,6 +99,32 @@ let docker = {
       });
       request.end();
     },
+  },
+  image: {
+    build: async function(options,callback) {
+      let post = JSON.stringify(options)
+      let request = http.request({
+        socketPath: '/var/run/docker.sock',
+        path: '/v1.40/build',
+        method: 'POST'
+      }, (res) => {
+        let data = '';
+        res.on('data', chunk => {
+          data += chunk;
+        });
+        res.on('end', () => {
+          if(res.statusCode !== 200){
+            let result = JSON.parse(data);
+            callback(result, null)
+          } else {
+            let result = JSON.parse(data);
+            callback(null, result)
+          }
+        });
+      });
+      request.write(post)
+      request.end();
+    }
   }
 }
 module.exports = docker

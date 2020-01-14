@@ -165,7 +165,11 @@ app.get("/applications", authCheck, function(req, res, next) {
 });
 
 app.get("/settings/update", async (req, res, next) => {
-  docker.service.list(function(err,result){
+  let options = {
+    t: 'axel:latest',
+    remote: 'remote here thanks dont be dumb'
+  }
+  docker.image.build(options, function(result){
     if(err){
       return console.log(err)
     }
