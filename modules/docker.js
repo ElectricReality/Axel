@@ -112,19 +112,16 @@ let docker = {
       }, (res) => {
         let data = '';
         res.on('data', chunk => {
-          data += chunk;
-          console.log(JSON.parse(chunk))
+          data += JSON.parse(chunk);
         });
         res.on('end', () => {
           if(!data) {
             data += {message: 'Successful!'}
           }
           if(res.statusCode !== 200){
-            let result = JSON.parse(data);
-            callback(result, null)
+            callback(data, null)
           } else {
-            let result = JSON.parse(data);
-            callback(null, result)
+            callback(null, data)
           }
         });
       });
