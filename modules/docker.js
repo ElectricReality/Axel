@@ -116,6 +116,25 @@ let docker = {
           'Content-Length': Buffer.byteLength(options)
         }
       }, (res) => {
+
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+          console.log('Response: ' + chunk);
+          if(res.statusCode !== 200){
+            let result = {
+              output: chunk,
+              statusCode: res.statusCode,
+              message: 'Build Failed!'
+            }
+            return callback(result, null)
+          }
+          let result = {
+            output: chunk,
+            message: 'Build Successful'
+          }
+          callback(null, result)
+        });
+
         let data = '';
         res.on('data', chunk => {
           data += chunk;
