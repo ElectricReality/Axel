@@ -134,19 +134,6 @@ let docker = {
           }
           callback(null, result)
         });
-
-        let data = '';
-        res.on('data', chunk => {
-          data += chunk;
-        });
-        res.on('end', () => {
-          let str = JSON.parse(data)
-          if(res.statusCode !== 200){
-            console.log(str)
-            return callback(res.statusCode, null)
-          }
-          callback(null, "Build Successful!")
-        });
       });
       request.write(options)
       request.end();
