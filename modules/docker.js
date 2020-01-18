@@ -115,7 +115,7 @@ let docker = {
           data += chunk;
         });
         res.on('end', () => {
-          let str = JSON.stringify(data)
+          let str = JSON.parse(data)
           if(res.statusCode !== 200){
             console.log(str)
             return callback(res.statusCode, null)
