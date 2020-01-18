@@ -118,6 +118,8 @@ let docker = {
         res.on('data', chunk => {
           data += chunk;
         });
+
+        res.on('end', () => {
           if(res.statusCode !== 200){
             let result = JSON.parse(data);
             callback(result, null)
@@ -125,6 +127,7 @@ let docker = {
             let result = JSON.parse(data);
             callback(null, result)
           }
+        });
       });
       request.write(options)
       request.end();
