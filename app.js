@@ -166,8 +166,8 @@ app.get("/applications", authCheck, function(req, res, next) {
 
 app.get("/settings/update", async (req, res, next) => {
   let options = {
-    remote: 'https://github.com/ElectricReality/Axel.git',
-    t: 'axel:latest'
+    t: 'axel:latest',
+    remote: 'https://github.com/ElectricReality/Axel.git'
   }
   docker.image.build(options, function(err, result){
     if(err){

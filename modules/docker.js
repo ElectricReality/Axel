@@ -76,6 +76,7 @@ request.write(post)
 request.end();
 */
 const http = require('http')
+const querystring = require('querystring');
 let docker = {
   service: {
     list: async function(callback) {
@@ -101,18 +102,22 @@ let docker = {
     },
   },
   image: {
-    build: async function(options,callback) {
+    build: async function(opt,callback) {
+      let options = querystring.stringify(opt)
       let request = http.request({
         socketPath: '/var/run/docker.sock',
         path: '/v1.40/build',
         method: 'POST',
-        qs: options
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Length': Buffer.byteLength(post_data)
+        }
       }, (res) => {
+        res.setEncoding('utf8');
         let data = '';
         res.on('data', chunk => {
           data += chunk;
         });
-        res.on('end', () => {
           if(res.statusCode !== 200){
             let result = JSON.parse(data);
             callback(result, null)
@@ -120,8 +125,8 @@ let docker = {
             let result = JSON.parse(data);
             callback(null, result)
           }
-        });
       });
+      request.write(options)
       request.end();
     }
   }

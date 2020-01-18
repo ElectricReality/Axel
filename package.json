@@ -25,6 +25,7 @@
     "path": "^0.12.7",
     "simple-git": "^1.129.0",
     "fs": "^0.0.1-security",
-    "async-request": "^1.2.0"
+    "async-request": "^1.2.0",
+    "querystring": "^0.2.0"
   }
 }
