@@ -119,14 +119,13 @@ let docker = {
         res.on('data', chunk => {
           data += chunk;
         });
-
         res.on('end', () => {
           if(res.statusCode !== 200){
             let result = JSON.parse(data);
-            callback(result, null)
+            callback(data, null)
           } else {
             let result = JSON.parse(data);
-            callback(null, result)
+            callback(null, data)
           }
         });
       });
