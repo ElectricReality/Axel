@@ -115,10 +115,12 @@ let docker = {
           data += chunk;
         });
         res.on('end', () => {
+          let str = JSON.stringify(data)
           if(res.statusCode !== 200){
-            callback(JSON.stringify(data), null)
-          } else {
-            callback(null, JSON.stringify(data))
+            return callback(data, null)
+          }
+          if(str == ""){
+              callback(null, "Build Successful!")
           }
         });
       });
