@@ -167,7 +167,8 @@ app.get("/applications", authCheck, function(req, res, next) {
 app.get("/settings/update", async (req, res, next) => {
   let options1 = {
     t: 'axel:latest',
-    remote: 'https://github.com/ElectricReality/Axel.git'
+    remote: 'https://github.com/ElectricReality/Axel.git',
+    nocache: true
   }
   await docker.image.build(options1, function(err, result) {
     if (err) {
@@ -189,7 +190,7 @@ app.get("/settings/update", async (req, res, next) => {
       }
       let options2 = {
         Name: 'axel-system',
-        version: parseInt(service.Version.Index)+1,
+        version: parseInt(service.Version.Index),
         TaskTemplate: {
           ContainerSpec: {
             Image: 'axel:latest',
