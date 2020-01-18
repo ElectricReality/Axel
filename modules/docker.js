@@ -119,6 +119,7 @@ let docker = {
 
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
+          process.stdin.pipe(chunk)
           console.log('Response: ' + chunk);
           if(res.statusCode !== 200){
             let result = {
