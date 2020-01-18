@@ -114,7 +114,6 @@ let docker = {
           'Content-Length': Buffer.byteLength(options)
         }
       }, (res) => {
-        res.setEncoding('utf8');
         let data = '';
         res.on('data', chunk => {
           data += chunk;
@@ -122,10 +121,10 @@ let docker = {
         res.on('end', () => {
           if(res.statusCode !== 200){
             let result = JSON.parse(data);
-            callback(data, null)
+            callback(result, null)
           } else {
             let result = JSON.parse(data);
-            callback(null, data)
+            callback(null, result)
           }
         });
       });
