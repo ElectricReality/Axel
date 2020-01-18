@@ -181,6 +181,7 @@ app.get("/settings/update", async (req, res, next) => {
     }
     let service = await result.find(s => s.Spec.Name == "axel-system")
     let id = service.ID
+    console.log(id)
     let query = {
       version: parseInt(service.Version.Index)
     }
