@@ -219,7 +219,7 @@ app.get("/settings/update", async (req, res, next) => {
         console.log(result2)
       })
     })
-  }, 10000);
+  }, 40000);
   res.render("update.ejs", {
     message: ''
   });
