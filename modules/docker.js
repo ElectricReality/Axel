@@ -101,6 +101,7 @@ let docker = {
       request.end();
     },
     update: async function(pathparams, queryparams, opt, callback) {
+      console.log('Service Updating')
       let queryparamsstr = querystring.stringify(queryparams)
       let options = JSON.stringify(opt)
       let path = `/v1.40/service/${pathparams}/update?${queryparamsstr}`
