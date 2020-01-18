@@ -100,11 +100,11 @@ let docker = {
       });
       request.end();
     },
-    update: async function(pathparams, queryparams, opt, callback) {
+    update: async function(id, queryparams, opt, callback) {
       console.log('Service Updating')
       let queryparamsstr = querystring.stringify(queryparams)
       let options = JSON.stringify(opt)
-      let path = `/v1.40/service/${pathparams}/update?${queryparamsstr}`
+      let path = `/v1.40/services/${id}/update?${queryparamsstr}`
       let request = http.request({
         socketPath: '/var/run/docker.sock',
         path: path,
