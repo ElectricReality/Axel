@@ -169,19 +169,22 @@ app.get("/settings/update", async (req, res, next) => {
     t: 'axel:latest',
     remote: 'https://github.com/ElectricReality/Axel.git'
   }
-  docker.image.build(options1, function(err, result){
+    await docker.image.build(options1, function(err, result){
     if(err){
       return console.log(err)
     }
     console.log(result)
   })
+  console.log('pausing process ');
+  setTimeout(function() {
+    console.log('resuming process');
+  }, 10000);
   docker.service.list(async function(err, result){
     if(err){
       return console.log(err)
     }
     let service = await result.find(s => s.Spec.Name == "axel-system")
     let id = service.ID
-    console.log(id)
     let query = {
       version: parseInt(service.Version.Index)
     }
