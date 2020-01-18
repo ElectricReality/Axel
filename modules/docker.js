@@ -107,7 +107,7 @@ let docker = {
       console.log(options)
       let request = http.request({
         socketPath: '/var/run/docker.sock',
-        path: '/v1.40/build',
+        path: `/v1.40/build?${options}`,
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
