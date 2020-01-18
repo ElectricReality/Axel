@@ -104,22 +104,17 @@ let docker = {
   image: {
     build: async function(opt,callback) {
       let options = querystring.stringify(opt)
+      console.log(options)
       let request = http.request({
         socketPath: '/var/run/docker.sock',
-        path: `/v1.40/build?${options}`,
+        path: `/v1.40/build${options}`,
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Content-Length': Buffer.byteLength(options)
-        }
       }, (res) => {
         let data = '';
         res.on('data', chunk => {
           data += chunk;
         });
-        console.log(data)
         res.on('end', () => {
-          console.log(data)
           if(res.statusCode !== 200){
             let result = JSON.parse(data);
             callback(result, null)
