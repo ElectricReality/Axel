@@ -226,5 +226,5 @@ app.get("/settings/update", async (req, res, next) => {
 });
 
 // Update Nginx settings
-console.log("Version 1.0.trdyucgh")
+console.log("Version 1.0.lmao")
 nginx.update()
