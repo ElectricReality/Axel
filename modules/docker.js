@@ -112,7 +112,7 @@ let docker = {
       }, (res) => {
         let data = '';
         res.on('data', chunk => {
-          data += JSON.parse(chunk);
+          data += JSON.stringify(chunk);
         });
         res.on('end', () => {
           if(!data) {
