@@ -208,9 +208,9 @@ app.get("/settings/update", async (req, res, next) => {
         }]
       }
     }
-    docker.service.update(id, query, options2, function(err2,result2){
+    docker.service.update(id, query, options2, function(err2, result2){
       if(err2){
-        return console.log(err)
+        return console.log(err2)
       }
       console.log(result2)
     })
