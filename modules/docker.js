@@ -116,6 +116,7 @@ let docker = {
       }, (res) => {
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
+          console.log(res.statusCode)
           if(res.statusCode !== 200){
             let result = {
               output: chunk,
