@@ -103,8 +103,7 @@ let docker = {
   },
   image: {
     build: async function(opt,callback) {
-      let options = await querystring.stringify(opt)
-      console.log(options)
+      let options = querystring.stringify(opt)
       let request = http.request({
         socketPath: '/var/run/docker.sock',
         path: `/v1.40/build?${options}`,
