@@ -1,3 +1,3 @@
 git pull
-docker build -t axel:latest . > /dev/null
+docker build -t axel:latest .
 docker service update --force axel-system
