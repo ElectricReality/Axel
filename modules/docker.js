@@ -115,22 +115,26 @@ let docker = {
         }
       }, (res) => {
         res.setEncoding('utf8');
+        let data = ''
         res.on('data', function (chunk) {
+          data += chunk
+        });
+        res.on('end', function(){
           console.log(res.statusCode)
           if(res.statusCode !== 200){
             let result = {
-              output: chunk,
+              output: data,
               statusCode: res.statusCode,
               message: 'Build Failed!'
             }
             return callback(result, null)
           }
           let result = {
-            output: chunk,
+            output: data,
             message: 'Build Successful'
           }
           callback(null, result)
-        });
+        })
       });
       request.write(options)
       request.end();
