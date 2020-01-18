@@ -89,7 +89,7 @@ let docker = {
           data += chunk;
         });
         res.on('end', () => {
-          if(res.statusCode !== 200){
+          if (res.statusCode !== 200) {
             let result = JSON.parse(data);
             callback(result, null)
           } else {
@@ -100,9 +100,46 @@ let docker = {
       });
       request.end();
     },
+    update: async function(pathparams, queryparams, opt, callback) {
+      let queryparamsstr = querystring.stringify(queryparams)
+      let options = JSON.stringify(opt)
+      let path = `/v1.40/service/${pathparams}/update?${queryparamsstr}`
+      let request = http.request({
+        socketPath: '/var/run/docker.sock',
+        path: path,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Content-Length': options.length
+        }
+      }, (res) => {
+        res.setEncoding('utf8');
+        let data = ''
+        res.on('data', function(chunk) {
+          data += chunk
+        });
+        res.on('end', function() {
+          if (res.statusCode !== 200) {
+            let result = {
+              output: data,
+              statusCode: res.statusCode,
+              message: 'Update Failed!'
+            }
+            return callback(result, null)
+          }
+          let result = {
+            output: data,
+            message: 'Update Successful!'
+          }
+          callback(null, result)
+        })
+      });
+      request.write(options)
+      request.end();
+    }
   },
   image: {
-    build: async function(opt,callback) {
+    build: async function(opt, callback) {
       let options = querystring.stringify(opt)
       let path = `/v1.40/build?${options}`
       let request = http.request({
@@ -116,12 +153,11 @@ let docker = {
       }, (res) => {
         res.setEncoding('utf8');
         let data = ''
-        res.on('data', function (chunk) {
+        res.on('data', function(chunk) {
           data += chunk
         });
-        res.on('end', function(){
-          console.log(res.statusCode)
-          if(res.statusCode !== 200){
+        res.on('end', function() {
+          if (res.statusCode !== 200) {
             let result = {
               output: data,
               statusCode: res.statusCode,
@@ -131,7 +167,7 @@ let docker = {
           }
           let result = {
             output: data,
-            message: 'Build Successful'
+            message: 'Build Successful!'
           }
           callback(null, result)
         })
