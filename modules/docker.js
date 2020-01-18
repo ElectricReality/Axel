@@ -118,7 +118,9 @@ let docker = {
         res.on('data', chunk => {
           data += chunk;
         });
+        console.log(data)
         res.on('end', () => {
+          console.log(data)
           if(res.statusCode !== 200){
             let result = JSON.parse(data);
             callback(result, null)
