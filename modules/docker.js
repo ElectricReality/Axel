@@ -117,7 +117,7 @@ let docker = {
         res.on('end', () => {
           let str = JSON.stringify(data)
           if(res.statusCode !== 200){
-            return callback(str, null)
+            return callback(res.statusCode, null)
           }
           if(str == ""){
               callback(null, "Build Successful!")
