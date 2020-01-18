@@ -105,7 +105,7 @@ let docker = {
     build: async function(opt,callback) {
       let options = querystring.stringify(opt)
       console.log(options)
-      let path = `/v1.40/build${options}`
+      let path = `/v1.40/build?${options}`
       console.log(path)
       let request = http.request({
         socketPath: '/var/run/docker.sock',
