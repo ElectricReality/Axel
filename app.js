@@ -184,8 +184,7 @@ app.get("/settings/update", async (req, res, next) => {
         let query = {
           version: parseInt(service.Version.Index)
         }
-        let options2 = {}
-        let options3 = {
+        let options2 = {
           Name: 'axel-system',
           version: parseInt(service.Version.Index),
           TaskTemplate: {
@@ -199,9 +198,6 @@ app.get("/settings/update", async (req, res, next) => {
             },
             ForceUpdate: 1
           },
-          Networks: [{
-            Target: 'axel-net',
-          }],
           EndpointSpec: {
             Ports: [{
               Protocol: 'tcp',
