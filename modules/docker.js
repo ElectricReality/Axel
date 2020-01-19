@@ -103,12 +103,15 @@ let docker = {
     update: async function(id, queryparams, opt, callback) {
       console.log('Service Updating')
       let queryparamsstr = querystring.stringify(queryparams)
-      let options = JSON.stringify(opt)
+      let options = await JSON.stringify(opt)
       let path = `/v1.40/services/${id}/update?${queryparamsstr}`
       let request = http.request({
         socketPath: '/var/run/docker.sock',
         path: path,
-        method: 'POST'
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }, (res) => {
         res.setEncoding('utf8');
         let data = ''
