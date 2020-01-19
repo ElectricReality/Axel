@@ -174,52 +174,50 @@ app.get("/settings/update", async (req, res, next) => {
       return console.log(err)
     }
     console.log(result)
-  })
-  console.log('pausing process ');
-  setTimeout(function() {
-    console.log('resuming process');
-    docker.service.list(async function(err, result) {
-      if (err) {
-        return console.log(err)
-      }
-      let service = await result.find(s => s.Spec.Name == "axel-system")
-      let id = service.ID
-      let query = {
-        version: parseInt(service.Version.Index)
-      }
-      let options2 = {
-        Name: 'axel-system',
-        version: parseInt(service.Version.Index),
-        TaskTemplate: {
-          ContainerSpec: {
-            Image: 'axel:latest',
-            Mounts: [{
-              Type: 'bind',
-              Source: '/var/run/docker.sock',
-              Target: '/var/run/docker.sock'
-            }]
+    if (result == "Build Successful!") {
+      docker.service.list(async function(err, result) {
+        if (err) {
+          return console.log(err)
+        }
+        let service = await result.find(s => s.Spec.Name == "axel-system")
+        let id = service.ID
+        let query = {
+          version: parseInt(service.Version.Index)
+        }
+        let options2 = {
+          Name: 'axel-system',
+          version: parseInt(service.Version.Index),
+          TaskTemplate: {
+            ContainerSpec: {
+              Image: 'axel:latest',
+              Mounts: [{
+                Type: 'bind',
+                Source: '/var/run/docker.sock',
+                Target: '/var/run/docker.sock'
+              }]
+            },
+            ForceUpdate: 1
           },
-          ForceUpdate: 1
-        },
-        Networks: [{
-          Target: 'axel-net',
-        }],
-        EndpointSpec: {
-          Ports: [{
-            Protocol: 'tcp',
-            TargetPort: 3000,
-            PublishedPort: 3000,
-          }]
+          Networks: [{
+            Target: 'axel-net',
+          }],
+          EndpointSpec: {
+            Ports: [{
+              Protocol: 'tcp',
+              TargetPort: 3000,
+              PublishedPort: 3000,
+            }]
+          }
         }
-      }
-      docker.service.update(id, query, options2, function(err2, result2) {
-        if (err2) {
-          return console.log(err2)
-        }
-        console.log(result2)
+        docker.service.update(id, query, options2, function(err2, result2) {
+          if (err2) {
+            return console.log(err2)
+          }
+          console.log(result2)
+        })
       })
-    })
-  }, 45000);
+    }
+  })
   res.render("update.ejs", {
     message: ''
   });
