@@ -182,7 +182,7 @@ app.get("/settings/update", async (req, res, next) => {
         let service = await result.find(s => s.Spec.Name == "axel-system")
         let id = service.ID
         let query = {
-          version: parseInt(service.Version.Index) + 1
+          version: parseInt(service.Version.Index)
         }
         let options2 = {
           Name: 'axel-system',
