@@ -220,7 +220,7 @@ app.get("/settings/update", async (req, res, next) => {
         console.log(result2)
       })
     })
-  }, 45000);
+  }, 105000);
   res.render("update.ejs", {
     message: ''
   });
