@@ -174,7 +174,7 @@ app.get("/settings/update", async (req, res, next) => {
       return console.log(err)
     }
     console.log(result)
-    if (result == "Build Successful!") {
+    if (result.message == "Build Successful!") {
       docker.service.list(async function(err, result) {
         if (err) {
           return console.log(err)
