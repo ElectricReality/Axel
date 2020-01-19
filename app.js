@@ -227,5 +227,5 @@ app.get("/settings/update", async (req, res, next) => {
 });
 
 // Update Nginx settings
-console.log("Version 1.0.lmao")
+console.log("Version 1.0.frik")
 nginx.update()
