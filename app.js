@@ -186,24 +186,30 @@ app.get("/settings/update", async (req, res, next) => {
         }
         let options2 = {
           Name: 'axel-system',
-          version: parseInt(service.Version.Index),
           TaskTemplate: {
             ContainerSpec: {
               Image: 'axel:latest',
-              Mounts: [{
-                Type: 'bind',
-                Source: '/var/run/docker.sock',
-                Target: '/var/run/docker.sock'
-              }]
             },
-            ForceUpdate: 1
+            Resources: {
+              Limits: {},
+              Reservations: {}
+            },
+            RestartPolicy: {
+              Condition: 'any',
+              MaxAttempts: 0
+            },
+            Placement: {}
+          },
+          Mode: {
+            Replicated: {
+              Replicas: 1
+            }
+          },
+          UpdateConfig: {
+            Parallelism: 1
           },
           EndpointSpec: {
-            Ports: [{
-              Protocol: 'tcp',
-              TargetPort: 3000,
-              PublishedPort: 3000,
-            }]
+            Mode: 'vip'
           }
         }
         docker.service.update(id, query, options2, function(err2, result2) {
