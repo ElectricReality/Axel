@@ -200,6 +200,7 @@ app.get("/settings/update", async (req, res, next) => {
               Target: '/var/run/docker.sock'
             }]
           },
+          ForceUpdate: 1
         },
         Networks: [{
           Target: 'axel-net',
@@ -219,7 +220,7 @@ app.get("/settings/update", async (req, res, next) => {
         console.log(result2)
       })
     })
-  }, 120000);
+  }, 45000);
   res.render("update.ejs", {
     message: ''
   });
