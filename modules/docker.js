@@ -131,7 +131,7 @@ let docker = {
           callback(null, result)
         })
       });
-      //request.write(options)
+      request.write(options)
       request.end();
     }
   },
