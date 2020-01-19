@@ -189,6 +189,11 @@ app.get("/settings/update", async (req, res, next) => {
           TaskTemplate: {
             ContainerSpec: {
               Image: 'axel:latest',
+              Mounts: [{
+                Type: 'bind',
+                Source: '/var/run/docker.sock',
+                Target: '/var/run/docker.sock'
+              }]
             },
             Resources: {
               Limits: {},
@@ -200,6 +205,9 @@ app.get("/settings/update", async (req, res, next) => {
             },
             Placement: {}
           },
+          Networks: [{
+            Target: 'axel-net',
+          }],
           Mode: {
             Replicated: {
               Replicas: 1
@@ -209,7 +217,12 @@ app.get("/settings/update", async (req, res, next) => {
             Parallelism: 1
           },
           EndpointSpec: {
-            Mode: 'vip'
+            Mode: 'vip',
+            Ports: [{
+              Protocol: 'tcp',
+              TargetPort: 8080,
+              PublishedPort: 8080,
+            }]
           }
         }
         docker.service.update(id, query, options2, function(err2, result2) {
