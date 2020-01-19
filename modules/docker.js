@@ -108,10 +108,7 @@ let docker = {
       let request = http.request({
         socketPath: '/var/run/docker.sock',
         path: path,
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        method: 'POST'
       }, (res) => {
         res.setEncoding('utf8');
         let data = ''
