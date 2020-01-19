@@ -16,7 +16,7 @@ session="$(date +%s | sha256sum | base64 | head -c 32 )"
 echo "Starting Swarm"
 docker swarm init --advertise-addr ${ipv4} > /dev/null 2>&1
 echo "Starting Network"
-docker network create --driver overlay axel-net > /dev/null 2>&1
+docker network create --driver overlay axel-net
 echo "Starting Axel Database"
 docker service create \
   --name axel-system-database \
