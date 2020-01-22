@@ -207,6 +207,9 @@ app.get("/settings/update", async (req, res, next) => {
           },
           Networks: [{
             Target: 'axel-net',
+          },
+          {
+            Target: 'ingress'
           }],
           Mode: {
             Replicated: {
