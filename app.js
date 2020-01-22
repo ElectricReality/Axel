@@ -217,7 +217,7 @@ app.get("/settings/update", async (req, res, next) => {
             }
           },
           UpdateConfig: {
-            Parallelism: 1
+            Parallelism: 0
           },
           EndpointSpec: {
             Mode: 'vip',
