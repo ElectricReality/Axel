@@ -33,6 +33,6 @@ docker service create \
   --publish 8080:8080 \
   --env session=${session} \
   --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
-  axel
+  axel:latest
 echo " "
 echo "You can now start using Axel at http://${ipv4}:8080/login. Please set new username and password immediately at the admin dashboard!"
