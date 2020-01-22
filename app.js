@@ -222,6 +222,7 @@ app.get("/settings/update", async (req, res, next) => {
               Protocol: 'tcp',
               TargetPort: 8080,
               PublishedPort: 8080,
+              PublishMode: 'ingress'
             }]
           }
         }
