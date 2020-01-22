@@ -188,7 +188,7 @@ app.get("/settings/update", async (req, res, next) => {
           Name: 'axel-system',
           TaskTemplate: {
             ContainerSpec: {
-              Image: 'axel:latest',
+              Image: 'axel',
               Mounts: [{
                 Type: 'bind',
                 Source: '/var/run/docker.sock',
