@@ -24,7 +24,7 @@ let request = http.request({
 request.end();
 
 // Service Update
-let post = JSON.stringify({
+let post = JSON.stringify({1
   Name: 'Name of service',
   version: 1 + 1, // Change this to parseInt(result.Version.Index) when you get the result
   TaskTemplate: {
@@ -108,7 +108,11 @@ let docker = {
       let request = http.request({
         socketPath: '/var/run/docker.sock',
         path: path,
-        method: 'POST'
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Content-Length': Buffer.byteLength(options)
+        }
       }, (res) => {
         res.setEncoding('utf8');
         let data = ''
