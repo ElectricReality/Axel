@@ -50,11 +50,6 @@ let api = {
       TaskTemplate: {
         Image: `${name}:latest`
       },
-      Networks: [{
-        Target: 'axel-net'
-      },{
-        Target: 'ingress'
-      }]
     }
     docker.createService
   },
