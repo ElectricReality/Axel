@@ -171,7 +171,7 @@ app.get("/settings/update", async (req, res, next) => {
   docker.buildImage(null, {
     t: 'axel',
     remote: 'https://github.com/ElectricReality/Axel.git',
-  },async function(err, result) {
+  }, async function(err, result) {
     if (err) {
       return console.log(err)
     }
@@ -237,12 +237,11 @@ app.get("/settings/update", async (req, res, next) => {
       })
     }
   })
+  res.render("update.ejs", {
+    message: ''
+  });
 });
 
-
-res.render("update.ejs", {
-  message: ''
-});
 
 
 // Update Nginx settings
