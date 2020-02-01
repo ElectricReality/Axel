@@ -168,8 +168,8 @@ app.post("/applications", authCheck, async function(req, res, next) {
   if(req.body.name){
     docker.api.appcreate(req.body.name)
   }
+  console.log(req.body.name)
   let apps = await docker.api.listapps()
-  console.log(apps.Spec)
   res.render("applications.ejs", {
     message: '',
     services: apps
