@@ -7,7 +7,7 @@
         <p style="font-size: 20px;">Deployment</p>
         <hr>
         <p style="font-size: 18px;">Git</p>
-        <input type="text" name="giturl" value="<% if(!mongoapp.deployment.giturl){ } else { mongoapp.deployment.giturl } %>" placeholder="Git Url">
+        <input type="text" name="giturl" value="<% if(mongoapp.deployment.giturl == 'ns'){ } else { return mongoapp.deployment.giturl } %>" placeholder="Git Url">
         <input type="text" name="gitusername" value="" placeholder="Git Username">
         <input type="text" name="gitpassword" value="" placeholder="Git Password">
         <p style="font-size: 18px;">Tar</p>
