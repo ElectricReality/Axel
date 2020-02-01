@@ -46,9 +46,24 @@ let api = {
   },
   appcreate: async function(name) {
     let options = {
-      Name: name
+      Name: name,
+      TaskTemplate: {
+        ContainerSpec: {
+          Image: `${name}:latest`
+        }
+      }
     }
     docker.createService(options)
+  },
+  appremove: async function(name) {
+    docker.listServices({}).then(async function(data) {
+      let servicesearch = await data.find(s => s.Spec.Name == name)
+      const service = docker.getService(servicesearch.ID)
+      let options = {
+        id: servicesearch.ID,
+      }
+      service.delete(options)
+    })
   },
   listapps: async function() {
     let apps = new Array()
