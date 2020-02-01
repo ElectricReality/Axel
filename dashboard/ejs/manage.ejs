@@ -8,8 +8,9 @@
         <hr>
         <p style="font-size: 18px;">Git</p>
         <input type="text" name="giturl" value="<% if(mongoapp.deployment.giturl == 'ns'){ } else { return mongoapp.deployment.giturl } %>" placeholder="Git Url">
-        <input type="text" name="gitusername" value="" placeholder="Git Username">
-        <input type="text" name="gitpassword" value="" placeholder="Git Password">
+        <input type="text" name="gitusername" value="<% if(mongoapp.deployment.giturl == 'ns'){ } else { return mongoapp.deployment.giturl } %>" placeholder="Git Username">
+        <input type="text" name="gitpassword" value="<% if(mongoapp.deployment.giturl == 'ns'){ } else { return mongoapp.deployment.giturl } %>" placeholder="Git Password">
+        <button type="submit">Login</button>
       </form>
     </div>
   </div>
@@ -19,6 +20,7 @@
       <p style="font-size: 18px;">Format on JSON!</p>
       <form action="/applications" method="post">
         <textarea name="env" ></textarea>
+        <button type="submit">Login</button>
       </form>
     </div>
   </div>
