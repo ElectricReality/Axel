@@ -159,7 +159,8 @@ app.post("/settings", authCheck, function(req, res, next) {
 
 app.get("/applications", authCheck, function(req, res, next) {
   res.render("applications.ejs", {
-    message: ''
+    message: '',
+    services: docker.api.listapps
   });
 });
 app.post("/applications", authCheck, function(req, res, next) {
