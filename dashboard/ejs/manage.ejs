@@ -16,19 +16,5 @@
       </form>
     </div>
   </div>
-  <%
-    if(services){
-    %>
-  <%
-    services.forEach(function(s){
-    %>
-  <div class="card">
-    <div class="content">
-      <h3><%= s.Spec.Name %></h3>
-      <a class="button" style="padding-top:5px; padding-bottom:5px;" href="/applications/<%= s.Spec.Name %>">Manage</a>
-    </div>
-  </div>
-  <% }) %>
-  <% } %>
 </div>
 <% include ./blocks/footer %>
