@@ -161,7 +161,7 @@ app.get("/applications", authCheck, async function(req, res, next) {
     let apps = await docker.api.listapps()
   res.render("applications.ejs", {
     message: '',
-    services: apps[0]
+    services: apps
   });
 });
 app.post("/applications", authCheck, async function(req, res, next) {
