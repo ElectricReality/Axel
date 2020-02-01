@@ -186,17 +186,16 @@ app.get("/settings/update", async (req, res, next) => {
         console.log('---------------------------')
         console.log(service)
         console.log('---------------------------')
-        let search = JSON.stringify(servicesearch)
-        console.log(search)
-        let options2 = {
+        let options1 = {
           Name: 'axel-system',
           version: parseInt(servicesearch.Version.Index),
-          TaskTemplate: search.Spec.TaskTemplate,
-          Networks: search.Spec.Networks,
-          Mode: search.Spec.Mode,
-          UpdateConfig: search.Spec.UpdateConfig,
-          EndpointSpec: search.Spec.EndpointSpec
+          TaskTemplate: servicesearch.Spec.TaskTemplate,
+          Networks: servicesearch.Spec.Networks,
+          Mode: servicesearch.Spec.Mode,
+          UpdateConfig: servicesearch.Spec.UpdateConfig,
+          EndpointSpec: servicesearch.Spec.EndpointSpec
         }
+        let options2 = JSON.stringify(options1)
 
         /* let options2 = {
           Name: 'axel-system',
