@@ -189,8 +189,13 @@ app.get("/settings/update", async (req, res, next) => {
         let options2 = {
           Name: 'axel-system',
           version: parseInt(servicesearch.Version.Index),
-          TaskTemplate: servicesearch.Spec.TaskTemplate
+          TaskTemplate: servicesearch.Spec.TaskTemplate,
+          Networks: servicesearch.Spec.Networks,
+          Mode: servicesearch.Spec.Mode,
+          UpdateConfig: servicesearch.Spec.UpdateConfig,
+          EndpointSpec: servicesearch.Spec.EndpointSpec
         }
+        console.log(options2)
         service.update(options2, async function(err3, data3) {
           if (err3) {
             return console.log(err3)
