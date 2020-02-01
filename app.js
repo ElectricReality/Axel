@@ -1,10 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const Docker = require('dockerode');
-const docker = new Docker({
-  socketPath: '/var/run/docker.sock'
-});
+const docker = require('./modules/docker.js')
 const bcrypt = require('bcrypt');
 const mongo = require('./modules/mongo.js')
 const LocalStrategy = require('passport-local').Strategy;
@@ -169,92 +166,7 @@ app.get("/applications", authCheck, function(req, res, next) {
 
 app.get("/settings/update", async (req, res, next) => {
   console.log('Updating Axel Service!')
-  docker.buildImage(null, {
-    t: 'axel:latest',
-    remote: 'https://github.com/ElectricReality/Axel.git',
-  }, async function(err, data) {
-    if (err) {
-      return console.log(err)
-    }
-    if (data.statusCode == 200) {
-      docker.listServices({}).then(async function(data2) {
-        let servicesearch = await data2.find(s => s.Spec.Name == "axel-system")
-        const service = docker.getService(servicesearch.ID)
-        console.log('---------------------------')
-        let options2 = {
-          Name: 'axel-system',
-          version: parseInt(servicesearch.Version.Index),
-          TaskTemplate: {
-            ContainerSpec: {
-              Image: servicesearch.Spec.TaskTemplate.ContainerSpec.Image,
-              Mounts: servicesearch.Spec.TaskTemplate.ContainerSpec.Mounts,
-              Labels: {
-                randomLabelForceUpdate: uuid()
-              }
-            }
-          },
-          Networks: servicesearch.Spec.Networks,
-          Mode: servicesearch.Spec.Mode,
-          UpdateConfig: servicesearch.Spec.UpdateConfig,
-          EndpointSpec: servicesearch.Spec.EndpointSpec
-        }
-        console.log(options2)
-        /* let options2 = {
-          Name: 'axel-system',
-          version: parseInt(servicesearch.Version.Index),
-          TaskTemplate: {
-            ContainerSpec: {
-              Image: 'axel',
-              Mounts: [{
-                Type: 'bind',
-                Source: '/var/run/docker.sock',
-                Target: '/var/run/docker.sock'
-              }]
-            },
-            Resources: {
-              Limits: {},
-              Reservations: {}
-            },
-            RestartPolicy: {
-              Condition: 'any',
-              MaxAttempts: 0
-            },
-            Placement: {}
-          },
-          Networks: [{
-              Target: 'axel-net',
-            },
-            {
-              Target: 'ingress'
-            }
-          ],
-          Mode: {
-            Replicated: {
-              Replicas: 1
-            }
-          },
-          UpdateConfig: {
-            Parallelism: 0
-          },
-          EndpointSpec: {
-            Mode: 'vip',
-            Ports: [{
-              Protocol: 'tcp',
-              TargetPort: 8080,
-              PublishedPort: 8080,
-              PublishMode: 'ingress'
-            }]
-          }
-        }*/
-        service.update(options2, async function(err3, data3) {
-          if (err3) {
-            return console.log(err3)
-          }
-          console.log(data3)
-        })
-      })
-    }
-  })
+  docker.api.appupdate('https://github.com/ElectricReality/Axel.git','axel-service')
   res.render("update.ejs", {
     message: ''
   });
