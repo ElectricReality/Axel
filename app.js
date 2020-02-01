@@ -158,10 +158,12 @@ app.post("/settings", authCheck, function(req, res, next) {
 });
 
 app.get("/applications", authCheck, function(req, res, next) {
-    console.log(docker.api.listapps())
+
+    let apps = await docker.api.listapps()
+    console.log(apps)
   res.render("applications.ejs", {
     message: '',
-    services: docker.api.listapps()
+    services: apps
   });
 });
 app.post("/applications", authCheck, function(req, res, next) {
