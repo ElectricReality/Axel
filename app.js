@@ -180,6 +180,8 @@ app.get("/applications/:appname", authCheck, async function(req, res, next) {
   let name = req.params.appname
   let dapp = await docker.api.getapp(name)
   let mapp = await mongo.get('apps', name)
+  console.log(dapp)
+  console.log(maap)
   res.render("manage.ejs", {
     message: '',
     dockerapp: dapp,
