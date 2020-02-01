@@ -199,7 +199,7 @@ app.get("/settings/update", async (req, res, next) => {
                 Target: '/var/run/docker.sock'
               }],
               Labels: {
-                randomLabelForceUpdate: uuid()
+                randomLabelForceUpdate: await uuid()
               }
             }
           },
