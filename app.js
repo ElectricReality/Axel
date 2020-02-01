@@ -190,6 +190,19 @@ app.get("/settings/update", async (req, res, next) => {
         let options2 = {
           Name: 'axel-system',
           version: parseInt(servicesearch.Version.Index),
+          TaskTemplate: {
+            ContainerSpec: {
+              Image: 'axel:latest',
+              Mounts: [{
+                Type: 'bind',
+                Source: '/var/run/docker.sock',
+                Target: '/var/run/docker.sock'
+              }],
+              Labels: {
+                randomLabelForceUpdate: uuid()
+              }
+            }
+          },
           TaskTemplate: servicesearch.Spec.TaskTemplate,
           Networks: servicesearch.Spec.Networks,
           Mode: servicesearch.Spec.Mode,
