@@ -54,8 +54,8 @@ let api = {
     let apps = new Array()
     await docker.listServices({}).then(async function(data) {
       data.forEach(function(d){
-        if(d.Spec.Name == "axel-system-nginx" || "axel-system-database" || "axel-system"){
-          return
+        if(d.Spec.Name == "axel-system-nginx" || d.Spec.Name == "axel-system-database" || d.Spec.Name == "axel-system"){
+          
         } else {
           apps.push(d)
         }
