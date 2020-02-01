@@ -6,7 +6,7 @@
       <form action="/applications" method="post">
         <p style="font-size: 20px;">Create App!</p>
         <br>
-        <input type="text" name="name" value="" placeholder="name">
+        <input type="text" name="name" value="" placeholder="Name">
         <br>
         <button type="submit">Create!</button>
       </form>
@@ -18,7 +18,7 @@
   <div class="card">
     <div class="content">
       <h3><%= s.Spec.Name %></h3>
-      <a class="button" style="padding-top:5px; padding-bottom:5px;" href="/applications/<%= s.Spec.Name %>"></a>
+      <a class="button" style="padding-top:5px; padding-bottom:5px;" href="/applications/<%= s.Spec.Name %>">Manage</a>
     </div>
   </div>
   <% }) %>
