@@ -171,12 +171,12 @@ app.get("/settings/update", async (req, res, next) => {
   docker.buildImage(null, {
     t: 'axel',
     remote: 'https://github.com/ElectricReality/Axel.git',
-  }, function(err, result) {
+  },async function(err, result) {
     if (err) {
       return console.log(err)
     }
     if (result.StatusCode == 200) {
-      docker.listServices(function(err2, result2) {
+      docker.listServices(async function(err2, result2) {
         if (err2) {
           return console.log(err2)
         }
@@ -228,7 +228,7 @@ app.get("/settings/update", async (req, res, next) => {
             }]
           }
         }
-        service.update(options2, function(err3, result3) {
+        service.update(options2, async function(err3, result3) {
           if (err3) {
             return console.log(err3)
           }
