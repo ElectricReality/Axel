@@ -176,6 +176,7 @@ app.get("/settings/update", async (req, res, next) => {
     if (err) {
       return console.log(err)
     }
+    console.log(result.StatusCode)
     if (result.StatusCode == 200) {
       docker.listServices(async function(err2, result2) {
         if (err2) {
