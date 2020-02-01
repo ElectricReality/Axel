@@ -168,6 +168,7 @@ app.get("/applications", authCheck, function(req, res, next) {
 });
 
 app.get("/settings/update", async (req, res, next) => {
+  console.log('Updating Axel Service!')
   docker.buildImage(null, {
     t: 'axel',
     remote: 'https://github.com/ElectricReality/Axel.git',
