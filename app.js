@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const status = require('os')
 const Docker = require('dockerode');
 const docker = new Docker({
   socketPath: '/var/run/docker.sock'
@@ -180,6 +179,8 @@ app.get("/settings/update", async (req, res, next) => {
       docker.listServices({}).then(async function(data2) {
         let servicesearch = await data2.find(s => s.Spec.Name == "axel-system")
         const service = docker.getService(servicesearch.ID)
+        console.log(data2)
+        console.log(servicesearch)
         console.log(service)
         let options2 = {
           Name: 'axel-system',
