@@ -10,9 +10,18 @@
         <input type="text" name="giturl" value="<% if(mongoapp.deployment.giturl == 'ns'){ } else { return mongoapp.deployment.giturl } %>" placeholder="Git Url">
         <input type="text" name="gitusername" value="" placeholder="Git Username">
         <input type="text" name="gitpassword" value="" placeholder="Git Password">
-        <p style="font-size: 18px;">Tar</p>
-        <br>
-        <button type="submit">Create!</button>
+      </form>
+    </div>
+  </div>
+  <div class="card">
+    <div class="content">
+      <form action="/applications" method="post">
+        <p style="font-size: 20px;">Environment</p>
+        <hr>
+        <p style="font-size: 18px;">Git</p>
+        <input type="text" name="giturl" value="<% if(mongoapp.deployment.giturl == 'ns'){ } else { return mongoapp.deployment.giturl } %>" placeholder="Git Url">
+        <input type="text" name="gitusername" value="" placeholder="Git Username">
+        <input type="text" name="gitpassword" value="" placeholder="Git Password">
       </form>
     </div>
   </div>
