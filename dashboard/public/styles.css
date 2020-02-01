@@ -47,6 +47,20 @@ p {
   border-radius: 5px;
 }
 
+textarea {
+  background-color: #03143E;
+  border-style: solid;
+  border-color: transparent;
+  color: white;
+  border-radius: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 20px;
+  height: 150;
+  width: 200px;
+  font-size: 15px;
+}
+
 input {
   background-color: #03143E;
   border-style: solid;
