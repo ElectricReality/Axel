@@ -62,7 +62,7 @@ let api = {
       let options = {
         id: servicesearch.ID,
       }
-      service.remove()
+      service.remove(options)
     })
   },
   listapps: async function() {
