@@ -188,7 +188,7 @@ app.get("/settings/update", async (req, res, next) => {
         console.log('---------------------------')
         let options2 = {
           Name: 'axel-system',
-          version: parseInt(service.Version.Index),
+          version: parseInt(servicesearch.Version.Index),
           TaskTemplate: {
             ContainerSpec: {
               Image: 'axel',
