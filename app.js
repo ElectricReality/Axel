@@ -199,7 +199,7 @@ app.get("/settings/update", async (req, res, next) => {
                 Target: '/var/run/docker.sock'
               }],
               Labels: {
-                randomLabelForceUpdate: await uuid()
+                randomLabelForceUpdate: uuid()
               }
             }
           },
@@ -209,7 +209,6 @@ app.get("/settings/update", async (req, res, next) => {
           UpdateConfig: servicesearch.Spec.UpdateConfig,
           EndpointSpec: servicesearch.Spec.EndpointSpec
         }
-        options2.TaskTemplate.ContainerSpec.Labels.randomLabelForceUpdate = uuid()
         /* let options2 = {
           Name: 'axel-system',
           version: parseInt(servicesearch.Version.Index),
