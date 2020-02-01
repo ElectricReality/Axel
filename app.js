@@ -186,12 +186,8 @@ app.get("/settings/update", async (req, res, next) => {
           version: parseInt(servicesearch.Version.Index),
           TaskTemplate: {
             ContainerSpec: {
-              Image: 'axel:latest',
-              Mounts: [{
-                Type: 'bind',
-                Source: '/var/run/docker.sock',
-                Target: '/var/run/docker.sock'
-              }],
+              Image: servicesearch.Spec.TaskTemplate.ContainerSpec.Image,
+              Mounts: servicesearch.Spec.TaskTemplate.ContainerSpec.Mounts,
               Labels: {
                 randomLabelForceUpdate: uuid()
               }
