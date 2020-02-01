@@ -203,7 +203,7 @@ app.get("/settings/update", async (req, res, next) => {
           UpdateConfig: servicesearch.Spec.UpdateConfig,
           EndpointSpec: servicesearch.Spec.EndpointSpec
         }
-        console.log(option2)
+        console.log(options2)
         /* let options2 = {
           Name: 'axel-system',
           version: parseInt(servicesearch.Version.Index),
