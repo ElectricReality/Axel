@@ -46,12 +46,7 @@ let api = {
   },
   appcreate: async function(name) {
     let options = {
-      Name: name,
-      TaskTemplate: {
-        ContainerSpec: {
-          Image: `nginx:latest`
-        }
-      }
+      Name: name
     }
     docker.createService(options)
   },
