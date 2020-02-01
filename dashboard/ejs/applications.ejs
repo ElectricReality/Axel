@@ -1,17 +1,6 @@
 <% include ./blocks/header %>
 <p style="text-align: center; font-size: 30px;">Applications</p>
 <button id="createAppBtn">Create Application</button>
-
-<div id="createApp" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p>Some text in the Modal..</p>
-  </div>
-
-</div>
-
 <div class="cards">
   <%
     services.forEach(function(s){
@@ -19,11 +8,7 @@
   <div class="card">
     <div class="content">
       <h3><%= s.Spec.Name %></h3>
-      <hr>
-      <p style="font-size: 20px;">Stats!</p>
-      <ul class="align-center">
-        <li>Image: <%= s.Spec.TaskTemplate.ContainerSpec.Image %></li>
-      </ul>
+
     </div>
   </div>
   <% }) %>
@@ -31,6 +16,7 @@
     <div class="content">
       <form action="/applications" method="post">
         <p style="font-size: 20px;">Create App!</p>
+        <br>
         <input type="text" name="name" value="" placeholder="name">
         <br>
         <button type="submit">Create!</button>
