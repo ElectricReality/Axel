@@ -171,9 +171,9 @@ app.post("/applications", authCheck, async function(req, res, next) {
     let query = {
       appname: req.body.name,
       deployment: {
-        giturl: '',
-        gitusername: '',
-        gitpassword: ''
+        giturl: 'ns',
+        gitusername: 'ns',
+        gitpassword: 'ns'
       },
       environment: {
 
