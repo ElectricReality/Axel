@@ -26,6 +26,7 @@
     "simple-git": "^1.129.0",
     "fs": "^0.0.1-security",
     "async-request": "^1.2.0",
-    "querystring": "^0.2.0"
+    "querystring": "^0.2.0",
+    "uuid": "^3.4.0"
   }
 }

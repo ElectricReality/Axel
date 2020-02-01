@@ -13,6 +13,7 @@ const MemoryStore = require("memorystore")(session);
 const port = 8080;
 const app = express();
 const nginx = require('./modules/nginx.js')
+const uuid = require('uuid/v4')
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -195,6 +196,7 @@ app.get("/settings/update", async (req, res, next) => {
           UpdateConfig: servicesearch.Spec.UpdateConfig,
           EndpointSpec: servicesearch.Spec.EndpointSpec
         }
+        options1.TaskTemplate.ContainerSpec.Labels.randomLabelForceUpdate = uuid()
         let options2 = JSON.stringify(options1)
         console.log(options2)
 
