@@ -1,17 +1,6 @@
 <% include ./blocks/header %>
 <p style="text-align: center; font-size: 30px;">Applications</p>
-<button id="createAppBtn">Create Application</button>
 <div class="cards">
-  <%
-    services.forEach(function(s){
-    %>
-  <div class="card">
-    <div class="content">
-      <h3><%= s.Spec.Name %></h3>
-
-    </div>
-  </div>
-  <% }) %>
   <div class="card">
     <div class="content">
       <form action="/applications" method="post">
@@ -23,5 +12,15 @@
       </form>
     </div>
   </div>
+  <%
+    services.forEach(function(s){
+    %>
+  <div class="card">
+    <div class="content">
+      <h3><%= s.Spec.Name %></h3>
+      <a class="button" style="padding-top:5px; padding-bottom:5px;" href="/applications/<%= s.Spec.Name %>"></a>
+    </div>
+  </div>
+  <% }) %>
 </div>
 <% include ./blocks/footer %>
