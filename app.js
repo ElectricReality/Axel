@@ -166,9 +166,8 @@ app.get("/applications", authCheck, async function(req, res, next) {
 });
 app.post("/applications", authCheck, async function(req, res, next) {
   if(req.body.name){
-    docker.api.appcreate(req.body.name)
+    await docker.api.appcreate(req.body.name)
   }
-  console.log(req.body.name)
   let apps = await docker.api.listapps()
   res.render("applications.ejs", {
     message: '',
