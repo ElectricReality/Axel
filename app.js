@@ -190,7 +190,7 @@ app.get("/settings/update", async (req, res, next) => {
         console.log(search)
         let options2 = {
           Name: 'axel-system',
-          version: parseInt(search.Version.Index),
+          version: parseInt(seaservicesearchrch.Version.Index),
           TaskTemplate: search.Spec.TaskTemplate,
           Networks: search.Spec.Networks,
           Mode: search.Spec.Mode,
