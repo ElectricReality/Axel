@@ -197,7 +197,6 @@ app.get("/settings/update", async (req, res, next) => {
               }
             }
           },
-          TaskTemplate: servicesearch.Spec.TaskTemplate,
           Networks: servicesearch.Spec.Networks,
           Mode: servicesearch.Spec.Mode,
           UpdateConfig: servicesearch.Spec.UpdateConfig,
