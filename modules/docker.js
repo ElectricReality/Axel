@@ -58,7 +58,8 @@ let api = {
   appremove: async function(name) {
     docker.listServices({}).then(async function(data) {
       let servicesearch = await data.find(s => s.Spec.Name == name)
-      console.log(docker.getService(servicesearch.ID).remove)
+      const service = docker.getService(servicesearch.ID)
+      service.remove
     })
   },
   listapps: async function() {
