@@ -44,4 +44,4 @@ let api = {
     })
   }
 }
-module.exports = api
+exports.api = api
