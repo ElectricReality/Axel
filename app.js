@@ -159,10 +159,9 @@ app.post("/settings", authCheck, function(req, res, next) {
 
 app.get("/applications", authCheck, async function(req, res, next) {
     let apps = await docker.api.listapps()
-    console.log(apps.Spec)
   res.render("applications.ejs", {
     message: '',
-    services: apps
+    services: apps[0]
   });
 });
 app.post("/applications", authCheck, async function(req, res, next) {
