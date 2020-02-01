@@ -188,7 +188,7 @@ app.get("/settings/update", async (req, res, next) => {
         console.log('---------------------------')
         let options2 = {
           Name: 'axel-system',
-          version: parseInt(servicesearch.Version.Index),
+          version: parseInt(servicesearch.Version.Index) + 1,
           TaskTemplate: servicesearch.Spec.TaskTemplate,
           Networks: servicesearch.Spec.Networks,
           Mode: servicesearch.Spec.Mode,
