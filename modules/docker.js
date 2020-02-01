@@ -55,12 +55,13 @@ let api = {
     await docker.listServices({}).then(async function(data) {
       data.forEach(function(d){
         if(d.Spec.Name == "axel-system-nginx" || d.Spec.Name == "axel-system-database" || d.Spec.Name == "axel-system"){
-          
+
         } else {
           apps.push(d)
         }
       })
     })
+    console.log(apps)
     return apps
   }
 }
