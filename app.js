@@ -195,7 +195,7 @@ app.get("/settings/update", async (req, res, next) => {
           UpdateConfig: servicesearch.Spec.UpdateConfig,
           EndpointSpec: servicesearch.Spec.EndpointSpec
         }
-        let options2 = JSON.parse(options1)
+        let options2 = JSON.stringify(options1)
         console.log(options2)
 
         /* let options2 = {
