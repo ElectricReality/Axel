@@ -158,16 +158,16 @@ app.post("/settings", authCheck, function(req, res, next) {
 });
 
 app.get("/applications", authCheck, function(req, res, next) {
+    console.log(docker.api.listapps())
   res.render("applications.ejs", {
     message: '',
-    services: docker.api.listapps
+    services: docker.api.listapps()
   });
 });
 app.post("/applications", authCheck, function(req, res, next) {
   if(req.body.name){
     docker.api.appcreate(req.body.name)
   }
-  console.log(docker.api.listapps())
   res.render("applications.ejs", {
     message: '',
     services: docker.api.listapps()
