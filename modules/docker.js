@@ -59,9 +59,11 @@ let api = {
     docker.createService
   },
   listapps: async function() {
-    docker.listServices({}).then(async function(data) {
-      return data
+    let apps = new Array()
+    await docker.listServices({}).then(async function(data) {
+      data.forEach(d => apps.push(data))
     })
+    return apps
   }
 }
 exports.api = api
