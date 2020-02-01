@@ -78,6 +78,15 @@ let api = {
     })
     console.log(apps)
     return apps
+  },
+  getapp: async function(name) {
+    let apps = new Array()
+    await docker.listServices({}).then(async function(data) {
+      let servicesearch = await data.find(s => s.Spec.Name == name)
+      apps.push(servicesearch)
+    })
+    console.log(apps)
+    return apps
   }
 }
 exports.api = api

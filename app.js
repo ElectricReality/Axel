@@ -164,6 +164,7 @@ app.get("/applications", authCheck, async function(req, res, next) {
     services: apps
   });
 });
+
 app.post("/applications", authCheck, async function(req, res, next) {
   if(req.body.name){
     await docker.api.appcreate(req.body.name)
@@ -172,6 +173,17 @@ app.post("/applications", authCheck, async function(req, res, next) {
   res.render("applications.ejs", {
     message: '',
     services: apps
+  });
+});
+
+app.get("/applications/:appname", authCheck, async function(req, res, next) {
+  let name = req.params.appname
+  let dapp = await docker.api.getapp(name)
+  let mapp = await mongo.get('apps', name)
+  res.render("manage.ejs", {
+    message: '',
+    dockerapp: dapp,
+    mongoapp : mapp
   });
 });
 
