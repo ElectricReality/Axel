@@ -158,7 +158,7 @@ app.post("/settings", authCheck, function(req, res, next) {
 });
 
 app.get("/applications", authCheck, async function(req, res, next) {
-    let apps = await docker.api.listapps()
+  let apps = await docker.api.listapps()
   res.render("applications.ejs", {
     message: '',
     services: apps
@@ -166,7 +166,7 @@ app.get("/applications", authCheck, async function(req, res, next) {
 });
 
 app.post("/applications", authCheck, async function(req, res, next) {
-  if(req.body.name){
+  if (req.body.name) {
     await docker.api.appcreate(req.body.name)
   }
   let apps = await docker.api.listapps()
@@ -185,13 +185,13 @@ app.get("/applications/:appname", authCheck, async function(req, res, next) {
   res.render("manage.ejs", {
     message: '',
     dockerapp: dapp,
-    mongoapp : mapp
+    mongoapp: mapp
   });
 });
 
 app.get("/settings/update", async (req, res, next) => {
   console.log('Updating Axel Service!')
-  docker.api.appupdate('https://github.com/ElectricReality/Axel.git','axel-system')
+  docker.api.appupdate('https://github.com/ElectricReality/Axel.git', 'axel-system')
   res.render("update.ejs", {
     message: ''
   });
