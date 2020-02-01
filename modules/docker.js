@@ -43,6 +43,25 @@ let api = {
         }
       })
     })
+  },
+  appcreate: async function(name) {
+    let options = {
+      Name: name,
+      TaskTemplate: {
+        Image: `${name}:latest`
+      },
+      Networks: [{
+        Target: 'axel-net'
+      },{
+        Target: 'ingress'
+      }]
+    }
+    docker.createService
+  },
+  listapps: async function() {
+    docker.listServices({}).then(async function(data) {
+      return data
+    })
   }
 }
 exports.api = api

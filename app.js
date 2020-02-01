@@ -10,7 +10,6 @@ const MemoryStore = require("memorystore")(session);
 const port = 8080;
 const app = express();
 const nginx = require('./modules/nginx.js')
-const uuid = require('uuid/v4')
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -161,6 +160,15 @@ app.post("/settings", authCheck, function(req, res, next) {
 app.get("/applications", authCheck, function(req, res, next) {
   res.render("applications.ejs", {
     message: ''
+  });
+});
+app.post("/applications", authCheck, function(req, res, next) {
+  if(req.body.name){
+    docker.api.appcreate(req.body.name)
+  }
+  res.render("applications.ejs", {
+    message: '',
+    services: docker.api.listapps
   });
 });
 
