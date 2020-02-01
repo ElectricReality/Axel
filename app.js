@@ -203,7 +203,7 @@ app.get("/applications/:appname", authCheck, async function(req, res, next) {
   });
 });
 
-app.get("/applications/:appname/delete", authCheck, async function(req, res, next) {
+app.get("/applications/:appname/remove", authCheck, async function(req, res, next) {
   let name = req.params.appname
 
   mongo.remove('apps', {
