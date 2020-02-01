@@ -2,6 +2,7 @@ const Docker = require('dockerode');
 const docker = new Docker({
   socketPath: '/var/run/docker.sock'
 });
+const uuid = require('uuid/v4')
 
 let api = {
   appupdate: async function(remote, name) {
