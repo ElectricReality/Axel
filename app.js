@@ -187,7 +187,7 @@ app.get("/settings/update", async (req, res, next) => {
         console.log('---------------------------')
         console.log(service)
         console.log('---------------------------')
-        let options1 = {
+        let options2 = {
           Name: 'axel-system',
           version: parseInt(servicesearch.Version.Index),
           TaskTemplate: servicesearch.Spec.TaskTemplate,
@@ -196,10 +196,7 @@ app.get("/settings/update", async (req, res, next) => {
           UpdateConfig: servicesearch.Spec.UpdateConfig,
           EndpointSpec: servicesearch.Spec.EndpointSpec
         }
-        options1.TaskTemplate.ContainerSpec.Labels.randomLabelForceUpdate = uuid()
-        let options2 = JSON.stringify(options1)
-        console.log(options2)
-
+        options2.TaskTemplate.ContainerSpec.Labels.randomLabelForceUpdate = uuid()
         /* let options2 = {
           Name: 'axel-system',
           version: parseInt(servicesearch.Version.Index),
