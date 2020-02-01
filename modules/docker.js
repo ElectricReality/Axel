@@ -7,6 +7,7 @@ let api = {
   appupdate: async function(remote, name) {
     docker.listServices({}).then(async function(data) {
       let servicesearch = await data.find(s => s.Spec.Name == name)
+      console.log(servicesearch)
       docker.buildImage(null, {
         t: servicesearch.Spec.TaskTemplate.ContainerSpec.Image,
         remote: remote,
