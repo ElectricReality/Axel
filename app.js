@@ -169,7 +169,7 @@ app.get("/applications", authCheck, function(req, res, next) {
 app.get("/settings/update", async (req, res, next) => {
   console.log('Updating Axel Service!')
   docker.buildImage(null, {
-    t: 'axel',
+    t: 'axel:latest',
     remote: 'https://github.com/ElectricReality/Axel.git',
   }, async function(err, data) {
     if (err) {
@@ -186,16 +186,65 @@ app.get("/settings/update", async (req, res, next) => {
         console.log('---------------------------')
         console.log(service)
         console.log('---------------------------')
+        let search = JSON.stringify(servicesearch)
+        console.log(search)
         let options2 = {
           Name: 'axel-system',
-          version: parseInt(servicesearch.Version.Index),
-          TaskTemplate: servicesearch.Spec.TaskTemplate,
-          Networks: servicesearch.Spec.Networks,
-          Mode: servicesearch.Spec.Mode,
-          UpdateConfig: servicesearch.Spec.UpdateConfig,
-          EndpointSpec: servicesearch.Spec.EndpointSpec
+          version: parseInt(search.Version.Index),
+          TaskTemplate: search.Spec.TaskTemplate,
+          Networks: search.Spec.Networks,
+          Mode: search.Spec.Mode,
+          UpdateConfig: search.Spec.UpdateConfig,
+          EndpointSpec: search.Spec.EndpointSpec
         }
-        console.log(options2)
+
+        /* let options2 = {
+          Name: 'axel-system',
+          version: parseInt(servicesearch.Version.Index),
+          TaskTemplate: {
+            ContainerSpec: {
+              Image: 'axel',
+              Mounts: [{
+                Type: 'bind',
+                Source: '/var/run/docker.sock',
+                Target: '/var/run/docker.sock'
+              }]
+            },
+            Resources: {
+              Limits: {},
+              Reservations: {}
+            },
+            RestartPolicy: {
+              Condition: 'any',
+              MaxAttempts: 0
+            },
+            Placement: {}
+          },
+          Networks: [{
+              Target: 'axel-net',
+            },
+            {
+              Target: 'ingress'
+            }
+          ],
+          Mode: {
+            Replicated: {
+              Replicas: 1
+            }
+          },
+          UpdateConfig: {
+            Parallelism: 0
+          },
+          EndpointSpec: {
+            Mode: 'vip',
+            Ports: [{
+              Protocol: 'tcp',
+              TargetPort: 8080,
+              PublishedPort: 8080,
+              PublishMode: 'ingress'
+            }]
+          }
+        }*/
         service.update(options2, async function(err3, data3) {
           if (err3) {
             return console.log(err3)
