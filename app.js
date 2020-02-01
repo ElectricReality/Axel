@@ -172,17 +172,17 @@ app.get("/settings/update", async (req, res, next) => {
   docker.buildImage(null, {
     t: 'axel',
     remote: 'https://github.com/ElectricReality/Axel.git',
-  }, async function(err, result) {
+  }, async function(err, data) {
     if (err) {
       return console.log(err)
     }
-    console.log(result.StatusCode)
-    if (result.StatusCode == 200) {
-      docker.listServices(async function(err2, result2) {
+    console.log(data.StatusCode)
+    if (data.StatusCode == 200) {
+      docker.listServices(async function(err2, data2) {
         if (err2) {
           return console.log(err2)
         }
-        let servicesearch = await result2.find(s => s.Spec.Name == "axel-system")
+        let servicesearch = await data2.find(s => s.Spec.Name == "axel-system")
         let service = docker.getService(servicesearch.ID)
         let options2 = {
           Name: 'axel-system',
@@ -230,11 +230,11 @@ app.get("/settings/update", async (req, res, next) => {
             }]
           }
         }
-        service.update(options2, async function(err3, result3) {
+        service.update(options2, async function(err3, data3) {
           if (err3) {
             return console.log(err3)
           }
-          console.log(result3)
+          console.log(data3)
         })
       })
     }
