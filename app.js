@@ -168,6 +168,18 @@ app.get("/applications", authCheck, async function(req, res, next) {
 app.post("/applications", authCheck, async function(req, res, next) {
   if (req.body.name) {
     await docker.api.appcreate(req.body.name)
+    let query = {
+      appname: req.body.name,
+      deployment: {
+        giturl: '',
+        gitusername: '',
+        gitpassword: ''
+      },
+      environment: {
+
+      }
+    }
+    mongo.post('apps', query)
   }
   let apps = await docker.api.listapps()
   res.render("applications.ejs", {
@@ -179,7 +191,9 @@ app.post("/applications", authCheck, async function(req, res, next) {
 app.get("/applications/:appname", authCheck, async function(req, res, next) {
   let name = req.params.appname
   let dapp = await docker.api.getapp(name)
-  let mapp = await mongo.get('apps', name)
+  let mapp = await mongo.get('apps', {
+    appname: name
+  })
   console.log(dapp)
   console.log(mapp)
   res.render("manage.ejs", {
@@ -187,6 +201,16 @@ app.get("/applications/:appname", authCheck, async function(req, res, next) {
     dockerapp: dapp[0],
     mongoapp: mapp
   });
+});
+
+app.get("/applications/:appname/delete", authCheck, async function(req, res, next) {
+  let name = req.params.appname
+
+  mongo.remove('apps', {
+    appname: name
+  })
+  docker.api.appremove(name)
+  res.redirect('/applications')
 });
 
 app.get("/settings/update", async (req, res, next) => {
