@@ -13,6 +13,9 @@
     </div>
   </div>
   <%
+    if(services){
+    %>
+  <%
     services.forEach(function(s){
     %>
   <div class="card">
@@ -22,5 +25,6 @@
     </div>
   </div>
   <% }) %>
+  <% } %>
 </div>
 <% include ./blocks/footer %>
