@@ -6,6 +6,7 @@ const docker = new Docker({
 let api = {
   appupdate: async function(remote, name) {
     docker.listServices({}).then(async function(data) {
+      console.log(data)
       let servicesearch = await data.find(s => s.Spec.Name == name)
       console.log(name)
       console.log(remote)
