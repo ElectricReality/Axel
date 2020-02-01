@@ -2,7 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const status = require('os')
-const docker = require('./modules/docker.js')
+const Docker = require('dockerode');
+const docker = new Docker({
+  socketPath: '/var/run/docker.sock'
+});
 const bcrypt = require('bcrypt');
 const mongo = require('./modules/mongo.js')
 const LocalStrategy = require('passport-local').Strategy;
@@ -165,25 +168,20 @@ app.get("/applications", authCheck, function(req, res, next) {
 });
 
 app.get("/settings/update", async (req, res, next) => {
-  let options1 = {
-    t: 'axel:latest',
+  docker.buildImage(null, {
+    t: 'axel',
     remote: 'https://github.com/ElectricReality/Axel.git',
-  }
-  await docker.image.build(options1, function(err, result) {
+  }, function(err, result) {
     if (err) {
       return console.log(err)
     }
-    console.log(result)
-    if (result.message == "Build Successful!") {
-      docker.service.list(async function(err, result) {
-        if (err) {
-          return console.log(err)
+    if (result.StatusCode == 200) {
+      docker.listServices(function(err2, result2) {
+        if (err2) {
+          return console.log(err2)
         }
-        let service = await result.find(s => s.Spec.Name == "axel-system")
-        let id = service.ID
-        let query = {
-          version: parseInt(service.Version.Index)
-        }
+        let servicesearch = await result2.find(s => s.Spec.Name == "axel-system")
+        let service = docker.getService(servicesearch.ID)
         let options2 = {
           Name: 'axel-system',
           TaskTemplate: {
@@ -206,11 +204,12 @@ app.get("/settings/update", async (req, res, next) => {
             Placement: {}
           },
           Networks: [{
-            Target: 'axel-net',
-          },
-          {
-            Target: 'ingress'
-          }],
+              Target: 'axel-net',
+            },
+            {
+              Target: 'ingress'
+            }
+          ],
           Mode: {
             Replicated: {
               Replicas: 1
@@ -229,19 +228,22 @@ app.get("/settings/update", async (req, res, next) => {
             }]
           }
         }
-        docker.service.update(id, query, options2, function(err2, result2) {
-          if (err2) {
-            return console.log(err2)
+        service.update(options2, function(err3, result3) {
+          if (err3) {
+            return console.log(err3)
           }
-          console.log(result2)
+          console.log(result3)
         })
       })
     }
   })
-  res.render("update.ejs", {
-    message: ''
-  });
 });
+
+
+res.render("update.ejs", {
+  message: ''
+});
+
 
 // Update Nginx settings
 console.log("Version 1.0.ga")
