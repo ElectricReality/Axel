@@ -177,7 +177,7 @@ app.get("/settings/update", async (req, res, next) => {
       return console.log(err)
     }
     if (data.statusCode == 200) {
-      docker.listServices(async function(data2) {
+      docker.listServices({}).then(async function(data2) {
         let servicesearch = await data2.find(s => s.Spec.Name == "axel-system")
         let service = await docker.getService(servicesearch.ID)
         console.log(service)
