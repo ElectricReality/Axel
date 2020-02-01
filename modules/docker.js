@@ -48,7 +48,9 @@ let api = {
     let options = {
       Name: name,
       TaskTemplate: {
-        Image: `${name}:latest`
+        ContainerSpec: {
+          Image: `${name}:latest`
+        }
       }
     }
     docker.createService(options)
