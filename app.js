@@ -184,7 +184,7 @@ app.get("/applications/:appname", authCheck, async function(req, res, next) {
   console.log(mapp)
   res.render("manage.ejs", {
     message: '',
-    dockerapp: dapp,
+    dockerapp: dapp[0],
     mongoapp: mapp
   });
 });
