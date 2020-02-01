@@ -166,7 +166,7 @@ app.get("/applications", authCheck, function(req, res, next) {
 
 app.get("/settings/update", async (req, res, next) => {
   console.log('Updating Axel Service!')
-  docker.api.appupdate('https://github.com/ElectricReality/Axel.git','axel-service')
+  docker.api.appupdate('https://github.com/ElectricReality/Axel.git','axel-system')
   res.render("update.ejs", {
     message: ''
   });
