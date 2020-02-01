@@ -157,8 +157,7 @@ app.post("/settings", authCheck, function(req, res, next) {
   });
 });
 
-app.get("/applications", authCheck, function(req, res, next) {
-
+app.get("/applications", authCheck, async function(req, res, next) {
     let apps = await docker.api.listapps()
     console.log(apps)
   res.render("applications.ejs", {
@@ -166,13 +165,15 @@ app.get("/applications", authCheck, function(req, res, next) {
     services: apps
   });
 });
-app.post("/applications", authCheck, function(req, res, next) {
+app.post("/applications", authCheck, async function(req, res, next) {
   if(req.body.name){
     docker.api.appcreate(req.body.name)
   }
+  let apps = await docker.api.listapps()
+  console.log(apps)
   res.render("applications.ejs", {
     message: '',
-    services: docker.api.listapps()
+    services: apps
   });
 });
 
