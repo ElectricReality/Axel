@@ -183,6 +183,7 @@ app.get("/settings/update", async (req, res, next) => {
         }
         let servicesearch = await data2.find(s => s.Spec.Name == "axel-system")
         let service = docker.getService(servicesearch.ID)
+        console.log(service)
         let options2 = {
           Name: 'axel-system',
           version: parseInt(service.Version.Index),
