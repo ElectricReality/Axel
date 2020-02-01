@@ -11,21 +11,21 @@ echo "||         Starting Axel Installation         ||"
 echo "||                                            ||"
 echo "================================================"
 echo ""
-ipv4="$(dig +short myip.opendns.com @resolver1.opendns.com)" > /dev/null 2>&1
+ipv4="$(dig +short myip.opendns.com @resolver1.opendns.com)"
 session="$(date +%s | sha256sum | base64 | head -c 32 )"
 echo "Starting Swarm"
-docker swarm init --advertise-addr ${ipv4} > /dev/null 2>&1
+docker swarm init --advertise-addr ${ipv4}
 echo "Starting Network"
-docker network create --driver overlay axel-net> /dev/null 2>&1
+docker network create --driver overlay axel-net
 echo "Starting Axel Database"
 docker service create \
   --name axel-system-database \
   --network axel-net \
   --mount type=volume,source=axel-system-database-data,target=/data/db \
   --mount type=volume,source=axel-system-database-config,target=/data/configdb \
-  mongo:latest > /dev/null 2>&1
+  mongo:latest 
 echo "Building Axel Image"
-docker build -t axel:latest . > /dev/null 2>&1
+docker build -t axel:latest .
 echo "Starting Axel Service"
 docker service create \
   --name axel-system \
@@ -33,6 +33,6 @@ docker service create \
   --publish 8080:8080/tcp \
   --env session=${session} \
   --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
-  axel > /dev/null 2>&1
+  axel
 echo " "
 echo "You can now start using Axel at http://${ipv4}:8080/login. Please set new username and password immediately at the admin dashboard!"
