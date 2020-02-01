@@ -181,6 +181,7 @@ app.get("/settings/update", async (req, res, next) => {
         if (err2) {
           return console.log(err2)
         }
+        console.log(data2)
         let servicesearch = await data2.find(s => s.Spec.Name == "axel-system")
         let service = await docker.getService(servicesearch.ID)
         console.log(service)
