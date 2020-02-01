@@ -185,6 +185,7 @@ app.get("/settings/update", async (req, res, next) => {
         let service = docker.getService(servicesearch.ID)
         let options2 = {
           Name: 'axel-system',
+          version: parseInt(service.Version.Index),
           TaskTemplate: {
             ContainerSpec: {
               Image: 'axel',
