@@ -84,7 +84,15 @@ p {
   padding-bottom: 10px;
 }
 
+.jumbobox a {
+  margin-left: 20px;
+}
+
 .jumbobox select {
+  margin-left: 20px;
+}
+
+.jumbobox button {
   margin-left: 20px;
 }
 
