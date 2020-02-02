@@ -17,7 +17,7 @@
     <div class="input_fields_wrap">
       <button class="add_field_button">Add More Fields</button>
       <%
-        if(mongoapp.environment.envname !== 0 ){
+        if(mongoapp.environment.envname.length > 0 ){
           for (var i = 0; i < mongoapp.environment.envname.length; i++){
       %>
       <div>

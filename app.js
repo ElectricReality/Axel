@@ -193,6 +193,7 @@ app.get("/applications/:appname", authCheck, async function(req, res, next) {
   let mapp = await mongo.get('apps', {
     appname: name
   })
+  console.log(mapp)
   res.render("manage.ejs", {
     message: '',
     dockerapp: dapp[0],
