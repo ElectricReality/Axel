@@ -12,7 +12,7 @@ echo "||                                            ||"
 echo "================================================"
 echo " "
 echo "Removing Services"
-docker service rm $(docker service ls -q > /dev/null 2>&1) > /dev/null 2>&1
+docker service rm $(docker service ls -q > /dev/null 2>&1)
 echo "Removing Swarm"
 docker swarm leave --force > /dev/null 2>&1
 echo "Starting System Prune"
