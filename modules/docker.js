@@ -15,7 +15,8 @@ let api = {
         if (err) {
           return console.log(err)
         }
-        if (data.statusCode == 200) {
+        conslone.log(data)
+        if(data.statusCode == 200){
           let options = {
             Name: servicesearch.Spec.Name,
             version: parseInt(servicesearch.Version.Index),
