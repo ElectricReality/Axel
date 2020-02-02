@@ -16,14 +16,14 @@ session="$(date +%s | sha256sum | base64 | head -c 32 )"
 echo "Starting Swarm"
 docker swarm init --advertise-addr ${ipv4}
 echo "Starting Network"
-docker network create --driver overlay axel-net
+docker network create --driver overlay axel-net --attachable
 echo "Starting Axel Database"
 docker service create \
   --name axel-system-database \
   --network axel-net \
   --mount type=volume,source=axel-system-database-data,target=/data/db \
   --mount type=volume,source=axel-system-database-config,target=/data/configdb \
-  mongo:latest 
+  mongo:latest
 echo "Building Axel Image"
 docker build -t axel:latest .
 echo "Starting Axel Service"
