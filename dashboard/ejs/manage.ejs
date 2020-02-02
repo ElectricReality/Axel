@@ -1,6 +1,7 @@
 <% include ./blocks/header %>
 <p style="text-align: center; font-size: 30px;">Manage <%= dockerapp.Spec.Name %></p>
 <div class="jumbobox">
+  <br>
   <p style="font-size: 20px;">Deployment Settings</p>
   <form action="/applications/<%= dockerapp.Spec.Name %>" method="post">
     <p style="font-size: 18px;">Git</p>
