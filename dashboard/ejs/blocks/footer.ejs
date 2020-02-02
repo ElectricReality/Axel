@@ -9,7 +9,7 @@
       e.preventDefault();
       x++;
       $(wrapper).append('<div><ul> <li><input type="text" placeholder="Name" name="envname[' + x + ']"/></li> <li><input type="text" placeholder="Value" name="envvalue[' + x +
-        ']"/></li> <li><a href="#" class="remove_field">Remove</a></li></ul></div>');
+        ']"/></li> <li><a href="#" class="remove_field"><i style="color: white;" class="fas fa-times"></i></a></li></ul></div>');
     });
     $(wrapper).on("click", ".remove_field", function(e) {
       e.preventDefault();
@@ -26,7 +26,7 @@
       e.preventDefault();
       x++;
       $(wrapper).append('<div><ul> <li><input type="text" placeholder="Source" name="volsource[' + x + ']"/></li> <li><input type="text" placeholder="Target" name="voltarget[' + x +
-        ']"/></li> <li><a href="#" class="remove_field">Remove</a></li></ul></div>');
+        ']"/></li> <li><a href="#" class="remove_field"><i style="color: white;" class="fas fa-times"></i></a></li></ul></div>');
     });
     $(wrapper).on("click", ".remove_field", function(e) {
       e.preventDefault();
