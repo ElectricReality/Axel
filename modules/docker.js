@@ -34,6 +34,7 @@ let api = {
             EndpointSpec: servicesearch.Spec.EndpointSpec
           }
           console.log(servicesearch.Spec.Networks)
+          console.log(options)
           const service = docker.getService(servicesearch.ID)
           service.update(options, async function(err3, data3) {
             if (err3) {
