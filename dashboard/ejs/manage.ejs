@@ -16,13 +16,20 @@
     <p style="font-size: 18px;">Variables</p>
     <div class="input_fields_wrap">
       <button class="add_field_button">Add More Fields</button>
+      <%
+        if(mongoapp.environment.length !== 0 ){
+          for (var i = 0; i < mongoapp.environment.length; i++){
+      %>
       <div>
         <ul>
-          <li><input type="text" name="envname['+ x +']"/></li>
-          <li><input type="text" name="envvalue['+ x +']"/></li>
+          <li><input type="text" name="envname[<%= i %>]"/></li>
+          <li><input type="text" name="envvalue[<%= i %>]"/></li>
           <li><a href="#" class="remove_field"><i></i></a></li>
         </ul>
       </div>
+      <% } %>
+      <% } %>
+
     </div>
   </form>
   <p style="font-size: 20px;">Advanced Settings</p>
