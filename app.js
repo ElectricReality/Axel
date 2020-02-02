@@ -170,14 +170,13 @@ app.post("/applications", authCheck, async function(req, res, next) {
     docker.api.appcreate(req.body.name)
     let query = {
       appname: req.body.name,
-      deployment: {
-        giturl: 'ns',
-        gitusername: 'ns',
-        gitpassword: 'ns'
-      },
       environment: {
-        envname: [],
-        envvalue: [],
+        envname: req.body.envname || [],
+        envvalue: req.body.envvalue || [],
+      },
+      volume: {
+        volsource: req.body.volsource || [],
+        voltarget: req.body.voltarget || [],
       }
     }
     await mongo.post('apps', query)
