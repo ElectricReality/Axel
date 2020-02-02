@@ -31,7 +31,6 @@ docker service create \
   --name axel-system \
   --network axel-net \
   --publish 8080:8080/tcp \
-  --env session=${session} \
   --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
   axel
 echo " "
