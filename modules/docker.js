@@ -28,7 +28,7 @@ let api = {
                 }
               }
             },
-
+            Networks: servicesearch.Spec.Networks,
             Mode: servicesearch.Spec.Mode,
             UpdateConfig: servicesearch.Spec.UpdateConfig,
             EndpointSpec: servicesearch.Spec.EndpointSpec
