@@ -226,11 +226,12 @@ app.post("/applications/:appname", authCheck, async function(req, res, next) {
         gitpassword: req.body.gitpassword || 'ns'
       },
       environment: {
+        envname: req.body.envname,
+        envvalue: req.body.envvalue,
       }
     }
   }
-  console.log(req.body)
-  //await mongo.update('GuildData', { appname: name }, data)
+  await mongo.update('apps', { appname: name }, data)
 
   res.render("manage.ejs", {
     message: '',
