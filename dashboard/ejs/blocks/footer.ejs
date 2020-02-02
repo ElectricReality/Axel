@@ -1,4 +1,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<div><ul><li><input type="text" name="envname['+ x +']"/></li><li><input type="text" name="envvalue['+ x +']"/></li></ul><a href="#" class="remove_field">Remove</a></div>
 <script type="text/javascript">
   $(document).ready(function() {
     var wrapper         = $(".input_fields_wrap"); //Fields wrapper
@@ -10,7 +11,7 @@
         e.preventDefault();
 
             x++;
-            $(wrapper).append('<div><input type="text" name="envname['+ x +']"/><input type="text" name="envvalue['+ x +']"/><a href="#" class="remove_field">Remove</a></div>');
+            $(wrapper).append('<div><ul><li><input type="text" name="envname['+ x +']"/></li><li><input type="text" name="envvalue['+ x +']"/></li></ul><a href="#" class="remove_field">Remove</a></div>');
 
     });
 
