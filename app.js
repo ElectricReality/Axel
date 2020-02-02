@@ -213,9 +213,9 @@ app.post("/applications/:appname", authCheck, async function(req, res, next) {
     $set: {
       appname: name,
       deployment: {
-        giturl: req.body.giturl || 'ns',
-        gitusername: req.body.gitusername || 'ns',
-        gitpassword: req.body.gitpassword || 'ns'
+        giturl: req.body.giturl || '',
+        gitusername: req.body.gitusername || '',
+        gitpassword: req.body.gitpassword || ''
       },
       environment: {
         envname: req.body.envname,
