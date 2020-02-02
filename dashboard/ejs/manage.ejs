@@ -22,8 +22,8 @@
       %>
       <div>
         <ul>
-          <li><input type="text" placeholder="Name" name="envname[<%= i %>]" value="<%= mongoapp.environment.envname[i] %>"/></li>
-          <li><input type="text" placeholder="Value" name="envvalue[<%= i %>]" value="<%= mongoapp.environment.envvalue[i] %>"/></li>
+          <li><input type="text" placeholder="Name" name="envname[<%= i %>]" value="<%= mongoapp.environment.envname[i] %>" /></li>
+          <li><input type="text" placeholder="Value" name="envvalue[<%= i %>]" value="<%= mongoapp.environment.envvalue[i] %>" /></li>
           <li><a href="#" class="remove_field"><i style="color: white;" class="fas fa-times"></i></a></li>
         </ul>
       </div>
@@ -31,9 +31,7 @@
       <% } %>
 
     </div>
-    <hr>
     <button type="submit">Save Settings</button>
-    <hr>
   </form>
   <p style="font-size: 20px;">Advanced Settings</p>
   <hr>
