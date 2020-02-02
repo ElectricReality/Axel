@@ -10,11 +10,11 @@
     $(add_button).click(function(e){ //on add input button click
         e.preventDefault();
             x++;
-            $(wrapper).append('<div><ul> <li><input type="text" name="envname['+ x +']"/></li> <li><input type="text" name="envvalue['+ x +']"/></li> <li><a href="#" class="remove_field">Remove</a></li></ul></div>');
+            $(wrapper).append('<div><ul> <li><input type="text" placeholder="Name" name="envname['+ x +']"/></li> <li><input type="text" placeholder="Value" name="envvalue['+ x +']"/></li> <li><a href="#" class="remove_field">Remove</a></li></ul></div>');
     });
 
     $(wrapper).on("click",".remove_field", function(e){
-        e.preventDefault(); $(this).parent().closest('div').attr('class').split(' ').remove(); x--;
+      e.preventDefault(); $(this).parent('div').remove(); x--;
     })
 
 });
