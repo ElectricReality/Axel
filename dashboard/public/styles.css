@@ -78,7 +78,9 @@ p {
 }
 
 .jumbobox a {
+  margin-top: 10px;
   margin-left: 20px;
+  margin-bottom: : 10px;
 }
 
 .jumbobox select {
@@ -87,6 +89,8 @@ p {
 
 .jumbobox button {
   margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: : 10px;
 }
 
 .jumbobox hr {
