@@ -1,35 +1,23 @@
 <% include ./blocks/header %>
 <p style="text-align: center; font-size: 30px;">Manage <%= dockerapp.Spec.Name %></p>
-<div class="cards">
-  <div class="card">
-    <div class="content">
-      <form action="/applications" method="post">
-        <p style="font-size: 20px;">Deployment</p>
-        <hr>
-        <p style="font-size: 18px;">Git</p>
-        <input type="text" name="giturl" value="<% if(mongoapp.deployment.giturl == 'ns'){ } else { return mongoapp.deployment.giturl } %>" placeholder="Git Url">
-        <input type="text" name="gitusername" value="<% if(mongoapp.deployment.giturl == 'ns'){ } else { return mongoapp.deployment.giturl } %>" placeholder="Git Username">
-        <input type="text" name="gitpassword" value="<% if(mongoapp.deployment.giturl == 'ns'){ } else { return mongoapp.deployment.giturl } %>" placeholder="Git Password">
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  </div>
-  <div class="card">
-    <div class="content">
-      <p style="font-size: 20px;">Environment</p>
-      <p style="font-size: 18px;">Format on JSON!</p>
-      <form action="/applications" method="post">
-        <textarea name="env" ></textarea>
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  </div>
-  <div class="card">
-    <div class="content">
-      <p style="font-size: 20px;">Advanced</p>
-      <a class="button" href="/applications/<%= dockerapp.Spec.Name %>/remove" style="padding-top:5px; padding-bottom:5px;">Delete App</a>
-    </div>
-  </div>
+<div class="jumbobox">
+  <p style="font-size: 20px;">Deployment Settings</p>
+  <form action="/applications/<%= dockerapp.Spec.Name %>" method="post">
+    <p style="font-size: 18px;">Git</p>
+    <ul>
+      <li><input type="text" name="giturl" value="<% if(mongoapp.deployment.giturl == 'ns'){ } else { return mongoapp.deployment.giturl } %>" placeholder="Git Url"></li>
+      <li><input type="text" name="gitusername" value="<% if(mongoapp.deployment.giturl == 'ns'){ } else { return mongoapp.deployment.giturl } %>" placeholder="Git Username"></li>
+      <li><input type="text" name="gitpassword" value="<% if(mongoapp.deployment.giturl == 'ns'){ } else { return mongoapp.deployment.giturl } %>" placeholder="Git Password"></li>
+    </ul>
+    <p style="font-size: 20px;">Environment Variables</p>
+    <hr>
+    <ul>
+      <li><textarea name="env" ></textarea></li>
+    </ul>
+  </form>
+  <p style="font-size: 20px;">Advanced Settings</p>
+  <hr>
+  <a class="button" href="/applications/<%= dockerapp.Spec.Name %>/remove" style="padding-top:5px; padding-bottom:5px;">Delete App</a>
 </div>
 
 <% include ./blocks/footer %>

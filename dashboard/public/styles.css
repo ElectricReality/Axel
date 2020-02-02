@@ -47,6 +47,14 @@ p {
   border-radius: 5px;
 }
 
+.jumbobox {
+  background-color: #03143E;
+  width: 90%;
+  border-radius: 5px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
 textarea {
   background-color: #03143E;
   border-style: solid;
