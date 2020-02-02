@@ -11,13 +11,7 @@
         e.preventDefault();
 
             x++;
-            $(wrapper).append('<div>
-              <ul>
-                <li><input type="text" name="envname['+ x +']"/></li>
-                <li><input type="text" name="envvalue['+ x +']"/></li>
-                <li><a href="#" class="remove_field">Remove</a></li>
-              </ul>
-            </div>');
+            $(wrapper).append('<div><ul> <li><input type="text" name="envname['+ x +']"/></li> <li><input type="text" name="envvalue['+ x +']"/></li> <li><a href="#" class="remove_field">Remove</a></li></ul></div>');
 
     });
 
