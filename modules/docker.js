@@ -15,7 +15,7 @@ let api = {
         if (err) {
           return console.log(err)
         }
-        conslone.log(data)
+        console.log(data)
         if(data.statusCode == 200){
           let options = {
             Name: servicesearch.Spec.Name,
