@@ -1,4 +1,24 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script src="/public/easypiechart.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+    var add_button      = $(".add_field_button"); //Add button ID
+
+
+    var x = $('div.env').length || 0
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+
+            x++;
+            $(wrapper).append('<div><input type="text" name="envname['+ x +']"/><input type="text" name="envvalue['+ x +']"/><a href="#" class="remove_field">Remove</a></div>');
+
+    });
+
+    $(wrapper).on("click",".remove_field", function(e){
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+
+});
+</script>
 </body>
 </html>

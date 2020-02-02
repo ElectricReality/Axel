@@ -3,6 +3,7 @@
 <div class="jumbobox">
   <br>
   <p style="font-size: 20px;">Deployment Settings</p>
+  <hr>
   <form action="/applications/<%= dockerapp.Spec.Name %>" method="post">
     <p style="font-size: 18px;">Git</p>
     <ul>
@@ -12,8 +13,18 @@
     </ul>
     <p style="font-size: 20px;">Environment Variables</p>
     <hr>
+    <p style="font-size: 18px;">Variables</p>
+    <div class="input_fields_wrap">
+      <button class="add_field_button">Add More Fields</button>
+      <div class="env"><input type="text" name="envname[1]"><input type="text" name="envvalue[1]"><a href="#" class="remove_field">Remove</a></div>
+    </div>
+
     <ul>
-      <li><textarea name="env" ></textarea></li>
+      <li><input type="text" name="envname" value="" placeholder="Name"></li>
+      <li><input type="text" name="envvalue" value="" placeholder="Value"></li>
+    </ul>
+    <ul>
+
     </ul>
   </form>
   <p style="font-size: 20px;">Advanced Settings</p>
