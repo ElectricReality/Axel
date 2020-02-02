@@ -193,6 +193,45 @@ app.get("/applications/:appname", authCheck, async function(req, res, next) {
   let mapp = await mongo.get('apps', {
     appname: name
   })
+  let query = {
+    appname: req.body.name,
+    deployment: {
+      giturl: 'ns',
+      gitusername: 'ns',
+      gitpassword: 'ns'
+    },
+    environment: {
+    }
+  }
+  mongo.post('apps', query)
+  res.render("manage.ejs", {
+    message: '',
+    dockerapp: dapp[0],
+    mongoapp: mapp
+  });
+});
+
+app.post("/applications/:appname", authCheck, async function(req, res, next) {
+  let name = req.params.appname
+  let dapp = await docker.api.getapp(name)
+  let mapp = await mongo.get('apps', {
+    appname: name
+  })
+  let data = {
+    $set: {
+      appname: name,
+      deployment: {
+        giturl: req.body.giturl || 'ns',
+        gitusername: req.body.gitusername || 'ns',
+        gitpassword: req.body.gitpassword || 'ns'
+      },
+      environment: {
+      }
+    }
+  }
+  console.log(req.body)
+  //await mongo.update('GuildData', { appname: name }, data)
+
   res.render("manage.ejs", {
     message: '',
     dockerapp: dapp[0],
