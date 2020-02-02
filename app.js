@@ -210,9 +210,6 @@ app.get("/applications/:appname", authCheck, async function(req, res, next) {
 app.post("/applications/:appname", authCheck, async function(req, res, next) {
   let name = req.params.appname
   let dapp = await docker.api.getapp(name)
-  let mapp = await mongo.get('apps', {
-    appname: name
-  })
   let data = {
     $set: {
       appname: name,
@@ -232,7 +229,9 @@ app.post("/applications/:appname", authCheck, async function(req, res, next) {
     }
   }
   await mongo.update('apps', { appname: name }, data)
-  docker.api.appupdate('https://github.com/ElectricReality/Axel.git', 'axel-system')
+  let mapp = await mongo.get('apps', {
+    appname: name
+  })
   res.render("manage.ejs", {
     message: '',
     dockerapp: dapp[0],
