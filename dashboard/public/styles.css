@@ -48,11 +48,52 @@ p {
 }
 
 .jumbobox {
-  background-color: #03143E;
+  background-color: #031950;
   width: 90%;
   border-radius: 5px;
   margin: 0 auto;
   margin-bottom: 10px;
+}
+
+.jumbobox li {
+  display: inline-block;
+}
+
+.jumbobox h3 {
+  width: 200px;
+  padding-top: 10px;
+  margin-left: 20px;
+  padding-bottom: 10px;
+}
+
+.jumbobox p {
+  width: 200px;
+  margin-left: 20px;
+}
+
+.jumbobox h4 {
+  width: 200px;
+  padding-top: 10px;
+  margin-left: 20px;
+  padding-bottom: 10px;
+}
+
+.jumbobox input {
+  padding-top: 10px;
+  margin-left: 20px;
+  padding-bottom: 10px;
+}
+
+.jumbobox select {
+  margin-left: 20px;
+}
+
+.jumbobox hr {
+  color: white;
+  margin-left: 20px;
+  margin-right: 20px;;
+  text-align: center;
+
 }
 
 textarea {
