@@ -2,22 +2,39 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
-    var add_button      = $(".add_field_button"); //Add button ID
-
-
+    var wrapper = $(".envwrapper"); //Fields wrapper
+    var add_button = $(".envbutton"); //Add button ID
     var x = $('div.env').length || 0
-    $(add_button).click(function(e){ //on add input button click
-        e.preventDefault();
-            x++;
-            $(wrapper).append('<div><ul> <li><input type="text" placeholder="Name" name="envname['+ x +']"/></li> <li><input type="text" placeholder="Value" name="envvalue['+ x +']"/></li> <li><a href="#" class="remove_field">Remove</a></li></ul></div>');
+    $(add_button).click(function(e) { //on add input button click
+      e.preventDefault();
+      x++;
+      $(wrapper).append('<div><ul> <li><input type="text" placeholder="Name" name="envname[' + x + ']"/></li> <li><input type="text" placeholder="Value" name="envvalue[' + x +
+        ']"/></li> <li><a href="#" class="remove_field">Remove</a></li></ul></div>');
     });
-
-    $(wrapper).on("click",".remove_field", function(e){
-      e.preventDefault(); $(this).parent('li').parent('ul').parent('div').remove(); x--;
+    $(wrapper).on("click", ".remove_field", function(e) {
+      e.preventDefault();
+      $(this).parent('li').parent('ul').parent('div').remove();
+      x--;
     })
+  });
 
-});
+  $(document).ready(function() {
+    var wrapper = $(".volwrapper"); //Fields wrapper
+    var add_button = $(".volbutton"); //Add button ID
+    var x = $('div.env').length || 0
+    $(add_button).click(function(e) { //on add input button click
+      e.preventDefault();
+      x++;
+      $(wrapper).append('<div><ul> <li><input type="text" placeholder="Name" name="envname[' + x + ']"/></li> <li><input type="text" placeholder="Value" name="envvalue[' + x +
+        ']"/></li> <li><a href="#" class="remove_field">Remove</a></li></ul></div>');
+    });
+    $(wrapper).on("click", ".remove_field", function(e) {
+      e.preventDefault();
+      $(this).parent('li').parent('ul').parent('div').remove();
+      x--;
+    })
+  });
 </script>
 </body>
+
 </html>

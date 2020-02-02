@@ -14,8 +14,8 @@
     <p style="font-size: 20px;">Environment Variables</p>
     <hr>
     <p style="font-size: 18px;">Variables</p>
-    <div class="input_fields_wrap">
-      <button class="add_field_button">Add More Fields</button>
+    <div class="envwrapper">
+      <button class="volbutton">Add More Fields</button>
       <%
         if(mongoapp.environment.envname.length > 0 ){
           for (var i = 0; i < mongoapp.environment.envname.length; i++){
@@ -29,7 +29,25 @@
       </div>
       <% } %>
       <% } %>
-
+    </div>
+    <p style="font-size: 20px;">Volumes</p>
+    <hr>
+    <p style="font-size: 18px;">Manage Volumes</p>
+    <div class="volwrapper">
+      <button class="volbutton">Add More Fields</button>
+      <%
+        if(mongoapp.volsource.length > 0 ){
+          for (var i = 0; i < mongoapp.volsource.length; i++){
+      %>
+      <div>
+        <ul>
+          <li><input type="text" placeholder="Source" name="volsource[<%= i %>]" value="<%= mongoapp.volume.volsource[i] %>" /></li>
+          <li><input type="text" placeholder="Target" name="voltarget[<%= i %>]" value="<%= mongoapp.volume.voltarget[i] %>" /></li>
+          <li><a href="#" class="remove_field"><i style="color: white;" class="fas fa-times"></i></a></li>
+        </ul>
+      </div>
+      <% } %>
+      <% } %>
     </div>
     <button type="submit">Save Settings</button>
   </form>

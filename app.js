@@ -220,11 +220,15 @@ app.post("/applications/:appname", authCheck, async function(req, res, next) {
       environment: {
         envname: req.body.envname || [],
         envvalue: req.body.envvalue || [],
+      },
+      volume: {
+        volsource: req.body.volsource || [],
+        voltarget: req.body.voltarget || [],
       }
     }
   }
   await mongo.update('apps', { appname: name }, data)
-
+  docker.api.appupdate('https://github.com/ElectricReality/Axel.git', 'axel-system')
   res.render("manage.ejs", {
     message: '',
     dockerapp: dapp[0],
