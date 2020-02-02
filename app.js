@@ -193,17 +193,6 @@ app.get("/applications/:appname", authCheck, async function(req, res, next) {
   let mapp = await mongo.get('apps', {
     appname: name
   })
-  let query = {
-    appname: req.body.name,
-    deployment: {
-      giturl: 'ns',
-      gitusername: 'ns',
-      gitpassword: 'ns'
-    },
-    environment: {
-    }
-  }
-  mongo.post('apps', query)
   res.render("manage.ejs", {
     message: '',
     dockerapp: dapp[0],
