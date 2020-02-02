@@ -176,6 +176,8 @@ app.post("/applications", authCheck, async function(req, res, next) {
         gitpassword: 'ns'
       },
       environment: {
+        envname: [],
+        envvalue: [],
       }
     }
     await mongo.post('apps', query)
