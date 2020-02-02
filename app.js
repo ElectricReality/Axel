@@ -218,8 +218,8 @@ app.post("/applications/:appname", authCheck, async function(req, res, next) {
         gitpassword: req.body.gitpassword || ''
       },
       environment: {
-        envname: req.body.envname,
-        envvalue: req.body.envvalue,
+        envname: req.body.envname || [],
+        envvalue: req.body.envvalue || [],
       }
     }
   }
