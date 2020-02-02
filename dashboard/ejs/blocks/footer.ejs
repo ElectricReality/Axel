@@ -1,4 +1,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
 <script type="text/javascript">
   $(document).ready(function() {
     var wrapper         = $(".input_fields_wrap"); //Fields wrapper
@@ -21,7 +22,7 @@
     });
 
     $(wrapper).on("click",".remove_field", function(e){
-        e.preventDefault(); var classes = $(this).parent().closest('div').attr('class').split(' ').remove(); x--;
+        e.preventDefault(); var classes = $(this).parent().attr('div').remove(); x--;
     })
 
 });
