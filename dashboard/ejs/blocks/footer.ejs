@@ -14,7 +14,7 @@
     });
 
     $(wrapper).on("click",".remove_field", function(e){
-      e.preventDefault(); $(this).parent('div').remove(); x--;
+      e.preventDefault(); $(this).parent('li').parent(ul).parent('div').remove(); x--;
     })
 
 });
