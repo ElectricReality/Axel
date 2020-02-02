@@ -8,8 +8,8 @@
     <p style="font-size: 18px;">Git</p>
     <ul>
       <li><input type="text" name="giturl" value="<% if(mongoapp.deployment.giturl !== "") {  %> <%= mongoapp.deployment.giturl %> <% } %>" placeholder="Git Url"></li>
-      <li><input type="text" name="gitusername" value="<% if(mongoapp.deployment.gitusername !== "") {  %> <%= mongoapp.deployment.gitusername %> <% } %>" placeholder="Git Username"></li>
-      <li><input type="text" name="gitpassword" value="<% if(mongoapp.deployment.gitpassword !== "") {  %> <%= mongoapp.deployment.gitpassword %> <% } %>" placeholder="Git Password"></li>
+      <li><input type="text" name="gitusername" value="<% if(mongoapp.deployment.gitusername !== "") {  %><%= mongoapp.deployment.gitusername %><% } %>" placeholder="Git Username"></li>
+      <li><input type="text" name="gitpassword" value="<% if(mongoapp.deployment.gitpassword !== "") {  %><%= mongoapp.deployment.gitpassword %><% } %>" placeholder="Git Password"></li>
     </ul>
     <p style="font-size: 20px;">Environment Variables</p>
     <hr>
