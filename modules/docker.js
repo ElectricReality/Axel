@@ -15,7 +15,7 @@ let api = {
         if (err) {
           return console.log(err)
         }
-        if(data.statusCode == 200){
+        if (data.statusCode == 200) {
           let options = {
             Name: servicesearch.Spec.Name,
             version: parseInt(servicesearch.Version.Index),
@@ -33,7 +33,6 @@ let api = {
             UpdateConfig: servicesearch.Spec.UpdateConfig,
             EndpointSpec: servicesearch.Spec.EndpointSpec
           }
-          console.log(servicesearch.Spec)
           const service = docker.getService(servicesearch.ID)
           service.update(options, async function(err3, data3) {
             if (err3) {
