@@ -170,6 +170,11 @@ app.post("/applications", authCheck, async function(req, res, next) {
     docker.api.appcreate(req.body.name)
     let query = {
       appname: req.body.name,
+      deployment: {
+        giturl: '',
+        gitusername: '',
+        gitpassword: ''
+      },
       environment: {
         envname: req.body.envname || [],
         envvalue: req.body.envvalue || [],
