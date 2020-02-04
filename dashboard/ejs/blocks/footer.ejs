@@ -1,10 +1,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
 <script type="text/javascript">
-  $("a").click(function (event) {
-    event.preventDefault();
-    window.location = $(this).attr("href");
-});
+  (function(a, b, c) {
+    if (c in b && b[c]) {
+      var d, e = a.location,
+        f = /^(a|html)$/i;
+      a.addEventListener("click", function(a) {
+        d = a.target;
+        while (!f.test(d.nodeName)) d = d.parentNode;
+        "href" in d && (d.href.indexOf("http") || ~d.href.indexOf(e.host)) && (a.preventDefault(), e.href = d.href)
+      }, !1)
+    }
+  })(document, window.navigator, "standalone")
   $(document).ready(function() {
     var wrapper = $(".envwrapper"); //Fields wrapper
     var add_button = $(".envbutton"); //Add button ID
