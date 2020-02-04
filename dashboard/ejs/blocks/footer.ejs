@@ -1,12 +1,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
 <script type="text/javascript">
-  $('a').on('click touchend', function(ev){
-
-    $(this).preventDefault();
-    window.location = $(this).attr('href');
-
-})
+  $("a").click(function (event) {
+    event.preventDefault();
+    window.location = $(this).attr("href");
+});
   $(document).ready(function() {
     var wrapper = $(".envwrapper"); //Fields wrapper
     var add_button = $(".envbutton"); //Add button ID
