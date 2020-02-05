@@ -206,6 +206,19 @@ app.get("/applications/:appname", authCheck, async function(req, res, next) {
     mongoapp: mapp
   });
 });
+app.get("/applications/:appname/logs", authCheck, async function(req, res, next) {
+  let name = req.params.appname
+  let dapp = await docker.api.getapplogs(name)
+  let mapp = await mongo.get('apps', {
+    appname: name
+  })
+  console.log(dapp)
+  res.render("manage.ejs", {
+    message: '',
+    dockerapp: dapp,
+    mongoapp: mapp
+  });
+});
 
 app.post("/applications/:appname", authCheck, async function(req, res, next) {
   let name = req.params.appname
