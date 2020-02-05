@@ -200,11 +200,7 @@ app.get("/applications/:appname", authCheck, async function(req, res, next) {
     appname: name
   })
   console.log(mapp)
-  res.render("manage.ejs", {
-    message: '',
-    dockerapp: dapp[0],
-    mongoapp: mapp
-  });
+  res.json(daap)
 });
 app.get("/applications/:appname/logs", authCheck, async function(req, res, next) {
   let name = req.params.appname
