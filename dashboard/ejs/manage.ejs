@@ -2,6 +2,13 @@
 <p style="text-align: center; font-size: 30px;">Manage <%= dockerapp.Spec.Name %></p>
 <div class="jumbobox">
   <br>
+  <p style="font-size: 20px;">Logs</p>
+  <hr>
+  <textarea name="name" readonly="" style="position: relative;top: 10px;width: calc(100% - 65px);height: calc(100vh - 20px);resize: none;margin-left: 20px;"></textarea>
+</div>
+<br>
+<div class="jumbobox">
+  <br>
   <p style="font-size: 20px;">Deployment Settings</p>
   <hr>
   <form action="/applications/<%= dockerapp.Spec.Name %>" method="post">
