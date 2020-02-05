@@ -81,6 +81,26 @@ let api = {
       apps.push(servicesearch)
     })
     return apps
+  },
+  getapplogs: async function(name) {
+    let str = '';
+    await docker.listServices({}).then(async function(data) {
+      let servicesearch = await data.find(s => s.Spec.Name == name)
+      const service = docker.getService(servicesearch.ID)
+      var logs_opts = {
+        follow: true,
+        stdout: true,
+        stderr: true,
+        timestamps: true
+      };
+      await service.logs(logs_opts, async function(err, stream) {
+        if (err) {
+          return console.log(err)
+        }
+        str += stream.toString();
+      })
+    })
+    return str
   }
 }
 exports.api = api
