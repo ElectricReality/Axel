@@ -89,7 +89,8 @@ let api = {
       const service = docker.getService(servicesearch.ID)
       var logs_opts = {
         timestamps: true,
-        stdout: true
+        stdout: true,
+        since: 10
       };
       await service.logs(logs_opts, async function(err, data) {
         if (err) {
