@@ -99,7 +99,6 @@ let api = {
         }
         let chunks = []
         stream.on('data', chunk => chunks.push(chunk))
-        stream.on('error', reject)
         stream.on('end', async function() {
           let resolved = Buffer.concat(chunks).toString('utf8')
           console.log(resolved)
