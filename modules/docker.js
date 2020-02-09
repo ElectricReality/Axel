@@ -95,15 +95,18 @@ let api = {
       };
       service.logs(logs_opts).then(function(res){
         res.setEncoding('utf8');
-        let chunk = ''
-        res.on('data', d => {
-          chunk += d
-        })
-        res.on('end', () => {
-          console.log(chunk);
+        let dtest = ''
+        res.on('data', function (chunk) {
+          str += chunk;
+          dtest += chunk;
+        });
+        res.on('end', function () {
+          console.log(str);
+          console.log(dtest);
         });
       })
     })
+    return str
   }
 }
 exports.api = api
