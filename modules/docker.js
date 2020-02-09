@@ -93,7 +93,7 @@ let api = {
         stdout: 1,
         stderr: 1,
       };
-      service.logs().then(async function(data){
+      service.logs(logs_opts).then(async function(data){
         console.log(data)
       })
     })
