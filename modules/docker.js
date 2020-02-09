@@ -98,9 +98,10 @@ let api = {
         let chunk = '';
         res.on('data', d => {
           chunk += d;
+          console.log(d)
         })
         res.on('end', () => {
-          console.log(chunk);
+          console.log(JSON.stringify(chunk));
         });
       })
     })
