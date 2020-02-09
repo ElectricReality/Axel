@@ -113,7 +113,7 @@ let api = {
           stderr: 1,
         };
         service.logs(logs_opts).then(function(dta) {
-          let string = dta.toString('utf8')
+          let string = dta.toString('ascii')
           resolve(string);
         })
       })
