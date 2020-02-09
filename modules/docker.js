@@ -3,6 +3,14 @@ const docker = new Docker({
   socketPath: '/var/run/docker.sock'
 });
 const uuid = require('uuid/v4')
+function streamToString (stream) {
+  const chunks = []
+  return new Promise((resolve, reject) => {
+    stream.on('data', chunk => chunks.push(chunk))
+    stream.on('error', reject)
+    stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')))
+  })
+}
 
 let api = {
   appupdate: async function(remote, name) {
@@ -64,8 +72,8 @@ let api = {
   listapps: async function() {
     let apps = new Array()
     await docker.listServices({}).then(async function(data) {
-      data.forEach(function(d){
-        if(d.Spec.Name == "axel-system-nginx" || d.Spec.Name == "axel-system-database" || d.Spec.Name == "axel-system"){
+      data.forEach(function(d) {
+        if (d.Spec.Name == "axel-system-nginx" || d.Spec.Name == "axel-system-database" || d.Spec.Name == "axel-system") {
 
         } else {
           apps.push(d)
@@ -97,22 +105,9 @@ let api = {
         if (err) {
           return console.log(err)
         }
-        stream.on('data', function(chunkRaw) {
-          safeParseChunk(chunkRaw).forEach(chunk => {
-            const chuckStream = chunk.stream
-            if (chuckStream) {
-              // Logger.dev('stream data ' + chuckStream);
-              str += chuckStream
-              console.log(chuckStream)
-            }
-
-            if (chunk.error) {
-              str += chunk.error
-            }
-          })
-
-        })
-
+        let result = await streamToString(stream)
+        console.log(result)
+        str.push(result)
       })
     })
     return str
