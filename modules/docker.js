@@ -94,7 +94,7 @@ let api = {
         stderr: 1,
       };
       service.logs(logs_opts).then(async function(data){
-        console.log(data)
+        console.log(data.body)
       })
     })
     return str
