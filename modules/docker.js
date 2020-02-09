@@ -95,7 +95,7 @@ let api = {
       };
       service.logs(logs_opts).then(function(res){
         let dtest = ''
-        res.setEncoding('utf8');
+        //res.setEncoding('utf8');
         res.on('data', function (chunk) {
           str += chunk;
           dtest += chunk;
