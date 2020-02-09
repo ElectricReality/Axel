@@ -93,12 +93,26 @@ let api = {
         stdout: true,
         stderr: true,
       };
-      await service.logs(logs_opts, async function(err, data) {
+      await service.logs(logs_opts, async function(err, stream) {
         if (err) {
           return console.log(err)
         }
-        console.log(data.body)
-        str += data
+        stream.on('data', function(chunkRaw) {
+          safeParseChunk(chunkRaw).forEach(chunk => {
+            const chuckStream = chunk.stream
+            if (chuckStream) {
+              // Logger.dev('stream data ' + chuckStream);
+              str += chuckStream
+              console.log(chuckStream)
+            }
+
+            if (chunk.error) {
+              str += chunk.error
+            }
+          })
+
+        })
+
       })
     })
     return str
