@@ -99,6 +99,7 @@ let api = {
         res.on('data', function (chunk) {
           str += chunk;
           dtest += chunk;
+          console.log(chunk)
         });
         res.on('end', function () {
           console.log(str);
