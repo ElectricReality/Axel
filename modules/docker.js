@@ -99,7 +99,7 @@ let api = {
           data += chunk;
         })
         res.on('end', () => {
-          console.log(JSON.parse(data).explanation);
+          console.log(JSON.parse(data));
         });
       })
     })
