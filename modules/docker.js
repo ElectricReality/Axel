@@ -49,7 +49,7 @@ let api = {
       Name: name,
       TaskTemplate: {
         ContainerSpec: {
-          Image: `${name}:latest`
+          Image: `nginx:latest`
         }
       }
     }
