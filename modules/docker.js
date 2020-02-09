@@ -94,12 +94,13 @@ let api = {
         stderr: 1,
       };
       service.logs(logs_opts).then(async function(res){
+        res.setEncoding('utf8');
         let chunk = '';
         res.on('data', d => {
           chunk += d;
         })
         res.on('end', () => {
-          console.log(JSON.stringify(chunk));
+          console.log(chunk);
         });
       })
     })
