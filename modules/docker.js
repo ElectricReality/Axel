@@ -95,7 +95,7 @@ let api = {
       };
       service.logs(logs_opts).then(async function(res){
         res.setEncoding('utf8');
-        let chunk = [];
+        let chunk = new Array()
         res.on('data', d => {
           chunk.push(d);
         })
