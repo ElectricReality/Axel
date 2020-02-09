@@ -3,14 +3,6 @@ const docker = new Docker({
   socketPath: '/var/run/docker.sock'
 });
 const uuid = require('uuid/v4')
-function streamToString (stream) {
-  const chunks = []
-  return new Promise((resolve, reject) => {
-    stream.on('data', chunk => chunks.push(chunk))
-    stream.on('error', reject)
-    stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')))
-  })
-}
 
 let api = {
   appupdate: async function(remote, name) {
@@ -105,10 +97,14 @@ let api = {
         if (err) {
           return console.log(err)
         }
-        let result = await streamToString(stream)
-        console.log(stream)
-        console.log(result)
-        str.push(result)
+        let chunks = []
+        stream.on('data', chunk => chunks.push(chunk))
+        stream.on('error', reject)
+        stream.on('end', () => {
+          let resolved = await Buffer.concat(chunks).toString('utf8')
+          console.log(resolved)
+          str += resolved
+        })
       })
     })
     return str
