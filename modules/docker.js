@@ -106,6 +106,7 @@ let api = {
           return console.log(err)
         }
         let result = await streamToString(stream)
+        console.log(stream)
         console.log(result)
         str.push(result)
       })
