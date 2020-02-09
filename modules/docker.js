@@ -96,10 +96,11 @@ let api = {
       service.logs(logs_opts).then(async function(res){
         let chunk = '';
         res.on('data', d => {
-          data += chunk;
+          chunk += d;
+          console.log(d)
         })
         res.on('end', () => {
-          console.log(JSON.parse(data));
+          console.log(JSON.parse(chunk));
         });
       })
     })
