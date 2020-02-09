@@ -93,7 +93,7 @@ let api = {
         stdout: 1,
         stderr: 1,
       };
-      service.logs(logs_opts).then(async function(d){
+      service.logs(logs_opts).then(function(d){
         if (Buffer.isBuffer(d)) {
           console.log(d.toString('utf8'))
           return d.toString('utf8')
