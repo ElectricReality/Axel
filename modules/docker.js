@@ -94,8 +94,8 @@ let api = {
         stderr: 1,
       };
       service.logs(logs_opts).then(function(res){
-        res.setEncoding('utf8');
         let dtest = ''
+        res.setEncoding('utf8');
         res.on('data', function (chunk) {
           str += chunk;
           dtest += chunk;
