@@ -3,7 +3,9 @@ const docker = new Docker({
   socketPath: '/var/run/docker.sock'
 });
 const uuid = require('uuid/v4')
+function callback (err, data){
 
+}
 let api = {
   appupdate: async function(remote, name) {
     docker.listServices({}).then(async function(data) {
@@ -84,7 +86,7 @@ let api = {
   },
   getapplogs: async function(name) {
     let str = ''
-    docker.listServices({}).then(async function(data) {
+    await docker.listServices({}).then(async function(data) {
       let servicesearch = await data.find(s => s.Spec.Name == name)
       const service = docker.getService(servicesearch.ID)
       var logs_opts = {
@@ -93,11 +95,33 @@ let api = {
         stdout: 1,
         stderr: 1,
       };
-      service.logs(logs_opts).then(function(dta){
+      service.logs(logs_opts).then(function(dta) {
         str += dta.toString('ascii')
       })
     })
-  return str
-  }
+    return str
+  },
+  getapplogs: async function(name){
+    let promise = await new Promise((resolve, reject) => {
+      docker.listServices({}).then(async function(datass){
+        let servicesearch = await data.find(s => s.Spec.Name == name)
+        const service = docker.getService(servicesearch.ID)
+        const service = docker.getService(servicesearch.ID)
+        var logs_opts = {
+          follow: false,
+          timestamps: true,
+          stdout: 1,
+          stderr: 1,
+        };
+        service.logs(logs_opts).then(function(dta) {
+          resolve(dta.toString('ascii'));
+        })
+      })
+    })
+    .catch(err => {throw err});
+
+    return promise
+  },
+
 }
 exports.api = api

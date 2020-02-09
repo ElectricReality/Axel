@@ -208,12 +208,11 @@ app.get("/applications/:appname", authCheck, async function(req, res, next) {
 });
 app.get("/applications/:appname/logs", async function(req, res, next) {
   let name = req.params.appname
-  let dapp = await docker.api.getapplogs(name)
-  let mapp = await mongo.get('apps', {
-    appname: name
+  let dapp = await docker.api.getapplogs(name).then(function(data){
+    res.send(data)
+    console.log(data)
   })
-  console.log(dapp)
-  res.send(dapp)
+  dapp()
 });
 
 app.post("/applications/:appname", authCheck, async function(req, res, next) {
