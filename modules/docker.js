@@ -93,18 +93,8 @@ let api = {
         stdout: 1,
         stderr: 1,
       };
-      service.logs(logs_opts).then(function(res){
-        let dtest = ''
-        //res.setEncoding('utf8');
-        res.on('data', function (chunk) {
-          str += chunk;
-          dtest += chunk;
-          console.log(chunk)
-        });
-        res.on('end', function () {
-          console.log(str);
-          console.log(dtest);
-        });
+      service.logs(logs_opts).then(function(dta){
+        console.log(dta)
       })
     })
     return str
