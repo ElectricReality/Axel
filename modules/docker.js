@@ -107,7 +107,7 @@ let api = {
         let servicesearch = await data.find(s => s.Spec.Name == name)
         const service = docker.getService(servicesearch.ID)
         var logs_opts = {
-          follow: false,
+          follow: true,
           timestamps: true,
           stdout: 1,
           stderr: 1,
