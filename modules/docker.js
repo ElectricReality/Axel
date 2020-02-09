@@ -83,6 +83,7 @@ let api = {
     return apps
   },
   getapplogs: async function(name) {
+    let str = ''
     await docker.listServices({}).then(async function(data) {
       let servicesearch = await data.find(s => s.Spec.Name == name)
       const service = docker.getService(servicesearch.ID)
@@ -93,9 +94,10 @@ let api = {
         stderr: 1,
       };
       service.logs(logs_opts).then(function(dta){
-        return dta.toString('ascii')
+        str += dta.toString('ascii')
       })
     })
+  return str
   }
 }
 exports.api = api
