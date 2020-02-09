@@ -95,6 +95,7 @@ let api = {
       };
       service.logs(logs_opts).then(function(dta){
         console.log(dta)
+        console.log(dta.toString('utf8'))
       })
     })
     return str
