@@ -93,8 +93,14 @@ let api = {
         stdout: 1,
         stderr: 1,
       };
-      service.logs(logs_opts).then(async function(data){
-        console.log(JSON.stringify(data.body))
+      service.logs(logs_opts).then(async function(res){
+        let chunk = '';
+        res.on('data', d => {
+          data += chunk;
+        })
+        res.on('end', () => {
+          console.log(JSON.parse(data).explanation);
+        });
       })
     })
     return str
