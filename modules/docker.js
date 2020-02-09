@@ -93,20 +93,15 @@ let api = {
         stdout: 1,
         stderr: 1,
       };
-      service.logs(logs_opts).then(function(d){
-        if (Buffer.isBuffer(d)) {
-          console.log(d.toString('utf8'))
-          return d.toString('utf8')
-        }
-        /*res.setEncoding('utf8');
+      service.logs(logs_opts).then(function(res){
+        res.setEncoding('utf8');
         let chunk = ''
         res.on('data', d => {
           chunk += d
-          console.log(d)
         })
         res.on('end', () => {
           console.log(chunk);
-        });*/
+        });
       })
     })
   }
