@@ -113,7 +113,9 @@ let api = {
           stderr: 1,
         };
         service.logs(logs_opts).then(function(dta) {
-          resolve(dta.toString('ascii'));
+          let string = dta.toString('ascii')
+          let result = string.replace(/[^\w\s]/gi, '')
+          resolve(result);
         })
       })
     })
