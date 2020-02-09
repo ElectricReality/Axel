@@ -90,20 +90,11 @@ let api = {
       var logs_opts = {
         follow: true,
         timestamps: true,
-        stdout: true,
-        stderr: true,
+        stdout: 1,
+        stderr: 1,
       };
-      await service.logs(logs_opts, async function(err, stream) {
-        if (err) {
-          return console.log(err)
-        }
-        let chunks = []
-        stream.on('data', chunk => chunks.push(chunk))
-        stream.on('end', async function() {
-          let resolved = Buffer.concat(chunks).toString('utf8')
-          console.log(resolved)
-          str += resolved
-        })
+      service.logs().then(async function(data){
+        console.log(data)
       })
     })
     return str
