@@ -84,7 +84,7 @@ let api = {
   },
   getapplogs: async function(name) {
     let str = ''
-    await docker.listServices({}).then(async function(data) {
+    docker.listServices({}).then(async function(data) {
       let servicesearch = await data.find(s => s.Spec.Name == name)
       const service = docker.getService(servicesearch.ID)
       var logs_opts = {

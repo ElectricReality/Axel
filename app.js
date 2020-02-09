@@ -213,7 +213,7 @@ app.get("/applications/:appname/logs", async function(req, res, next) {
     appname: name
   })
   console.log(dapp)
-  res.json(dapp)
+  res.send(dapp)
 });
 
 app.post("/applications/:appname", authCheck, async function(req, res, next) {
