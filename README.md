@@ -1,5 +1,5 @@
 # Axel
-Simplifying developer's life. A PaaS that eases pain and trouble.
+Simplifying developer's life. A PaaS that eases pain and trouble. This is a Work In Progress! Expect Bugs. Pls
 
 ## Contents
 
